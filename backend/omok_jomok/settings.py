@@ -27,13 +27,6 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
-# 사용자 인증 부분 모델, 백엔드 부분
-
-AUTHENTICATION_BACKENDS = (
-	'django.contrib.auth.backends.ModelBackend'
-	'allauth.account.auth_backends.AuthenticationBackend'
-)
-
 # Application definition
 
 # App 새로 설치 시 여기에 추가, rest_framework도 추가해야함
@@ -45,14 +38,29 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'allauth',
+    'django.contrib.sites',
+
+    # restframework 인증
     'rest_framework',
+    'rest_framework.authtoken',
+    'rest_auth',
+    'allauth',
+    'allauth.account',
+    'rest_auth.registration',
+
+    # cors 작업
+    'corsheaders',
+
+    # app
     'account',
 ]
+
+SITE_ID = 1
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -129,3 +137,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
+
+# rest_framework 설정 인증 토큰화
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.TokenAuthentication',
+    ]
+}
