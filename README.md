@@ -34,4 +34,11 @@
   $python manage.py startapp account
   ```
 
-  
+* db 설정
+  mariadb이용
+  설치 참고 사이트 : https://offbyone.tistory.com/199
+  연동 참고 사이트 : https://ministar.tistory.com/4
+
+   ```bash
+  $pip install mysqlclient
+  ``` 
