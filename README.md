@@ -42,3 +42,23 @@
    ```bash
   $pip install mysqlclient
   ``` 
+
+* django-rest 인증
+  django-restframework 설치
+  django-rest-auth 설치
+  allauth 설치
+  jwt 설치
+  설치 참고 사이트 : https://django-rest-auth.readthedocs.io/en/latest/installation.html#jwt-support-optional
+
+  ```bash
+  $pip install djangorestframework
+  $pip install django-rest-auth
+  $pip install django-allauth
+  $pip install djangorestframework djangorestframework-jwt
+  ```
+* cors 작업
+  참고사이트 : https://github.com/adamchainz/django-cors-headers
+
+  ```bash
+  $python -m pip install django-cors-headers
+  ```
