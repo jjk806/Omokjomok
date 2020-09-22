@@ -14,6 +14,7 @@
     * environment.yaml
       * 생성 : `conda env export > environment.yaml`
       * 사용 : `conda env create --file environment.yaml`
+      * 사용시 기존 가상환경 제거 후 새로 설치하기
   
 * 프로젝트 생성
 
@@ -39,9 +40,14 @@
   설치 참고 사이트 : https://offbyone.tistory.com/199
   연동 참고 사이트 : https://ministar.tistory.com/4
 
-   ```bash
+  ```bash
   $pip install mysqlclient
   ``` 
+  
+  MYSQL이용
+  ```bash
+  $pip install PyMySQL
+  ```
 
 * django-rest 인증
   django-restframework 설치

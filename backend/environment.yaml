@@ -103,9 +103,17 @@ dependencies:
   - zstd=1.4.5=h04227a9_0
   - pip:
     - asgiref==3.2.10
+    - defusedxml==0.6.0
     - django==3.1.1
+    - django-allauth==0.42.0
+    - django-cors-headers==3.5.0
+    - django-rest-auth==0.9.5
+    - djangorestframework==3.11.1
+    - djangorestframework-jwt==1.11.0
+    - mysqlclient==2.0.1
     - pandas==1.1.1
+    - python3-openid==3.2.0
     - pytz==2020.1
     - sqlparse==0.3.1
-prefix: C:\Users\multicampus\anaconda3\envs\AI
+prefix: C:\ProgramData\Anaconda3\envs\AI
 
