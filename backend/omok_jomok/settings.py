@@ -101,9 +101,9 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'ssafy',  #mysql
         'USER': 'root', #root
-        'PASSWORD': 'ssafy', #1234
+        'PASSWORD': '1234', #1234
         'HOST': '', #공백으로 냅두면 default localhost
-        'PORT': '' #공백으로 냅두면 default 3306
+        'PORT': '3305' #공백으로 냅두면 default 3306
     }
 }
 
