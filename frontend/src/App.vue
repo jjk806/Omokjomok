@@ -5,7 +5,7 @@
   </div>
 </template>
 
-<script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>  
+<script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
 <script>
 import "./assets/css/style.scss";
 import Header from "./components/common/Header.vue";
@@ -37,7 +37,7 @@ export default {
       this.isHeader = isHeader;
     },
   },
-  data: function () {
+  data: function() {
     return {
       isHeader: true,
       constants,

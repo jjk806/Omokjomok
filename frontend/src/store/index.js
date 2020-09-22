@@ -37,9 +37,9 @@ const initialState = {
         [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
         [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
         [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 2, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
         [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
         [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
         [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -80,19 +80,19 @@ export default new Vuex.Store({
     makeMove({ state, commit }, { posX, posY }) {
       commit("setmoveIsPending", { moveIsPending: true, posX, posY });
       console.info(`Making move at ${[posX, posY]}`);
-      const url = new URL(
-        `${state.httpEndpoint}/match/${state.match.matchId}/move`
-      );
-      const options = {
-        method: "POST",
-        cache: "no-cache",
-        body: JSON.stringify({
-          id: state.match.matchId,
-          playerId: state.match.currentPlayerId,
-          posX,
-          posY,
-        }),
-      };
+      // const url = new URL(
+      //   `${state.httpEndpoint}/match/${state.match.matchId}/move`
+      // );
+      // const options = {
+      //   method: "POST",
+      //   cache: "no-cache",
+      //   body: JSON.stringify({
+      //     id: state.match.matchId,
+      //     playerId: state.match.currentPlayerId,
+      //     posX,
+      //     posY,
+      //   }),
+      // };
       // return fetch(url, options)
       //   .then((response) => response.json())
       //   .then((data) => {

@@ -1,13 +1,17 @@
 <template>
   <div
     class="flex-none flex flex-wrap justify-center items-center resize-none m-0 p-0 h-10 w-10 border-solid border-grey-darkest border rounded-sm content-center"
-    :class="[{'cursor-pointer': !anyMoveIsPending && value === 0}, {'opacity-75 cursor-default': anyMoveIsPending}, isSuggestion && !anyMoveIsPending ? 'bg-cyan-dark' : 'bg-gray-dark-4']"
-    @click="() => (!anyMoveIsPending && value === 0) && sendMove({ posX, posY })"
+    :class="[
+      { 'cursor-pointer': !anyMoveIsPending && value === 0 },
+      { 'opacity-75 cursor-default': anyMoveIsPending },
+      isSuggestion && !anyMoveIsPending ? 'bg-cyan-dark' : 'bg-gray-dark-4',
+    ]"
+    @click="() => !anyMoveIsPending && value === 0 && sendMove({ posX, posY })"
     @mouseover="mouseOver"
     @mouseleave="mouseOut"
   >
     <div v-if="posY === 0" class="text-gray-600 -mt-12">{{ posX }}</div>
-    <div class="h-4 w-3 p-4 rounded-full" :class="[stoneColor, stoneOpacity]" />
+    <div class="h-4 w-3 p-3 rounded-full" :class="[stoneColor, stoneOpacity]" />
   </div>
 </template>
 
@@ -23,13 +27,13 @@ export default {
     isSuggestion: Boolean,
     anyMoveIsPending: {
       type: Boolean,
-      default: false
+      default: false,
     },
-    isPendingPosition: Boolean
+    isPendingPosition: Boolean,
   },
   data() {
     return {
-      hovering: false
+      hovering: false,
     };
   },
   computed: {
@@ -38,7 +42,7 @@ export default {
         value,
         hovering,
         isSuggestion,
-        match: { currentPlayerId: id }
+        match: { currentPlayerId: id },
       } = this;
       return !hovering && value === 0 && !isSuggestion
         ? ""
@@ -54,7 +58,7 @@ export default {
         hovering,
         isSuggestion,
         anyMoveIsPending,
-        isPendingPosition
+        isPendingPosition,
       } = this;
       return value === 0 &&
         !isPendingPosition &&
@@ -67,7 +71,7 @@ export default {
         ? "opacity-100"
         : "opacity-50";
     },
-    ...mapState(["match"])
+    ...mapState(["match"]),
   },
   methods: {
     mouseOver() {
@@ -78,8 +82,9 @@ export default {
     },
     sendMove({ posX, posY }) {
       this.makeMove({ posX, posY });
+      console.log("sendMove 오목판 눌렀음!");
     },
-    ...mapActions(["makeMove"])
-  }
+    ...mapActions(["makeMove"]),
+  },
 };
 </script>

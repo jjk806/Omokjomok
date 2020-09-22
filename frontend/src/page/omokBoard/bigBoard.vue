@@ -1,7 +1,7 @@
 <template>
-  <div class="h-full w-56-rem self-center flex flex-col p-10 text-white-whip">
+  <div class="h-full w-80-rem self-center flex flex-col p-10 text-white-whip">
     <h1 class="cursor-pointer" @click="localClearMatch">
-      Gomoku_v2 Match {{match.matchId}} |
+      Gomoku_v2 Match {{ match.matchId }} |
       <span class="text-cyan">Home</span>
     </h1>
     <div class="py-3 flex justify-end mb-4">
@@ -19,12 +19,19 @@
         <button
           class="btn"
           @click="undoMove"
-          :disabled="match.moveIsPending || match.history === null || match.history.length === 0"
-        >Undo</button>
+          :disabled="
+            match.moveIsPending ||
+              match.history === null ||
+              match.history.length === 0
+          "
+        >
+          Undo
+        </button>
       </div>
     </div>
-    <Board v-if="match && match.board && match.board.tab && match.board.tab.length" />
-    <p>asdasdasd</p>
+    <Board
+      v-if="match && match.board && match.board.tab && match.board.tab.length"
+    />
   </div>
 </template>
 

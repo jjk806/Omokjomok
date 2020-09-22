@@ -11,13 +11,19 @@
       <div class="text-gray-600 w-5">{{ posY }}</div>
       <Tile
         v-for="(tile, posX) in line"
-        :key="posX + (match.board.tab.length * posY)"
+        :key="posX + match.board.tab.length * posY"
         :value="match.board.tab[posY][posX]"
         :posX="posX"
         :posY="posY"
-        :isSuggestion="posY === match.suggestion.y && posX === match.suggestion.x"
+        :isSuggestion="
+          posY === match.suggestion.y && posX === match.suggestion.x
+        "
         :anyMoveIsPending="!!match.pendingPosition"
-        :isPendingPosition="!!match.pendingPosition && posY === match.pendingPosition.y && posX === match.pendingPosition.x"
+        :isPendingPosition="
+          !!match.pendingPosition &&
+            posY === match.pendingPosition.y &&
+            posX === match.pendingPosition.x
+        "
       />
     </div>
   </div>
@@ -44,13 +50,3 @@ export default {
   },
 };
 </script>
-<style scoped>
-.fade-enter-active,
-.fade-leave-active {
-  transition: opacity 0.4s;
-}
-.fade-enter,
-.fade-leave-to {
-  opacity: 0;
-}
-</style>
