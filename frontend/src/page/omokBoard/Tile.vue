@@ -81,8 +81,9 @@ export default {
       this.hovering = false;
     },
     sendMove({ posX, posY }) {
+      console.log("sendMove 시작!");
       this.makeMove({ posX, posY });
-      console.log("sendMove 오목판 눌렀음!");
+      console.log("sendMove 끝!");
     },
     ...mapActions(["makeMove"]),
   },

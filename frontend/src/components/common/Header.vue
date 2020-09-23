@@ -105,13 +105,10 @@
 </template>   
 
 <script>
-import constants from "../../lib/constants";
-
 export default {
   name: "Header",
   data: function () {
     return {
-      constants,
       keyword: "",
       roomTitle: null,
       roomPassword: null,
