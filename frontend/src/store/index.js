@@ -86,7 +86,7 @@ export default new Vuex.Store({
 
       //여기서 부터 커스텀
       http
-        .post("/testgame", { board: this.state.match.board.tab })
+        .post("/testgame/", { board: this.state.match.board.tab })
         .then(({ data }) => {
           console.log("1");
           if (data != null) {
@@ -97,7 +97,7 @@ export default new Vuex.Store({
             alert(" <추후 수정>실패했습니다.");
           }
           console.log("4");
-          console.log(this.state.match.board.tab[0]);
+          console.log(data);
           commit("setmoveIsPending", { moveIsPending: false, posX, posY });
         });
       //여기까지 커스텀
