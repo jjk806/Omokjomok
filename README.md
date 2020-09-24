@@ -14,6 +14,7 @@
     * environment.yaml
       * 생성 : `conda env export > environment.yaml`
       * 사용 : `conda env create --file environment.yaml`
+      * 사용시 기존 가상환경 제거 후 새로 설치하기
   
 * 프로젝트 생성
 
@@ -39,6 +40,33 @@
   설치 참고 사이트 : https://offbyone.tistory.com/199
   연동 참고 사이트 : https://ministar.tistory.com/4
 
-   ```bash
+  ```bash
   $pip install mysqlclient
   ``` 
+  
+  MYSQL이용
+  ```bash
+  $pip install PyMySQL
+  ```
+
+* django-rest 인증
+  django-restframework 설치
+  django-rest-auth 설치
+  allauth 설치
+  jwt 설치
+  설치 참고 사이트 : https://django-rest-auth.readthedocs.io/en/latest/installation.html#jwt-support-optional
+
+  ```bash
+  $pip install djangorestframework
+  $pip install django-rest-auth
+  $pip install django-allauth
+  $pip install djangorestframework djangorestframework-jwt
+  ```
+* cors 작업
+  참고사이트 : https://github.com/adamchainz/django-cors-headers
+
+  ```bash
+  $python -m pip install django-cors-headers
+  ```
+* Email 인증 작업
+  참고사이트 : https://velog.io/@snowman39/Django-%EC%97%90%EC%84%9C-%EC%9D%B4%EB%A9%94%EC%9D%BC-%EB%B3%B4%EB%82%B4%EA%B8%B0-SMT-Gmail-API
