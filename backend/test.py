@@ -16,6 +16,7 @@ for i in range(15):
     while True:
         if game.state.check_turn():
             game.next(mcts_action(pb, pw, vb, vw, game.state))
+            print(game.state)
             print(mcts_action(pb, pw, vb, vw, game.state))
         else:
             game.next(predict_p(pb, pw, game.state))
