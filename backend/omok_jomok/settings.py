@@ -56,6 +56,12 @@ INSTALLED_APPS = [
     'omok_game',
 ]
 
+# allauth setting
+AUTHENTICATOIN_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend',
+    'allauth.account.auth_backends.AuthenticationBackend',
+)
+
 SITE_ID = 1
 
 MIDDLEWARE = [
@@ -125,6 +131,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+AUTH_USER_MODEL = 'accounts.CustomUser'
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.1/topics/i18n/

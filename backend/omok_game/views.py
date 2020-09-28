@@ -5,7 +5,7 @@ from rest_framework.response import Response
 # Create your views here.
 @api_view(['POST'])
 def test(request):
-    print('clear', reques.data['board'])
+    print('clear', request.data['board'])
     board = request.data['board']
     ch = 0
     for i in range(19):
