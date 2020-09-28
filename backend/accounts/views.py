@@ -10,11 +10,10 @@ import random
 def emailAuth(request):
     print(request)
     number = random.randrange(100000, 1000000)
-    email = EmailMessage(
-        '오목조목 회원 인증 메일', # 제목
-        '인증하실 번호는' + str(number) + '입니다.', # 내용
-        # '', # 보내는 이메일(settings에서 설정해서 작성안해도 됨)
-        to=['jjk8060@naver.com'] # 받는 이메일 목록
-    )
-    email.send()
+    email = 'jjk806@gmail.com' # 받는 사람 이메일
+    subject = '오목조목 회원 인증 메일' # 제목
+    message = '인증하실 번호는' + str(number) + '입니다.' # 내용
+    sendmail = EmailMessage(subject, message, to=[email])
+    # EmailMessage(제목, 내용, 보내는 사람(settings 설정으로 안 적어도 됨), 받는 사람 목록)
+    sendmail.send()
     return Response(number)
