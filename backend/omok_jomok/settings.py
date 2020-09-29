@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'rest_auth',
     'allauth',
     'allauth.account',
+    'allauth.socialaccount',
     'rest_auth.registration',
 
     # cors 작업
@@ -54,7 +55,21 @@ INSTALLED_APPS = [
     # app
     'accounts',
     'omok_game',
+
+    # 소셜로그인
+    'allauth.socialaccount.providers.google',
 ]
+
+# 이메일을 기본으로
+ACCOUNT_AUTHENTICATION_METHOD = 'email'
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_USERNAME_REQUIRED = False
+
+# allauth setting
+AUTHENTICATOIN_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend',
+    'allauth.account.auth_backends.AuthenticationBackend',
+)
 
 SITE_ID = 1
 
@@ -67,9 +82,6 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-
-    # CORS
-    'corsheaders.middleware.CorsMiddleware',
 ]
 
 ROOT_URLCONF = 'omok_jomok.urls'
@@ -98,15 +110,15 @@ WSGI_APPLICATION = 'omok_jomok.wsgi.application'
 
 DATABASES = {
     'default': {
-        # 'ENGINE': 'django.db.backends.sqlite3',
-        # 'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        #'ENGINE': 'django.db.backends.sqlite3',
+        #'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
 
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'ssafy',  # mysql
-        'USER': 'root',  # root
-        'PASSWORD': '1234',  # 1234
-        'HOST': '',  # 공백으로 냅두면 default localhost
-        'PORT': '3305'  # 공백으로 냅두면 default 3306
+        'NAME': 'ssafy',  #mysql
+        'USER': 'root', #root
+        'PASSWORD': '1234', #1234
+        'HOST': '', #공백으로 냅두면 default localhost
+        'PORT': '3305' #공백으로 냅두면 default 3306
     }
 }
 
@@ -128,6 +140,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+AUTH_USER_MODEL = 'accounts.CustomUser'
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.1/topics/i18n/
@@ -155,8 +168,8 @@ REST_FRAMEWORK = {
     ]
 }
 
-# CORS
-CORS_ORIGIN_ALLOW_ALL = True
+##CORS
+CORS_ORIGIN_ALLOW_ALL=True
 CORS_ALLOW_CREDENTIALS = True
 
 CORS_ALLOW_METHODS = (
@@ -179,3 +192,12 @@ CORS_ALLOW_HEADERS = (
     'x-csrftoken',
     'x-requested-with',
 )
+
+# Email 보내기
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = "smtp.gmail.com"
+EMAIL_HOST_USER = 'jjk806@gmail.com' # 이메일 보내는데 사용할 계정
+EMAIL_HOST_PASSWORD = '1q!2w@3e#' # 위 계정 비번
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
