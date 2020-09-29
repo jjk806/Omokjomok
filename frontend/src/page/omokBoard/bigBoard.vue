@@ -4,7 +4,7 @@
       Gomoku_v2 Match {{ match.matchId }} |
       <span class="text-cyan">Home</span>
     </h1>
-    <div class="py-3 flex justify-end mb-4">
+    <div class="py-3 flex justify-center mb-4">
       <div class="flex flex-col mr-10">
         <p>p1 (black stones)</p>
         <p>Is AI: {{ `${match.players.p1.isAi}` }}</p>
@@ -21,8 +21,8 @@
           @click="undoMove"
           :disabled="
             match.moveIsPending ||
-              match.history === null ||
-              match.history.length === 0
+            match.history === null ||
+            match.history.length === 0
           "
         >
           Undo
