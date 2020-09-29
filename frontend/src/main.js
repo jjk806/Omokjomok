@@ -23,6 +23,10 @@ Vue.config.productionTip = false;
 //fontAwesome
 import "./fontAwesomeIcon.js"; // fontAwesomeIcon.js 불러옴
 
+//vue-cookie
+import VueCookies from 'vue-cookies'
+Vue.use(VueCookies)
+
 new Vue({
   el: "#app",
   router,
