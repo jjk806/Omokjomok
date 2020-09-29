@@ -1,7 +1,7 @@
 <template>
   <b-container id="loginCon" style="" >
     <h1 class="signup-title my-5">로그인</h1>
-		<!-- 이메일 -->
+		<!-- 유저네임 -->
     <b-row class="my-3">
       <b-col>
         <b-form @submit.prevent="checkEmail">
@@ -19,6 +19,29 @@
               type="email"
               required
               placeholder="유저이름을 입력해주세요"
+            ></b-form-input>
+          </b-input-group>
+        </b-form>
+      </b-col>
+    </b-row>
+    <!-- 이메일 -->
+    <b-row class="my-3">
+      <b-col>
+        <b-form @submit.prevent="checkEmail">
+          <b-input-group>
+            <label
+              style="text-align:right"
+              for="input-large"
+            ></label>
+            <b-input-group-prepend variant is-text>
+              <b-icon icon="person"></b-icon>
+            </b-input-group-prepend>
+            <b-form-input
+              v-model="loginInfo.email"
+							size="lg"
+              type="email"
+              required
+              placeholder="이메일을 입력해주세요"
             ></b-form-input>
           </b-input-group>
         </b-form>
@@ -50,7 +73,7 @@
 		<!-- 로그인 버튼 -->
 		<b-row class="mt-5">
 			<b-col>
-				<b-button block size="lg">로그인</b-button>
+				<b-button block size="lg" @click="login()">로그인</b-button>
 			</b-col>
 		</b-row>
 
@@ -131,9 +154,6 @@
 			</template>
     </b-modal>
 
-
-
-
 		<!-- 비밀번호 찾기 -->
 		<b-row class="my-3">
 			<b-col class="text-right">
@@ -144,22 +164,43 @@
 </template>
 
 <script>
+import http from "@/util/http-common"
+
 export default {
 	name: "Login",
 	data() {
 		return {
 			loginInfo: {
-				username: null,
+        username: null,
+        email: null,
 				password: null,
 			},
 			signupInfo: {
 				userId: null,
 				password: null,
 				email: null
-			}
+      },
+      isLoggedIn: false
 		}
 	},
 	methods: {
+    setCookie(key) {
+      this.$cookies.set('auth-token', key)
+      this.isLoggedIn = true
+    },
+    login() {
+      http
+        .post("rest_auth/login/", this.loginInfo)
+          .then(res => {
+            this.setCookie(res.data.key)
+            console.log(this.$cookies)
+            this.$router.push('/')
+          })
+          .catch(err => {
+            console.error(err)
+            alert(err)
+          })
+    },
 		signupModal() {
 			this.$bvModal.msgBoxConfirm('signupForm()', {
 				title: '회원가입',

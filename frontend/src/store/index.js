@@ -164,7 +164,7 @@ export default new Vuex.Store({
       this.state.match.board.stackIndex++;
       //여기서 부터 커스텀
       http
-        .post("/testgame/", { board: this.state.match.board.tab })
+        .post("omok_game/testgame/", { board: this.state.match.board.tab })
         .then(({ data }) => {
           if (data != null) {
             // this.match.board.tab = data;
