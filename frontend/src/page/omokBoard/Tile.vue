@@ -44,6 +44,7 @@ export default {
         isSuggestion,
         match: { currentPlayerId: id },
       } = this;
+
       return !hovering && value === 0 && !isSuggestion
         ? ""
         : value === 1 || (value === 0 && (hovering || isSuggestion) && id === 1)

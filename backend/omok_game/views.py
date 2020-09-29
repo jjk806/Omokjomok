@@ -20,7 +20,7 @@ def test(request):
         for j in range(19):
             if board[i][j] == 0:
                 ch = 1
-                board[i][j] = 1
+                board[i][j] = 2
                 break
         if ch == 1:
             break
