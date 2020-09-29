@@ -55,7 +55,15 @@ INSTALLED_APPS = [
     # app
     'accounts',
     'omok_game',
+
+    # 소셜로그인
+    'allauth.socialaccount.providers.google',
 ]
+
+# 이메일을 기본으로
+ACCOUNT_AUTHENTICATION_METHOD = 'email'
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_USERNAME_REQUIRED = False
 
 # allauth setting
 AUTHENTICATOIN_BACKENDS = (
