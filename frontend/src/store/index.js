@@ -77,7 +77,7 @@ const initialState = {
     // matchId: -1,
     matchId: 1,
     // currentPlayerId: -1,
-    currentPlayerId: 1,
+    currentPlayerId: 2,
     suggestionTimer: 0,
     suggestorOn: undefined,
     suggestion: {
@@ -168,7 +168,11 @@ export default new Vuex.Store({
         .then(({ data }) => {
           if (data != null) {
             // this.match.board.tab = data;
-            commit("makeMove", data);
+            if (data == "게임끝!!") {
+              alert("게임끝")
+            } else {
+              commit("makeMove", data);
+            }
           } else {
             alert(" <추후 수정>실패했습니다.");
           }
