@@ -60,6 +60,19 @@ INSTALLED_APPS = [
     'allauth.socialaccount.providers.google',
 ]
 
+# 구글로그인 관련
+SOCIALACCOUNT_PROVIDERS = {
+    'google': {
+        'SCOPE': [
+            'profile',
+            'email'
+        ],
+        'AUTH_PARMAS': {
+            'access_type': 'online',
+        }
+    }
+}
+
 # 이메일을 기본으로
 ACCOUNT_AUTHENTICATION_METHOD = 'email'
 ACCOUNT_EMAIL_REQUIRED = True
@@ -78,7 +91,7 @@ MIDDLEWARE = [
     'django.contrib.sessions.middleware.SessionMiddleware',
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
+    # 'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
@@ -97,6 +110,9 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+
+                # 'allauth' needs this from django
+                'django.template.context_processors.request'
             ],
         },
     },
@@ -165,6 +181,8 @@ STATIC_URL = '/static/'
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework.authentication.TokenAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.BasicAuthentication'
     ]
 }
 
@@ -201,3 +219,13 @@ EMAIL_HOST_PASSWORD = '1q!2w@3e#' # 위 계정 비번
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+
+REST_USE_JWT = True
+
+# /allauth/logout/ 시 바로 로그아웃
+ACCOUNT_LOGOUT_ON_GET = True
+
+# google login 이후
+# LOGIN_REDIRECT_URL = '/' # 로그인 후 돌아올 URL  
+ACCOUNT_LOGOUT_REDIRECT_URL = "/" 
+ACCOUNT_AUTHENTICATED_LOGIN_REDIRECTS = True
