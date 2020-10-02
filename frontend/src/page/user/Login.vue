@@ -157,7 +157,7 @@
 		<!-- 비밀번호 찾기 -->
 		<b-row class="my-3">
 			<b-col class="text-right">
-				<router-link :to="{ name: 'List' }">비밀번호 찾기</router-link>
+				<router-link :to="{ name: 'Mainpage' }">비밀번호 찾기</router-link>
 			</b-col>
 		</b-row>
   </b-container>
