@@ -11,6 +11,12 @@
             <b-dropdown-item router :to="{ name: 'bigBoard' }"
               >테스트용 오목판 view</b-dropdown-item
             >
+            <b-dropdown-item router :to="{ name: 'trickSolving_bigBoard' }"
+              >묘수풀이용 오목판 view</b-dropdown-item
+            >
+            <b-dropdown-item router :to="{ name: 'fightWithAI_bigBoard' }"
+              >AI와 대결용 오목판 view</b-dropdown-item
+            >
             <b-dropdown-divider></b-dropdown-divider>
             <b-dropdown-item router :to="{ name: 'Login' }"
               >로그인</b-dropdown-item
