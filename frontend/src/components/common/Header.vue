@@ -2,14 +2,33 @@
   <div id="header" v-if="isHeader">
     <b-container fluid>
       <b-row align-v="center">
-        <b-col offset="2" >
-          <b-button id="mainTitle" router :to="{ name: 'Mainpage' }" variant="white">오 목 조 목</b-button>
+        <b-col offset="2">
+          <b-button
+            id="mainTitle"
+            router
+            :to="{ name: 'Mainpage' }"
+            variant="white"
+            >오 목 조 목</b-button
+          >
         </b-col>
-        <b-col cols=1>
-          <b-link><b-icon @click="clickTip" class="icon-size" icon="question-circle-fill" aria-label="Help"></b-icon></b-link>
+        <b-col cols="1">
+          <b-link
+            ><b-icon
+              @click="clickTip"
+              class="icon-size"
+              icon="question-circle-fill"
+              aria-label="Help"
+            ></b-icon
+          ></b-link>
         </b-col>
-        <b-col cols=1>
-          <b-link :to="{ name: 'Mypage' }"><b-icon class="icon-size" icon="person-fill" aria-label="Help"></b-icon></b-link>
+        <b-col cols="1">
+          <b-link :to="{ name: 'Mypage' }"
+            ><b-icon
+              class="icon-size"
+              icon="person-fill"
+              aria-label="Help"
+            ></b-icon
+          ></b-link>
         </b-col>
       </b-row>
       <b-row>
@@ -23,6 +42,12 @@
               <b-dropdown-item router :to="{ name: 'bigBoard' }"
                 >테스트용 오목판 view</b-dropdown-item
               >
+              <b-dropdown-item router :to="{ name: 'trickSolving_bigBoard' }"
+                >묘수풀이용 오목판 view</b-dropdown-item
+              >
+              <b-dropdown-item router :to="{ name: 'fightWithAI_bigBoard' }"
+                >AI와 대결용 오목판 view</b-dropdown-item
+              >
               <b-dropdown-divider></b-dropdown-divider>
               <b-dropdown-item router :to="{ name: 'Login' }"
                 >로그인</b-dropdown-item
@@ -30,10 +55,8 @@
             </b-dropdown>
           </b-button-group>
         </b-col>
-
       </b-row>
     </b-container>
-
   </div>
 </template>   
 
@@ -55,7 +78,7 @@ export default {
   created() {},
   methods: {
     clickTip() {
-      alert('꿀팁!')
+      alert("꿀팁!");
     },
   },
 };
@@ -69,7 +92,6 @@ export default {
 #mainTitle {
   font-size: xx-large;
 }
-
 
 .icon-size {
   font-size: 50px;

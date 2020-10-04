@@ -11,7 +11,7 @@
     @mouseleave="mouseOut"
   >
     <div v-if="posY === 0" class="text-gray-600 -mt-12">{{ posX }}</div>
-    <div class="h-3 w-3 p-3 rounded-full" :class="[stoneColor, stoneOpacity]" />
+    <div class="h-4 w-3 p-3 rounded-full" :class="[stoneColor, stoneOpacity]" />
   </div>
 </template>
 

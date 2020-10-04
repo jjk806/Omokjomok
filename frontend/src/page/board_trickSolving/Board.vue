@@ -1,6 +1,6 @@
 <template>
   <div
-    class="p-10 text-center m-auto "
+    class="p-10 text-center m-auto"
     v-if="match && match.board && match.board.tab && match.board.tab.length"
   >
     <div
@@ -21,8 +21,8 @@
         :anyMoveIsPending="!!match.pendingPosition"
         :isPendingPosition="
           !!match.pendingPosition &&
-            posY === match.pendingPosition.y &&
-            posX === match.pendingPosition.x
+          posY === match.pendingPosition.y &&
+          posX === match.pendingPosition.x
         "
       />
     </div>
