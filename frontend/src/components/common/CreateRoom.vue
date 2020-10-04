@@ -13,16 +13,8 @@
       <form ref="form" @submit.stop.prevent="handleSubmit">
         <!-- checkbox -->
         <b-form-group>
-          <b-form-group label="">
-            <b-form-radio-group
-              id="radio-group-1"
-              v-model="selectFirstAttack"
-              :options="options"
-              name="radio-options"
-            ></b-form-radio-group>
-          </b-form-group>
           <b-form-group>
-            <b-form-radio-group id="radio-group-2" v-model="selectFirstAttack" name="radio-sub-component">
+            <b-form-radio-group id="radio-group-2" v-model="selectOrder">
               <b-row>
                 <b-col class="text-info" cols=3>공격 순서</b-col>
                 <b-col cols=3>
@@ -36,16 +28,14 @@
           </b-form-group>
 
           
-          <b-form-group label="">
+          <!-- <b-form-group>
             <b-form-radio-group
-              id="radio-group-1"
-              v-model="selected"
-              :options="options"
-              name="radio-options"
+              id="radio-group-2"
+              v-model="selectLevel"
             ></b-form-radio-group>
-          </b-form-group>
+          </b-form-group> -->
           <b-form-group>
-            <b-form-radio-group id="level" v-model="selected" name="radio-sub-component">
+            <b-form-radio-group id="level" v-model="selectLevel">
               <b-row>
                 <b-col class="text-info" cols=3>난이도</b-col>
                 <b-col cols=3>
@@ -63,7 +53,7 @@
 
           <b-row class="mt-5">
             <b-col>
-              <b-button block variant="primary">생성하기</b-button>
+              <b-button @click="createRoom()" block variant="primary">생성하기</b-button>
             </b-col>
           </b-row>
           <b-row class="mt-3">
@@ -81,7 +71,8 @@
 export default {
   data() {
     return {
-      selectFirstAttack: null,
+      selectOrder: null,
+      selectLevel: null,
     }
   },
   // created() {
@@ -108,6 +99,9 @@ export default {
   //   })
   // },
   methods: {
+    createRoom() {
+      this.$router.push({ name: "bigBoard" })
+    },
     resetModal() {},
     handleOk() {},
   },
