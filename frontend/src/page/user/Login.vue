@@ -66,50 +66,57 @@
       ref="modal"
       title="회원가입"
 			centered
-      @show="resetModal"
-      @hidden="resetModal"
-      @ok="handleOk"
     >
-      <form ref="form" @submit.stop.prevent="handleSubmit">
-				<!-- ID -->
+      <form ref="form" @submit.prevent="handleSubmit">
+				<!-- EMAIL -->
         <b-form-group
-          :state="userIdState"
-          label="ID"
-          label-for="userId-input"
-          invalid-feedback="ID is required"
+          label="이메일"
+          label-for="userEmail-input"
+          invalid-feedback="EMAIL is required"
+          class="mb-1"
         >
           <b-form-input
-            id="userId-input"
-            v-model="userId"
-            :state="userIdState"
+            id="userEmail-input"
+            v-model="signupInfo.email"
             required
           ></b-form-input>
         </b-form-group>
+        <b-button size="sm" variant="primary" @click="mail()">인증메일 발송</b-button>
+
+        <b-form-group
+          label="인증번호"
+          label-for="Emailconfirmation"
+          invalid-feedback="EMAIL is required"
+          v-if="mailsubmit"
+        >
+          <b-form-input
+            id="Emailconfirmation"
+            v-model="emailconfirmation"
+            required
+          ></b-form-input>
+        </b-form-group>
+
 				<!-- PASSWORD -->
         <b-form-group
-          :state="nameState"
-          label="PASSWORD"
+          label="패스워드"
           label-for="password-input"
           invalid-feedback="Password is required"
         >
           <b-form-input
             id="password-input"
-            v-model="password"
-            :state="passwordState"
+            v-model="signupInfo.password1"
             required
           ></b-form-input>
         </b-form-group>
-				<!-- EMAIL -->
+				<!-- PASSWORD2 -->
         <b-form-group
-          :state="nameState"
-          label="EMAIL"
-          label-for="email-input"
-          invalid-feedback="Email is required"
+          label="패스워드확인"
+          label-for="passwordconfirmation-input"
+          invalid-feedback="Passord Confirmation is required"
         >
           <b-form-input
-            id="email-input"
-            v-model="email"
-            :state="emailState"
+            id="password2-input"
+            v-model="signupInfo.password2"
             required
           ></b-form-input>
         </b-form-group>
@@ -123,13 +130,15 @@
 						</b-button>
 					</b-col>
 					<b-col>
-						<b-button size="sm" variant="success" @click="ok()">
+						<b-button size="sm" variant="success" @click="signup()">
 							SIGNUP
 						</b-button>
 					</b-col>
 				</b-row>
 			</template>
     </b-modal>
+
+    
 
     <button @click="logout()">logout</button>
 		<!-- 비밀번호 찾기 -->
@@ -153,11 +162,14 @@ export default {
 				password: null,
 			},
 			signupInfo: {
-				email: null,
+        email: null,
 				password1: null,
 				password2: null
       },
-      isLoggedIn: false
+      isLoggedIn: false,
+      mailsubmit: false,
+      mailauthentication: null,
+      emailconfirmation: null
 		}
 	},
 	methods: {
@@ -181,18 +193,25 @@ export default {
     logout() {
       const config = {
         headers: {
-          Authorization: `Token ${this.$cookies.get('csrftoken')}`
+          Authorization: `Token ${this.$cookies.get('auth-token')}`
         }
       }
       http
-        .post("accounts/logout/", null, config)
-        .then(() => {
-          console.log('hi')
-          this.$cookies.remove('csrftoken')
-          this.isLoggedIn = false
-          this.$router.push('/')
-        })
-        .catch(err => console.error(err))
+        .post("rest_auth/logout/")
+          .then((res) => {
+            this.$cookies.remove('auth-token')
+            this.$router.push('/')
+          })
+          .catch(err => console.log(err))
+      // http
+      //   .post("rest_auth/logout/", null, config)
+      //     .then(() => {
+      //       console.log('hi')
+      //       this.$cookies.remove('auth-token')
+      //       this.isLoggedIn = false
+      //       this.$router.push('/')
+      //     })
+      //     .catch(err => console.error(err))
     },
 		signupModal() {
 			this.$bvModal.msgBoxConfirm('signupForm()', {
@@ -209,8 +228,34 @@ export default {
 		},
 		signupForm() {
 			alert('aaa')
-		},
-
+    },
+    handlesubmit() {
+      console.log(this.signupInfo)
+    },
+    signup() {
+      if (this.emailconfirmation == this.mailauthentication) {
+        http
+          .post("rest_auth/registration/", this.signupInfo)
+            .then(res => {
+              this.signupInfo.email = null
+              this.signupInfo.password1 = null
+              this.signupInfo.password2 = null
+              this.mailsubmit = false
+              this.mailsubmit = null
+              this.mailauthentication = null
+            })
+      } else {
+        alert('인증번호 오류')
+      }
+    },
+    mail() {
+      this.mailsubmit = true
+      http
+        .post("accounts/emailAuth/", { email: this.signupInfo.email})
+          .then(res => {
+            this.mailauthentication = res.data
+          })
+    }
 	},
 };
 </script>
