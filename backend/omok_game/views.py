@@ -2,6 +2,8 @@ from django.shortcuts import render
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
+from .models import *
+from .serializers import * 
 from mcts import mcts_action
 from game import Game
 
@@ -19,3 +21,9 @@ def test(request):
     # c, r = AIaction//15, AIaction%15
     # board[c][r] = 1 
     return Response(board)
+
+@api_view(['GET'])
+def Tricklist(request):
+    tricks = TrickSolving.objects.filter(user=request.user)
+    serializer = TrickSolvingSerializer(instance=tricks)
+    return Response(serializer.data)
