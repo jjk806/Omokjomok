@@ -207,3 +207,8 @@ dmypy.json
 # pytype static type analyzer
 
 # End of https://www.toptal.com/developers/gitignore/api/django,python
+
+node_modules/
+dist/
+npm-debug.log
+yarn-error.log
