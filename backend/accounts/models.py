@@ -6,6 +6,8 @@ class CustomUser(AbstractUser):
 	username = None
 	email = models.EmailField(unique=True, blank=False)
 	win = models.IntegerField(default=0)
+	lose = models.IntegerField(default=0)
+	rate = models.IntegerField(default=0)
 
 	USERNAME_FIELD = 'email'
 	REQUIRED_FIELDS = []
