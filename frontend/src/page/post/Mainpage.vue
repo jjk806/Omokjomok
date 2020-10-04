@@ -43,6 +43,7 @@ import AiCarousel from "../../components/common/AiCarousel.vue";
 import Rating from "../../components/common/Rating.vue";
 import MyInfo from "../../components/common/MyInfo.vue";
 import CreateRoom from "../../components/common/CreateRoom.vue";
+// import axios from "axios";
 
 export default {
   name: "Mainpage",
@@ -53,7 +54,6 @@ export default {
     CreateRoom,
   },
   watch: {},
-  created() {},
   methods: {
     clickCrateRoom() {},
     resetModal() {},
