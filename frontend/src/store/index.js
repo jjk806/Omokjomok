@@ -5,78 +5,16 @@ import http from "@/util/http-common";
 import { mapState } from "vuex";
 
 Vue.use(Vuex);
-/////////////////////////// 백업용 ///////////////////////////////
-// const initialState = {
-//   message: "ASD1",
-//   errorResponse: "",
-//   httpEndpoint: process.env.VUE_APP_SERVER_HTTP || "http://localhost:4242",
-//   match: {
-//     // matchPending: undefined, // bool
-//     matchPending: false, // bool
-//     pendingPosition: null, // { x: int, y: int }
-//     // matchId: -1,
-//     matchId: 1,
-//     // currentPlayerId: -1,
-//     currentPlayerId: 2,
-//     suggestionTimer: 0,
-//     suggestorOn: undefined,
-//     suggestion: {
-//       x: -1,
-//       y: -1,
-//     },
-//     history: null,
-//     board: {
-//       size: 15,
-//       suggestedPosition: -1,
-//       //tab : null
-//       tab: [
-//         [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-//         [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-//         [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-//         [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-//         [0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-//         [0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-//         [0, 0, 0, 0, 1, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-//         [0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-//         [0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-//         [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-//         [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-//         [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-//         [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-//         [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-//         [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-//       ],
-//       invalidMoves: [], // returned with prev move
-//     },
-//     players: {
-//       p1: {
-//         isAi: false,
-//         id: 1,
-//         captured: 0,
-//       },
-//       p2: {
-//         isAi: false,
-//         id: 2,
-//         captured: 0,
-//       },
-//     },
-//   },
-// };
-/////////////////////////////////////백업용 ///////////////////////////////////////////
-
-////////////////////////////////////쓸모 없는 데이터 삭제 중/////////////////////////////
 
 const initialState = {
   message: "ASD1",
   errorResponse: "",
   httpEndpoint: process.env.VUE_APP_SERVER_HTTP || "http://localhost:4242",
   match: {
-    // matchPending: undefined, // bool
     matchPending: false, // bool
     pendingPosition: null, // { x: int, y: int }
-    // matchId: -1,
     matchId: 1,
-    // currentPlayerId: -1,
+    // currentPlayerId 가 1일시 흑색 currentPlayerId 2일시 백색
     currentPlayerId: 2,
     suggestionTimer: 0,
     suggestorOn: undefined,
@@ -85,10 +23,10 @@ const initialState = {
       y: -1,
     },
     history: null,
+    alphabet:['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'],
     board: {
       size: 15,
       suggestedPosition: -1,
-      //tab : null
       tab: [
         [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
         [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -168,11 +106,7 @@ export default new Vuex.Store({
         .then(({ data }) => {
           if (data != null) {
             // this.match.board.tab = data;
-            if (data == "게임끝!!") {
-              alert("게임끝")
-            } else {
-              commit("makeMove", data);
-            }
+            commit("makeMove", data);
           } else {
             alert(" <추후 수정>실패했습니다.");
           }
