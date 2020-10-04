@@ -58,12 +58,16 @@ INSTALLED_APPS = [
 
     # 소셜로그인
     'allauth.socialaccount.providers.google',
+    'allauth.socialaccount.providers.kakao',
 ]
 
 # 이메일을 기본으로
+ACCOUNT_USER_MODEL_USERNAME_FIELD = None
 ACCOUNT_AUTHENTICATION_METHOD = 'email'
+ACCOUNT_UNIQUE_EMAIL = True
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_USERNAME_REQUIRED = False
+SOCIALACCOUNT_QUERY_EMAIL = True
 
 # allauth setting
 AUTHENTICATOIN_BACKENDS = (
@@ -72,6 +76,9 @@ AUTHENTICATOIN_BACKENDS = (
 )
 
 SITE_ID = 1
+
+REST_USE_JWT = True
+ACCOUNT_LOGOUT_ON_GET = True
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -163,12 +170,18 @@ STATIC_URL = '/static/'
 
 # rest_framework 설정 인증 토큰화
 REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated',
+    ),
     'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
         'rest_framework.authentication.TokenAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.BasicAuthentication',
     ]
 }
 
-##CORS
+# CORS
 CORS_ORIGIN_ALLOW_ALL=True
 CORS_ALLOW_CREDENTIALS = True
 
@@ -201,3 +214,14 @@ EMAIL_HOST_PASSWORD = '1q!2w@3e#' # 위 계정 비번
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+
+## 소셜로그인 설정
+SOCIALACCOUNT_PROVIDERS = {
+    'kakao': {
+        'APP': {
+            'client_id': '1959deb17d11d37e28fecfb81284c8c4',
+            'secret': 488279,
+            'key': ''
+        }
+    }
+}
