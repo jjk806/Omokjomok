@@ -58,8 +58,4 @@ export default {
   },
 };
 </script>
-<style>
-.Board{
-  display : inline;
-}
-</style>
+

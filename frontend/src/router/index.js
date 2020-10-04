@@ -18,6 +18,10 @@ import bigBoard from "../page/omokBoard/bigBoard.vue";
 import fightWithAI_bigBoard from "../page/board_fightWithAI/fightWithAI_bigBoard.vue";
 import trickSolving_bigBoard from "../page/board_trickSolving/trickSolving_bigBoard.vue";
 
+
+import TrickSolve from "../page/tricksolving/tricksolve.vue"
+
+
 Vue.use(Router);
 
 export default new Router({
@@ -81,6 +85,13 @@ export default new Router({
       path: "/board_trickSolving/trickSolving_bigBoard",
       name: "trickSolving_bigBoard",
       component: trickSolving_bigBoard,
+    },    
+    // 묘수 풀이
+    {
+      path: "/tricksolve",
+      name: "TrickSolve",
+      component: TrickSolve
     },
+
   ],
 });
