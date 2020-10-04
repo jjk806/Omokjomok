@@ -40,3 +40,9 @@ def test(request):
         return Response(end)
 
     return Response(board)
+
+@api_view(['GET'])
+def Tricklist(request):
+    tricks = TrickSolving.objects.filter(user=request.user)
+    serializer = TrickSolvingSerializer(instance=tricks)
+    return Response(serializer.data)
