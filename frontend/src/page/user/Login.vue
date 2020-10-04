@@ -1,29 +1,6 @@
 <template>
   <b-container id="loginCon" style="" >
     <h1 class="signup-title my-5">로그인</h1>
-		<!-- 유저네임 -->
-    <b-row class="my-3">
-      <b-col>
-        <b-form @submit.prevent="checkEmail">
-          <b-input-group>
-            <label
-              style="text-align:right"
-              for="input-large"
-            ></label>
-            <b-input-group-prepend variant is-text>
-              <b-icon icon="person"></b-icon>
-            </b-input-group-prepend>
-            <b-form-input
-              v-model="loginInfo.username"
-							size="lg"
-              type="email"
-              required
-              placeholder="유저이름을 입력해주세요"
-            ></b-form-input>
-          </b-input-group>
-        </b-form>
-      </b-col>
-    </b-row>
     <!-- 이메일 -->
     <b-row class="my-3">
       <b-col>
@@ -154,6 +131,7 @@
 			</template>
     </b-modal>
 
+    <button @click="logout()">logout</button>
 		<!-- 비밀번호 찾기 -->
 		<b-row class="my-3">
 			<b-col class="text-right">
@@ -171,7 +149,6 @@ export default {
 	data() {
 		return {
 			loginInfo: {
-        username: null,
         email: null,
 				password: null,
 			},
@@ -190,16 +167,31 @@ export default {
     },
     login() {
       http
-        .post("rest_auth/login/", this.loginInfo)
+        .post("allauth/login/", this.loginInfo)
           .then(res => {
+            console.log(res)
             this.setCookie(res.data.key)
-            console.log(this.$cookies)
             this.$router.push('/')
           })
           .catch(err => {
             console.error(err)
             alert(err)
           })
+    },
+    logout() {
+      const config = {
+        headers: {
+          Authorization: `Token ${this.$cookies.get('csrftoken')}`
+        }
+      }
+      http
+        .post("allauth/logout/", null, config)
+        .then(() => {
+          this.$cookies.remove('csrftoken')
+          this.isLoggedIn = false
+          this.$router.push('/')
+        })
+        .catch(err => console.error(err))
     },
 		signupModal() {
 			this.$bvModal.msgBoxConfirm('signupForm()', {

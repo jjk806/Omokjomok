@@ -11,7 +11,7 @@ import urllib
 def emailAuth(request):
     print(request)
     number = random.randrange(100000, 1000000)
-    email = 'jjk806@gmail.com' # 받는 사람 이메일
+    email = request.data['email'] # 받는 사람 이메일
     subject = '오목조목 회원 인증 메일' # 제목
     message = '인증하실 번호는' + str(number) + '입니다.' # 내용
     sendmail = EmailMessage(subject, message, to=[email])
@@ -25,8 +25,7 @@ def kakao_login(request):
     redirect_uri = "http://127.0.0.1:8000/account/login/kakao/callback"
     return redirect(
         f"https://kauth.kakao.com/oauth/authorize?client_id={app_rest_api_key}&redirect_uri={redirect_uri}&response_type=code"
-    )
-    
+    )    
     
 # access token 요청
 def kakao_callback(request):                                                                  

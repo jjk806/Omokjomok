@@ -4,7 +4,7 @@
     :class="[
       { 'cursor-pointer': !anyMoveIsPending && value === 0 },
       { 'opacity-75 cursor-default': anyMoveIsPending },
-      isSuggestion && !anyMoveIsPending ? 'bg-cyan-dark' : 'bg-gray-dark-4',
+      isSuggestion && !anyMoveIsPending ? 'bg-cyan-dark' : 'bg-warning',
     ]"
     @click="() => !anyMoveIsPending && value === 0 && sendMove({ posX, posY })"
     @mouseover="mouseOver"
