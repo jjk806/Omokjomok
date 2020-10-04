@@ -23,8 +23,14 @@
         <b-col cols=1>
           <b-link><b-icon @click="$bvModal.show('modal-scoped')" class="icon-size" icon="question-circle-fill" aria-label="Help"></b-icon></b-link>
         </b-col>
-        <b-col cols=1>
-          <b-link :to="{ name: 'Mypage' }"><b-icon class="icon-size" icon="person-fill" aria-label="Help"></b-icon></b-link>
+        <b-col cols="1">
+          <b-link :to="{ name: 'Mypage' }"
+            ><b-icon
+              class="icon-size"
+              icon="person-fill"
+              aria-label="Help"
+            ></b-icon
+          ></b-link>
         </b-col>
       </b-row>
     </b-container>
@@ -143,7 +149,6 @@ export default {
 #mainTitle {
   font-size: xx-large;
 }
-
 
 .icon-size {
   font-size: 50px;
