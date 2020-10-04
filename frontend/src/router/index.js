@@ -7,11 +7,11 @@ import Join from "../page/user/Join.vue";
 import Mypage from "../page/user/Mypage.vue";
 
 // 포스트
-import List from "../page/post/List.vue";
+import Mainpage from "../page/post/Mainpage.vue";
 import Game from "../page/post/Game.vue";
 import RecentGame from "../page/post/RecentGame.vue";
+import Rule from "../page/post/Rule.vue";
 
-import VueChartJS from "../page/VueChartJS";
 
 //곧 지울 테스트용 오목판 view 보러가기
 import bigBoard from "../page/omokBoard/bigBoard.vue";
@@ -19,6 +19,7 @@ import bigBoard from "../page/omokBoard/bigBoard.vue";
 Vue.use(Router);
 
 export default new Router({
+  mode: 'history',
   routes: [
     // 로그인/가입
     {
@@ -40,14 +41,8 @@ export default new Router({
     // 포스트
     {
       path: "/",
-      name: "List",
-      component: List,
-    },
-    // chart
-    {
-      path: "/VueChartJS",
-      name: "VueChartJS",
-      component: VueChartJS,
+      name: "Mainpage",
+      component: Mainpage,
     },
     // 대국
     {
@@ -60,6 +55,12 @@ export default new Router({
       path: "/post/RecentGame",
       name: "RecentGame",
       component: RecentGame,
+    },
+    // 룰 설명 페이지
+    {
+      path: "/post/Rule",
+      name: "Rule",
+      component: Rule ,
     },
     //곧 지울 테스트용 오목판 이동
     {
