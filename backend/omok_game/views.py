@@ -6,10 +6,10 @@ from tensorflow.keras.models import load_model
 from mcts import mcts_action
 from game import Game
 
-pb = load_model('./model/policy_black.h5', compile=False)
-pw = load_model('./model/policy_white.h5', compile=False)
-vb = load_model('./model/value_black_t.h5', compile=False)
-vw = load_model('./model/value_white_t.h5', compile=False)
+# pb = load_model('./model/policy_black.h5', compile=False)
+# pw = load_model('./model/policy_white.h5', compile=False)
+# vb = load_model('./model/value_black_t.h5', compile=False)
+# vw = load_model('./model/value_white_t.h5', compile=False)
 
 
 @api_view(['POST'])
