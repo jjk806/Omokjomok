@@ -1,14 +1,15 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect 
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from django.core.mail import EmailMessage
 
 import random
+import urllib 
 
 # Create your views here.
 @api_view(['POST'])
 def emailAuth(request):
-    print(request.data)
+    print(request)
     number = random.randrange(100000, 1000000)
     email = request.data['email'] # 받는 사람 이메일
     subject = '오목조목 회원 인증 메일' # 제목
