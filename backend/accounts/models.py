@@ -1,11 +1,5 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
-<<<<<<< HEAD
-from django.utils.translation import ugettext_lazy as _
-
-
-=======
->>>>>>> 47ed8c6e782569958f341e203ef9eab98e46a4b6
 
 # Create your models here.
 class CustomUser(AbstractUser):
