@@ -10,6 +10,7 @@ const initialState = {
   message: "ASD1",
   errorResponse: "",
   httpEndpoint: process.env.VUE_APP_SERVER_HTTP || "http://localhost:4242",
+  isloggedin: false,
   match: {
     matchPending: false, // bool
     pendingPosition: null, // { x: int, y: int }
