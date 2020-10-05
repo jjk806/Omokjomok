@@ -25,7 +25,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 
 #trick {
   background-image: url('../../assets/omok_pan2.png');
