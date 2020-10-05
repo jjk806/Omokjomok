@@ -39,3 +39,34 @@ def Tricklist(request):
     tricks = TrickSolving.objects.filter(user=request.user)
     serializer = TrickSolvingSerializer(instance=tricks)
     return Response(serializer.data)
+
+@api_view(['POST'])
+def gamestart(request):
+    rsgame = omokgame.objects.all()
+    g_data = request.data['data']
+    g_auid = request.data['auid']
+    g_turn = request.data['turn']
+    g_date = request.data['date']
+
+    rows = omokgame.object.create(data = g_data, auid = g_auid, turn = g_turn, date = g_date)
+
+
+@api_view(['POST'])
+def showgame(request):
+    round = request.data['round']
+    rsgame = myosu.objects.get(round = round)
+    arr = list(rsgame.data.split())
+    for i in range(len(arr)):
+        arr[i] = arr[i][0] + chr(int(arr[i][1:]) + 96)
+
+    return Response(arr)
+
+
+@api_view(['POST'])
+def makeroom(request):
+    rsgame = room.objects.all()
+    r_uid = request.data['uid']
+    r_att_turn = request.data['att_turn']
+    r_level = request.data['level']
+
+    rows = room.object.create(uid = r_uid, att_turn = r_att_turn, level = r_level)
