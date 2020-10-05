@@ -1,6 +1,6 @@
 <template>
   <div
-    class="p-5 text-center m-auto"
+    class="p-10 text-center m-auto "
     v-if="match && match.board && match.board.tab && match.board.tab.length"
   >
     <div
@@ -8,7 +8,7 @@
       v-for="(line, posY) in match.board.tab"
       :key="posY"
     >
-      <div class="text-gray-600 w-5">{{ posY }}</div>
+      <div class="text-gray-600 w-5">{{ match.alphabet[posY] }}</div>
       <Tile
         v-for="(tile, posX) in line"
         :key="posX + match.board.tab.length * posY"

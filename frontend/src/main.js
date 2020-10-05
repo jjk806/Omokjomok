@@ -27,6 +27,7 @@ import "./fontAwesomeIcon.js"; // fontAwesomeIcon.js 불러옴
 import VueCookies from 'vue-cookies'
 Vue.use(VueCookies)
 
+
 new Vue({
   el: "#app",
   router,

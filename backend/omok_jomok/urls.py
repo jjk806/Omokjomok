@@ -15,17 +15,14 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from rest_framework_jwt.views import obtain_jwt_token
 
 # account 앱의 urls와 연결, include를 써서 account의 모든 urls 포함
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('django.contrib.auth.urls')),
     path('accounts/', include('accounts.urls')),
-    path('allauth/', include('allauth.urls')),
+    path('accounts/', include('allauth.urls')),
     path('rest_auth/', include('rest_auth.urls')),
     path('rest_auth/registration/', include('rest_auth.registration.urls')),
-    path('api-token-auth/', obtain_jwt_token),
     path('omok_game/', include('omok_game.urls')),
 ]

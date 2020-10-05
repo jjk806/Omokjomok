@@ -133,11 +133,11 @@
 
     <button @click="logout()">logout</button>
 		<!-- 비밀번호 찾기 -->
-		<b-row class="my-3">
+		<!-- <b-row class="my-3">
 			<b-col class="text-right">
 				<router-link :to="{ name: 'List' }">비밀번호 찾기</router-link>
 			</b-col>
-		</b-row>
+		</b-row> -->
   </b-container>
 </template>
 
@@ -153,9 +153,9 @@ export default {
 				password: null,
 			},
 			signupInfo: {
-				userId: null,
-				password: null,
-				email: null
+				email: null,
+				password1: null,
+				password2: null
       },
       isLoggedIn: false
 		}
@@ -167,7 +167,7 @@ export default {
     },
     login() {
       http
-        .post("allauth/login/", this.loginInfo)
+        .post("rest_auth/login/", this.loginInfo)
           .then(res => {
             console.log(res)
             this.setCookie(res.data.key)
@@ -185,8 +185,9 @@ export default {
         }
       }
       http
-        .post("allauth/logout/", null, config)
+        .post("accounts/logout/", null, config)
         .then(() => {
+          console.log('hi')
           this.$cookies.remove('csrftoken')
           this.isLoggedIn = false
           this.$router.push('/')

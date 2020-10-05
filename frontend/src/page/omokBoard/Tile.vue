@@ -1,17 +1,17 @@
 <template>
   <div
-    class="flex-none flex flex-wrap justify-center items-center resize-none m-0 p-0 h-10 w-10 border-solid border-grey-darkest border rounded-sm content-center"
+    class="flex-none flex flex-wrap justify-center items-center resize-none m-0 p-0 h-8 w-8 border-solid border-dark border rounded-sm content-center"
     :class="[
       { 'cursor-pointer': !anyMoveIsPending && value === 0 },
       { 'opacity-75 cursor-default': anyMoveIsPending },
-      isSuggestion && !anyMoveIsPending ? 'bg-cyan-dark' : 'bg-warning',
+      isSuggestion && !anyMoveIsPending ? 'bg-warning-70' : 'bg-orange-400',
     ]"
     @click="() => !anyMoveIsPending && value === 0 && sendMove({ posX, posY })"
     @mouseover="mouseOver"
     @mouseleave="mouseOut"
   >
     <div v-if="posY === 0" class="text-gray-600 -mt-12">{{ posX }}</div>
-    <div class="h-4 w-3 p-3 rounded-full" :class="[stoneColor, stoneOpacity]" />
+    <div class="h-3 w-3 p-3 rounded-full" :class="[stoneColor, stoneOpacity]" />
   </div>
 </template>
 

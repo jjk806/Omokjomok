@@ -1,162 +1,78 @@
 <template>
   <div id="header" v-if="isHeader">
-    <b-container>
-      <b-col cols="10">
-        <b-button id="mainTitle" router :to="{ name: 'List' }" variant="white"
-          >오 목 조 목</b-button
-        >
-      </b-col>
-      <b-row>
-        <b-col cols="1" align-self="center">
-          <b-button-group>
-            <b-dropdown size="lg" variant="link" left no-caret>
-              <template v-slot:button-content>
-                <b-icon scale="2" icon="justify"></b-icon>
-                <span class="sr-only"></span>
-              </template>
-              <b-dropdown-item router :to="{ name: 'Mypage' }"
-                >마이페이지</b-dropdown-item
-              >
-              <b-dropdown-item v-b-modal.modal-create-room
-                >방 만들기</b-dropdown-item
-              >
-              <b-dropdown-item>친구와 대전</b-dropdown-item>
-              <b-dropdown-item>AI 대전</b-dropdown-item>
-              <b-dropdown-item router :to="{ name: 'bigBoard' }"
-                >테스트용 오목판 view</b-dropdown-item
-              >
-              <b-dropdown-divider></b-dropdown-divider>
-              <b-dropdown-item router :to="{ name: 'Login' }"
-                >로그인</b-dropdown-item
-              >
-              <b-dropdown-item router :to="{ name: 'Game' }"
-                >대국</b-dropdown-item
-              >
-              <b-dropdown-item router :to="{ name: 'RecentGame' }"
-                >최근 대국</b-dropdown-item
-              >
-            </b-dropdown>
-          </b-button-group>
+    <b-container fluid>
+      <b-row align-v="center">
+        <b-button-group>
+          <b-dropdown size="lg" variant="link" left no-caret>
+            <template v-slot:button-content>
+              <b-icon scale="2" icon="justify"></b-icon>
+              <span class="sr-only"></span>
+            </template>
+            <b-dropdown-item router :to="{ name: 'bigBoard' }"
+              >테스트용 오목판 view</b-dropdown-item
+            >
+            <b-dropdown-item router :to="{ name: 'trickSolving_bigBoard' }"
+              >묘수풀이용 오목판 view</b-dropdown-item
+            >
+            <b-dropdown-item router :to="{ name: 'fightWithAI_bigBoard' }"
+              >AI와 대결용 오목판 view</b-dropdown-item
+            >
+            <b-dropdown-divider></b-dropdown-divider>
+            <b-dropdown-item router :to="{ name: 'Login' }"
+              >로그인</b-dropdown-item
+            >
+          </b-dropdown>
+        </b-button-group>
+        <b-col offset="2" >
+          <b-button id="mainTitle" router :to="{ name: 'Mainpage' }" variant="white">오 목 조 목</b-button>
         </b-col>
-        <b-navbar
-          toggleable="md"
-          class="py-1 shadow-sm"
-          type="light"
-          variant="white"
-        >
-          <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
-          <b-navbar-nav
-            class="w-100 justify-content-between"
-            style="max-width: 1080px"
-          >
-            <b-nav-item to="/caselist">
-              <b-icon icon="list"></b-icon>
-              <span class>&nbsp;제보목록</span>
-            </b-nav-item>
-            <b-nav-item to="/reportinfo">
-              <b-icon icon="bar-chart"></b-icon>
-              <span>&nbsp;제보현황</span>
-            </b-nav-item>
-            <b-nav-item to="/mapmain">
-              <b-icon icon="map"></b-icon>
-              <span>&nbsp;지도보기</span>
-            </b-nav-item>
-            <b-nav-item to="/noticeboard">
-              <b-icon icon="info-circle"></b-icon>
-              <span>&nbsp;공지사항</span>
-            </b-nav-item>
-            <b-nav-item to="/howtouse">
-              <b-icon icon="question-circle"></b-icon>
-              <span>&nbsp;이용방법</span>
-            </b-nav-item>
-          </b-navbar-nav>
-        </b-navbar>
+        <b-col cols=1>
+          <b-link><b-icon @click="$bvModal.show('modal-scoped')" class="icon-size" icon="question-circle-fill" aria-label="Help"></b-icon></b-link>
+        </b-col>
+        <b-col cols="1">
+          <b-link :to="{ name: 'Mypage' }"
+            ><b-icon
+              class="icon-size"
+              icon="person-fill"
+              aria-label="Help"
+            ></b-icon
+          ></b-link>
+        </b-col>
       </b-row>
     </b-container>
 
-    <b-modal
-      id="modal-create-room"
-      ref="modal"
-      title="방 만들기"
-      centered
-      @show="resetModal"
-      @hidden="resetModal"
-      @ok="handleOk"
-    >
-      <form ref="form" @submit.stop.prevent="handleSubmit">
-        <!-- roomTitle -->
-        <b-form-group
-          label="방 제목"
-          label-for="roomTitle-input"
-          invalid-feedback="Title is required"
-          class="text-info"
-        >
-          <b-form-input
-            id="roomTitle-input"
-            v-model="roomTitle"
-            placeholder="방 제목을 입력하세요"
-            required
-          ></b-form-input>
-        </b-form-group>
-        <!-- roomPASSWORD -->
-        <b-form-group
-          label="비밀번호"
-          label-for="roomPassword-input"
-          invalid-feedback="Password is required"
-          class="text-info"
-        >
-          <b-form-input
-            id="roomPassword-input"
-            v-model="roomPassword"
-            placeholder="방 비밀번호를 입력하세요"
-            required
-          ></b-form-input>
-        </b-form-group>
+    <b-modal size="lg" centered id="modal-scoped">
+      <template v-slot:modal-header="{ }">
+        <!-- Emulate built in modal header close button action -->
+        <h5>오목 규칙 TIP</h5>
+      </template>
 
-        <!-- checkbox -->
-        <b-form-group label="관전 허용" class="text-info">
+      <template v-slot:default="{ ok }">
+        <b-container>
           <b-row>
             <b-col>
-              <b-form-checkbox
-                id="checkbox-1"
-                v-model="status"
-                name="checkbox-1"
-                value="accepted"
-                class="text-dark"
-                unchecked-value="not_accepted"
-                >허용</b-form-checkbox
-              >
-            </b-col>
-            <b-col>
-              <b-form-checkbox
-                id="checkbox-1"
-                v-model="status"
-                name="checkbox-1"
-                value="accepted"
-                class="text-dark"
-                unchecked-value="not_accepted"
-                >미허용</b-form-checkbox
-              >
+              <img src="../../assets/rule.png" alt="" width="1000px">
             </b-col>
           </b-row>
-        </b-form-group>
-      </form>
-      <template v-slot:modal-footer="{ ok, cancel }">
+          <b-row class="mt-3">
+            <b-col offset="9">
+              <b-link @click="ok()" :to="{ name: 'Rule' }">규칙 더 보러가기</b-link>
+            </b-col>
+          </b-row>
+        </b-container>
+
+      </template>
+
+      <template v-slot:modal-footer="{ ok }">
         <!-- Emulate built in modal footer ok and cancel button actions -->
-        <b-row>
-          <b-col>
-            <b-button size="sm" variant="danger" @click="cancel()"
-              >CANCEL</b-button
-            >
-          </b-col>
-          <b-col>
-            <b-button size="sm" variant="success" @click="ok()"
-              >SUBMIT</b-button
-            >
-          </b-col>
-        </b-row>
+        <b-button size="sm" variant="success" @click="ok()">
+          닫기
+        </b-button>
       </template>
     </b-modal>
+
+
+
   </div>
 </template>   
 
@@ -177,9 +93,56 @@ export default {
   watch: {},
   created() {},
   methods: {
-    clickCrateRoom() {},
-    resetModal() {},
-    handleOk() {},
+    clickTip() {
+      // alert('꿀팁!')
+      this.boxTwo = ''
+      this.$bvModal.msgBoxOk('Data was submitted successfully', {
+        title: '렌쥬룰 설명',
+        size: 'lg',
+        buttonSize: 'lg',
+        okVariant: 'success',
+        headerClass: 'p-2 border-bottom-0',
+        footerClass: 'p-2 border-top-0',
+        centered: true,
+        src: '../../assets/rule.png',
+      })
+        .then(value => {
+          this.boxTwo = value
+        })
+        .catch(err => {
+          // An error occurred
+        })
+    },
+    showMsgOk() {
+      const h = this.$createElement
+      // Using HTML string
+      const titleVNode = h('div', { domProps: { innerHTML: '렌주룰 설명' } })
+      // More complex structure
+      const messageVNode = h('div', { class: ['foobar'] }, [
+        h('p', { class: ['text-center'] }, [
+          ' Flashy ',
+          h('strong', 'msgBoxOk'),
+          ' message ',
+        ]),
+        // h('p', { class: ['text-center'] }, [h('b-spinner')]),
+        h('b-img', {
+          props: {
+            src: 'https://picsum.photos/id/20/250/250',
+            alt: 'rule',
+            // thumbnail: true,
+            // center: true,
+            // fluid: true, 
+            // rounded: 'circle'
+          }
+        })
+      ])
+      // We must pass the generated VNodes as arrays
+      this.$bvModal.msgBoxOk([messageVNode], {
+        title: [titleVNode],
+        buttonSize: 'sm',
+        centered: true, size: 'sm'
+      })
+    }
   },
 };
 </script>
@@ -187,9 +150,13 @@ export default {
 
 <style>
 #header {
-  height: 100px;
+  height: 90px;
 }
 #mainTitle {
   font-size: xx-large;
+}
+
+.icon-size {
+  font-size: 50px;
 }
 </style>
