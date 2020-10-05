@@ -245,6 +245,21 @@ export default new Vuex.Store({
           console.log(data);
           //this.state.match.board.tab = data.cloneDeep;
           commit("setmoveIsPending", { moveIsPending: false, posX, posY });
+          alert(data.endmessage);
+          if(data.endmessage == 1 || data.endmessage == 2){
+            if(data.endmessage == 1){
+              setTimeout(function() {
+                alert('백 승리')
+                router.push('/')
+              }, 500);
+            }else{
+              setTimeout(function() {
+                alert('흑 승리')
+                router.push('/')
+              }, 500);
+            }
+            gameIsEnd(data.endmessage);
+          }
         });
     },
     initSetBoard({ state, commit }) {
@@ -285,6 +300,9 @@ export default new Vuex.Store({
           //this.state.match.board.tab = data.cloneDeep;
         });
     },
+    gameIsEnd({whoWin}){
+      resultModal = true;
+    }
   },
   computed: {
     ...mapState(["state"]),

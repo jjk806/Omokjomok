@@ -68,12 +68,9 @@
 </template>
 
 <script>
-<<<<<<< frontend/src/components/common/CreateRoom.vue
-import { mapActions } from "vuex";
-=======
 import { mapState, mapActions } from "vuex";
+import http from "@/util/http-common";
 
->>>>>>> frontend/src/components/common/CreateRoom.vue
 export default {
   data() {
     return {
@@ -90,6 +87,22 @@ export default {
       this.match.turn = this.selectOrder;
       this.match.level = this.selectLevel;
       alert(this.selectOrder + " " + this.selectLevel + " " + this.match.turn + " " + this.match.level)
+
+      if(this.match.turn != null && this.match.level != null){
+        this.$router.push({ name: "fightWithAI_bigBoard"})
+      }else{
+        alert("공격순서와 난이도를 설정해주세요.");
+      }
+    //   ////////////////////////////////////////////////////////////////
+    //   http
+    //     // .post("omok_game/testgame/", { board: this.state.match.board.tab, level:  012하중상, turn: 흑1 백2 })
+    //     .get("accounts/userplay/")
+    //     .then(({ data }) => {
+    //       if (data != null) {
+    //         alert("대전횟수 +1 요청 완료했어요!")
+    //       }
+    //     });
+    // /////////////////////////////////////////////////////
       this.$router.push({ name: "fightWithAI_bigBoard"})
     },
     resetModal() {},

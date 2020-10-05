@@ -8,7 +8,7 @@
         />
       </div>
     </b-col>
-    <b-col cols = "3">
+    <b-col cols = "3" id = "forColor">
       <div class="h-full">
         <b-container > 
           <b-row>
@@ -100,3 +100,8 @@ export default {
   },
 };
 </script>
+<style scoped>
+#forColor{
+  background-color: aqua;
+}
+</style>
