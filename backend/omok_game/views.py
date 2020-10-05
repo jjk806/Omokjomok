@@ -11,9 +11,9 @@ from mcts_low import mcts_action as mcts_low
 from game import Game
 
 pb = load_model('./model/policy_black.h5', compile=False)
-pw = load_model('./model/policy_white.h5', compile=False)
+pw = load_model('./model/policy_black.h5', compile=False)
 vb = load_model('./model/value_black_t.h5', compile=False)
-vw = load_model('./model/value_white_t.h5', compile=False)
+vw = load_model('./model/value_black_t.h5', compile=False)
 
 
 @api_view(['POST'])
@@ -31,24 +31,51 @@ def test(request):
     game.state.black = black
     game.state.white = white
 
-    if request.data['turn'] == 1:
+    if request.data['turn'] == '1':
         game.state.turn = [[1]]
     else:
         game.state.turn = [[0]]
 
-    if request.data['level'] == 0:
+    if request.data['level'] == '0':
         AIaction = mcts_low(pb, pw, vb, vw, game.state)
-    elif request.data['level'] == 1:
+    elif request.data['level'] == '1':
         AIaction = mcts_middle(pb, pw, vb, vw, game.state)
-    elif request.data['level'] == 2:
+    elif request.data['level'] == '2':
         AIaction = mcts_high(pb, pw, vb, vw, game.state)
 
     c, r = AIaction//15, AIaction%15
-    if request.data['turn'] == 1:
-        board[c][r] = 1
-    else:
+    if request.data['turn'] == '1':
         board[c][r] = 2
-    result = {'board': board, 'AIaction': AIaction}
+    else:
+        board[c][r] = 1
+
+    endmessage = ''
+    if request.data['level'] == '0':
+        game.next(mcts_low(pb, pw, vb, vw, game.state))
+        if game.end >= 1:
+            if game.end == 1:
+                if game.state.check_turn():
+                    endmessage = 'white win'
+                else:
+                    endmessage = 'black win'
+    elif request.data['level'] == '1':
+        game.next(mcts_middle(pb, pw, vb, vw, game.state))
+        if game.end >= 1:
+            if game.end == 1:
+                if game.state.check_turn():
+                    endmessage = 'white win'
+                else:
+                    endmessage = 'black win'
+    else:
+        game.next(mcts_high(pb, pw, vb, vw, game.state))
+        if game.end >= 1:
+            if game.end == 1:
+                if game.state.check_turn():
+                    endmessage = 'white win'
+                else:
+                    endmessage = 'black win'
+
+    result = {'board': board, 'AIaction': AIaction, 'endmessage': endmessage}
     return Response(result)
 
 @api_view(['GET'])
