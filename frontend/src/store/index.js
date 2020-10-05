@@ -10,13 +10,16 @@ const initialState = {
   message: "ASD1",
   errorResponse: "",
   httpEndpoint: process.env.VUE_APP_SERVER_HTTP || "http://localhost:4242",
+  isloggedin: false,
   match: {
     matchPending: false, // bool
     pendingPosition: null, // { x: int, y: int }
     matchId: 1,
     // currentPlayerId 가 1일시 흑색 currentPlayerId 2일시 백색
-    currentPlayerId: 2,
+    currentPlayerId: 1,
     suggestionTimer: 0,
+    level: -1,
+    turn: -1,
     suggestorOn: undefined,
     suggestion: {
       x: -1,
@@ -74,6 +77,10 @@ export default new Vuex.Store({
   mutations: {
     makeMove(state, data) {
       state.match.board.tab = cloneDeep(data);
+    },
+    clearMatch(state) {
+      Object.assign(state, cloneDeep(initialState));
+      state.message = { Message: "You have navigated back to Gomoku_v2 home!" };
     },
     setmoveIsPending(state, { moveIsPending, posX, posY }) {
       state.match.pendingPosition = moveIsPending ? { x: posX, y: posY } : null;
@@ -197,7 +204,9 @@ export default new Vuex.Store({
         [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
       ]
       state.match.board.tab = tab1
-    }
+    },
+    justSendOne(){
+    },
   },
   actions: {
     makeMove({ state, commit }, { posX, posY }) {
@@ -222,11 +231,14 @@ export default new Vuex.Store({
       this.state.match.board.stackIndex++;
       //여기서 부터 커스텀
       http
-        .post("omok_game/testgame/", { board: this.state.match.board.tab })
+        // .post("omok_game/testgame/", { board: this.state.match.board.tab, level:  012하중상, turn: 흑1 백2 })
+        .post("omok_game/testgame/", { board: this.state.match.board.tab, level: this.state.match.level, turn: this.state.match.turn})
         .then(({ data }) => {
           if (data != null) {
             // this.match.board.tab = data;
-            commit("makeMove", data);
+            commit("makeMove", data.board);
+            alert(Math.floor(data.AIaction/15)  + " " + data.AIaction%15);
+
           } else {
             alert(" <추후 수정>실패했습니다.");
           }
@@ -252,6 +264,26 @@ export default new Vuex.Store({
     },
     testSetBoard5({ state, commit }) {
       commit('setBoard5')
+    },
+    clearMatch({ commit }) {
+      commit("clearMatch");
+    },
+    justSendOne({ commit }){
+      http
+        // .post("omok_game/testgame/", { board: this.state.match.board.tab, level:  012하중상, turn: 흑1 백2 })
+        .post("omok_game/testgame/", { board: this.state.match.board.tab, level: this.state.match.level, turn: this.state.match.turn})
+        .then(({ data }) => {
+          if (data != null) {
+            // this.match.board.tab = data;
+            commit("makeMove", data.board);
+            alert(Math.floor(data.AIaction/15)  + " " + data.AIaction%15);
+
+          } else {
+            alert(" <추후 수정>실패했습니다.");
+          }
+          console.log(data);
+          //this.state.match.board.tab = data.cloneDeep;
+        });
     },
   },
   computed: {
