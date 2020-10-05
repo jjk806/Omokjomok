@@ -90,8 +90,12 @@ export default {
     ...mapState(["match"]),
   },
   mounted(){
+    if(this.match.turn == 1){
+      this.match.currentPlayerId = 1;
+    }
     if(this.match.turn == 2){
       this.justSendOne();
+      this.match.currentPlayerId = 2;
     }
   },
 };

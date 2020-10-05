@@ -68,7 +68,7 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
+import { mapState, mapActions } from "vuex";
 
 export default {
   data() {
@@ -77,32 +77,11 @@ export default {
       selectLevel: null,
     }
   },
-  // created() {
-  //   axios.post(`${API_URL}study/mystudy/join?email=${this.email}`,  {
-  //     headers: {
-  //       "Content-Type": "application/json; charset=utf-8",
-  //       'jwt-auth-token': sessionStorage.getItem('jwt-auth-token'),
-  //       'user-email': sessionStorage.getItem('user-email')
-  //     }
-  //   })
-  //   .then(res => {
-  //     var resItem = res.data
-  //     for (var i=0; i<resItem.length; i++) {
-  //       this.check(resItem,i)
-  //       if (resItem[i].mgrEmail === this.email) {
-  //         this.makingStudy += 1
-  //       }
-  //     }
-  //     this.items = resItem
-  //     this.countStudy = resItem.length
-  //   })
-  //   .catch(err => {
-  //     console.log(err)
-  //   })
-  // },
   methods: {
+    ...mapActions(["clearMatch"]),
+
     createRoom() {
-      
+      this.clearMatch();
       this.match.turn = this.selectOrder;
       this.match.level = this.selectLevel;
       alert(this.selectOrder + " " + this.selectLevel + " " + this.match.turn + " " + this.match.level)
