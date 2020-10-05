@@ -53,7 +53,7 @@
 
           <b-row class="mt-5">
             <b-col>
-              <b-button @click="createRoom()" block variant="primary">생성하기</b-button>
+              <b-button @click='initSetBoard' :to="{ name: 'bigBoard' }" block variant="primary">생성하기</b-button>
             </b-col>
           </b-row>
           <b-row class="mt-3">
@@ -68,6 +68,7 @@
 </template>
 
 <script>
+import { mapActions } from "vuex";
 export default {
   data() {
     return {
@@ -99,9 +100,7 @@ export default {
   //   })
   // },
   methods: {
-    createRoom() {
-      this.$router.push({ name: "bigBoard" })
-    },
+    ...mapActions(['initSetBoard']),
     resetModal() {},
     handleOk() {},
   },

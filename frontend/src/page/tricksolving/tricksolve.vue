@@ -3,30 +3,33 @@
     <h1>묘 수 풀 이</h1>
     <div class="d-flex align-items-center justify-content-center" id="trick" style="height:75vh; text-align:center;">
       <div>
-        <b-button variant="white" router :to="{ name: 'round1' }" class="btn ml-3 mb-5" type="submit"><img class="btn-img" src="../../assets/one_black.png" width="100"></b-button>
-        <b-button variant="white" router :to="{ name: 'round2' }" class="btn ml-3 mb-5" type="submit"><img class="btn-img" src="../../assets/two_black.png" width="100"></b-button>
-        <b-button variant="white" router :to="{ name: 'round3' }" class="btn ml-3 mb-5" type="submit"><img class="btn-img" src="../../assets/three.png" width="100"></b-button>
-        <b-button variant="white" router :to="{ name: 'round4' }" class="btn ml-3 mb-5" type="submit"><img class="btn-img" src="../../assets/four.png" width="100"></b-button>
-        <b-button variant="white" router :to="{ name: 'round5' }" class="btn ml-3 mb-5" type="submit"><img class="btn-img" src="../../assets/five.png" width="100"></b-button>
+        <b-button @click='testSetBoard1' variant="white" router :to="{ name: 'trickSolving_bigBoard' }" class="btn ml-3 mb-5" type="submit"><img class="btn-img" src="../../assets/one_black.png" width="100"></b-button>
+        <b-button @click='testSetBoard2' variant="white" router :to="{ name: 'trickSolving_bigBoard' }" class="btn ml-3 mb-5" type="submit"><img class="btn-img" src="../../assets/two_black.png" width="100"></b-button>
+        <b-button @click='testSetBoard3' variant="white" router :to="{ name: 'trickSolving_bigBoard' }" class="btn ml-3 mb-5" type="submit"><img class="btn-img" src="../../assets/three.png" width="100"></b-button>
+        <b-button @click='testSetBoard4' variant="white" router :to="{ name: 'trickSolving_bigBoard' }" class="btn ml-3 mb-5" type="submit"><img class="btn-img" src="../../assets/four.png" width="100"></b-button>
+        <b-button @click='testSetBoard5' variant="white" router :to="{ name: 'trickSolving_bigBoard' }" class="btn ml-3 mb-5" type="submit"><img class="btn-img" src="../../assets/five.png" width="100"></b-button>
         <br>
         <button @click="check()" class="btn ml-3 mt-3" type="submit"><img class="btn-img" src="../../assets/six.png" width="100"></button>
-        <button class="btn ml-3 mt-3" type="submit"><img class="btn-img" src="../../assets/seven.png" width="100"></button>
-        <button class="btn ml-3 mt-3" type="submit"><img class="btn-img" src="../../assets/eight.png" width="100"></button>
-        <button class="btn ml-3 mt-3" type="submit"><img class="btn-img" src="../../assets/nine.png" width="100"></button>
-        <button class="btn ml-3 mt-3" type="submit"><img class="btn-img" src="../../assets/ten.png" width="100"></button>
+        <button @click="check()" class="btn ml-3 mt-3" type="submit"><img class="btn-img" src="../../assets/seven.png" width="100"></button>
+        <button @click="check()" class="btn ml-3 mt-3" type="submit"><img class="btn-img" src="../../assets/eight.png" width="100"></button>
+        <button @click="check()" class="btn ml-3 mt-3" type="submit"><img class="btn-img" src="../../assets/nine.png" width="100"></button>
+        <button @click="check()" class="btn ml-3 mt-3" type="submit"><img class="btn-img" src="../../assets/ten.png" width="100"></button>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import { mapActions } from "vuex";
+
 export default {
   name: "TrickSolve",
   methods: {
     check() {
       alert('추후 업데이트 예정')
-    }
-  }
+    },
+    ...mapActions(['testSetBoard1', 'testSetBoard2', 'testSetBoard3', 'testSetBoard4', 'testSetBoard5']),
+  },
 }
 </script>
 

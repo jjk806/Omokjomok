@@ -20,12 +20,6 @@ import trickSolving_bigBoard from "../page/board_trickSolving/trickSolving_bigBo
 
 // 묘수 풀이 페이지
 import TrickSolve from "../page/tricksolving/tricksolve.vue"
-import round1 from "../page/board_trickSolving/round1.vue"
-import round2 from "../page/board_trickSolving/round2.vue"
-import round3 from "../page/board_trickSolving/round3.vue"
-import round4 from "../page/board_trickSolving/round4.vue"
-import round5 from "../page/board_trickSolving/round5.vue"
-
 
 Vue.use(Router);
 
@@ -96,36 +90,6 @@ export default new Router({
       path: "/tricksolve",
       name: "TrickSolve",
       component: TrickSolve
-    },
-    // 묘수 풀이
-    {
-      path: "/board_trickSolving/round1",
-      name: "round1",
-      component: round1
-    },
-    // 묘수 풀이
-    {
-      path: "/board_trickSolving/round2",
-      name: "round2",
-      component: round2
-    },
-    // 묘수 풀이
-    {
-      path: "/board_trickSolving/round3",
-      name: "round3",
-      component: round3
-    },
-    // 묘수 풀이
-    {
-      path: "/board_trickSolving/round4",
-      name: "round4",
-      component: round4
-    },
-    // 묘수 풀이
-    {
-      path: "/board_trickSolving/round5",
-      name: "round5",
-      component: round5
     },
 
   ],
