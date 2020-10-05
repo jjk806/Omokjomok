@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from django.core.mail import EmailMessage
@@ -16,7 +16,6 @@ def emailAuth(request):
     sendmail = EmailMessage(subject, message, to=[email])
     # EmailMessage(제목, 내용, 보내는 사람(settings 설정으로 안 적어도 됨), 받는 사람 목록)
     sendmail.send()
-<<<<<<< HEAD
     return Response(number)
 
 # code 요청
@@ -31,6 +30,3 @@ def kakao_login(request):
 def kakao_callback(request):                                                                  
     params = urllib.parse.urlencode(request.GET)                                      
     return redirect(f'http://127.0.0.1:8000/accounts/login/kakao/callback?{params}')   
-=======
-    return Response(number)
->>>>>>> 83c3fe39708e1ae0de4d241974885846ee8a2f50
