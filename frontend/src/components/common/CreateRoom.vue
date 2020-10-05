@@ -14,14 +14,14 @@
         <!-- checkbox -->
         <b-form-group>
           <b-form-group>
-            <b-form-radio-group id="radio-group-2" v-model="selectOrder">
+            <b-form-radio-group id="whoAttack" v-model="selectOrder">
               <b-row>
                 <b-col class="text-info" cols=3>공격 순서</b-col>
                 <b-col cols=3>
-                  <b-form-radio value="first">선공</b-form-radio>
+                  <b-form-radio value="1">선공</b-form-radio>
                 </b-col>
                 <b-col>
-                  <b-form-radio value="second">후공</b-form-radio>
+                  <b-form-radio value="2">후공</b-form-radio>
                 </b-col>
               </b-row>
             </b-form-radio-group>
@@ -39,13 +39,13 @@
               <b-row>
                 <b-col class="text-info" cols=3>난이도</b-col>
                 <b-col cols=3>
-                  <b-form-radio value="high">상</b-form-radio>
+                  <b-form-radio value="2">상</b-form-radio>
                 </b-col>
                 <b-col cols=3>
-                  <b-form-radio value="mid">중</b-form-radio>
+                  <b-form-radio value="1">중</b-form-radio>
                 </b-col>
                 <b-col cols=3>
-                  <b-form-radio value="low">하</b-form-radio>
+                  <b-form-radio value="0">하</b-form-radio>
                 </b-col>
               </b-row>
             </b-form-radio-group>
@@ -68,6 +68,8 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
+
 export default {
   data() {
     return {
@@ -100,10 +102,17 @@ export default {
   // },
   methods: {
     createRoom() {
-      this.$router.push({ name: "bigBoard" })
+      
+      this.match.turn = this.selectOrder;
+      this.match.level = this.selectLevel;
+      alert(this.selectOrder + " " + this.selectLevel + " " + this.match.turn + " " + this.match.level)
+      this.$router.push({ name: "fightWithAI_bigBoard"})
     },
     resetModal() {},
     handleOk() {},
+  },
+  computed: {
+    ...mapState(["match"]),
   },
 }
 </script>
