@@ -213,5 +213,22 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
+## 소셜로그인 설정
+SOCIALACCOUNT_PROVIDERS = {
+    'kakao': {
+        'APP': {
+            'client_id': '1959deb17d11d37e28fecfb81284c8c4',
+            'secret': 488279,
+            'key': ''
+        }
+    }
+}
+
+# 로그인/로그아웃 후 돌아올 URL  
+ACCOUNT_LOGOUT_REDIRECT_URL = "/" 
+ACCOUNT_AUTHENTICATED_LOGIN_REDIRECTS = True
+ACCOUNT_AUTHENTICATED_LOGOUT_REDIRECTS = True
+ACCOUNT_LOGOUT_REDIRECT_URL = "/"
+
 # /account/logout/ 시 바로 로그아웃
 ACCOUNT_LOGOUT_ON_GET = True

@@ -16,4 +16,21 @@ def emailAuth(request):
     sendmail = EmailMessage(subject, message, to=[email])
     # EmailMessage(제목, 내용, 보내는 사람(settings 설정으로 안 적어도 됨), 받는 사람 목록)
     sendmail.send()
+<<<<<<< HEAD
     return Response(number)
+
+# code 요청
+def kakao_login(request):
+    app_rest_api_key = '1959deb17d11d37e28fecfb81284c8c4'
+    redirect_uri = "http://127.0.0.1:8000/accounts/login/kakao/callback/"
+    return redirect(
+        f"https://kauth.kakao.com/oauth/authorize?client_id={app_rest_api_key}&redirect_uri={redirect_uri}&response_type=code"
+    )    
+    
+# access token 요청
+def kakao_callback(request):                                                                  
+    params = urllib.parse.urlencode(request.GET)                                      
+    return redirect(f'http://127.0.0.1:8000/accounts/login/kakao/callback?{params}')   
+=======
+    return Response(number)
+>>>>>>> 83c3fe39708e1ae0de4d241974885846ee8a2f50
