@@ -20,7 +20,6 @@ class omokgame(models.Model):
     date = models.DateTimeField(db_column = 'date')
 
     class Meta:
-        managed = False
         db_table = 'game'
 
 
@@ -30,7 +29,6 @@ class myosu(models.Model):
     round = models.IntegerField(db_column = 'round')
 
     class Meta:
-        managed = False
         db_table = 'myosu'
 
 
@@ -41,5 +39,4 @@ class room(models.Model):
      level = models.IntegerField(db_column = 'level')
 
      class Meta:
-         managed = False
-         db_table = 'room'
+        db_table = 'room'
