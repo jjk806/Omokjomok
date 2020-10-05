@@ -2,6 +2,8 @@ from django.shortcuts import render
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
+from .models import *
+from .serializers import * 
 from tensorflow.keras.models import load_model
 from mcts import mcts_action
 from game import Game
@@ -31,3 +33,9 @@ def test(request):
     board[c][r] = 1 
     result = {'board': board, 'AIaction': AIaction}
     return Response(result)
+
+@api_view(['GET'])
+def Tricklist(request):
+    tricks = TrickSolving.objects.filter(user=request.user)
+    serializer = TrickSolvingSerializer(instance=tricks)
+    return Response(serializer.data)
