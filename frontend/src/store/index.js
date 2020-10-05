@@ -15,7 +15,7 @@ const initialState = {
     pendingPosition: null, // { x: int, y: int }
     matchId: 1,
     // currentPlayerId 가 1일시 흑색 currentPlayerId 2일시 백색
-    currentPlayerId: 2,
+    currentPlayerId: 1,
     suggestionTimer: 0,
     level: -1,
     turn: -1,
