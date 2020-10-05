@@ -60,6 +60,56 @@ const initialState = {
       },
     },
   },
+  matchRound1: {
+    matchPending: false, // bool
+    pendingPosition: null, // { x: int, y: int }
+    matchId: 1,
+    // currentPlayerId 가 1일시 흑색 currentPlayerId 2일시 백색
+    currentPlayerId: 1,
+    suggestionTimer: 0,
+    suggestorOn: undefined,
+    suggestion: {
+      x: -1,
+      y: -1,
+    },
+    history: null,
+    alphabet:['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'],
+    board: {
+      size: 15,
+      suggestedPosition: -1,
+      tab: [
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 1, 1, 2, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      ],
+      stackMoves: [], // returned with prev move
+      stackIndex: 0, // where index is next?
+    },
+    players: {
+      p1: {
+        isAi: false,
+        id: 1, //blackcolor
+        captured: 0,
+      },
+      p2: {
+        isAi: false,
+        id: 2, //whitecolor
+        captured: 0,
+      },
+    },
+  },
 };
 
 /////////////////////////////////////쓸모 없는 데이터 삭제 중////////////////////////////////

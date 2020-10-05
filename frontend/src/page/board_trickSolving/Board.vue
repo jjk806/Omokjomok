@@ -1,28 +1,28 @@
 <template>
   <div
     class="p-10 text-center m-auto"
-    v-if="match && match.board && match.board.tab && match.board.tab.length"
+    v-if="matchRound1 && matchRound1.board && matchRound1.board.tab && matchRound1.board.tab.length"
   >
     <div
       class="row flex justify-center align-center p-0"
-      v-for="(line, posY) in match.board.tab"
+      v-for="(line, posY) in matchRound1.board.tab"
       :key="posY"
     >
-      <div class="text-gray-600 w-5">{{ match.alphabet[posY] }}</div>
+      <div class="text-gray-600 w-5">{{ matchRound1.alphabet[posY] }}</div>
       <Tile
         v-for="(tile, posX) in line"
-        :key="posX + match.board.tab.length * posY"
-        :value="match.board.tab[posY][posX]"
+        :key="posX + matchRound1.board.tab.length * posY"
+        :value="matchRound1.board.tab[posY][posX]"
         :posX="posX"
         :posY="posY"
         :isSuggestion="
-          posY === match.suggestion.y && posX === match.suggestion.x
+          posY === matchRound1.suggestion.y && posX === matchRound1.suggestion.x
         "
-        :anyMoveIsPending="!!match.pendingPosition"
+        :anyMoveIsPending="!!matchRound1.pendingPosition"
         :isPendingPosition="
-          !!match.pendingPosition &&
-          posY === match.pendingPosition.y &&
-          posX === match.pendingPosition.x
+          !!matchRound1.pendingPosition &&
+          posY === matchRound1.pendingPosition.y &&
+          posX === matchRound1.pendingPosition.x
         "
       />
     </div>
@@ -41,12 +41,12 @@ export default {
     // if (!this.$route.params.id)
     //   this.$router.push({ name: "match", params: { id: matchId } });
 
-    console.log(this.match.board.tab[0]);
+    console.log(this.matchRound1.board.tab[0]);
     console.log("board 도착");
   },
   methods: {},
   computed: {
-    ...mapState(["match"]),
+    ...mapState(["matchRound1"]),
   },
 };
 </script>

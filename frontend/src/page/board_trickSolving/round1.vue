@@ -4,7 +4,7 @@
     <b-col cols = "8">
       <div class="h-full self-center flex flex-col text-white-whip" >
         <Board
-          v-if="match && match.board && match.board.tab && match.board.tab.length "
+          v-if="matchRound1 && matchRound1.board && matchRound1.board.tab && matchRound1.board.tab.length "
         />
       </div>
     </b-col>
@@ -73,7 +73,7 @@ import { mapState, mapActions } from "vuex";
 import Board from "./Board.vue";
 
 export default {
-  name: "Match",
+  name: "MatchRound1",
   components: { Board },
   methods: {
     // local methods here
@@ -86,7 +86,7 @@ export default {
   },
   computed: {
     // local computed here
-    ...mapState(["match"]),
+    ...mapState(["matchRound1"]),
   },
 };
 </script>
