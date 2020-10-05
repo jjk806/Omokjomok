@@ -18,9 +18,8 @@ import bigBoard from "../page/omokBoard/bigBoard.vue";
 import fightWithAI_bigBoard from "../page/board_fightWithAI/fightWithAI_bigBoard.vue";
 import trickSolving_bigBoard from "../page/board_trickSolving/trickSolving_bigBoard.vue";
 
-
+// 묘수 풀이 페이지
 import TrickSolve from "../page/tricksolving/tricksolve.vue"
-
 
 Vue.use(Router);
 

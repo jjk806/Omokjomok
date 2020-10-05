@@ -80,7 +80,7 @@ export default {
     undo() {},
     restartGame() {
       this.clearMatch();
-      this.$router.push("/");
+      this.$router.push("/tricksolve/");
     },
     ...mapActions(["newMatch", "undoMove", "clearMatch"]),
   },

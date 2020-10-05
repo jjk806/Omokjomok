@@ -30,7 +30,7 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
+import { mapState, mapActions, mapMutations } from "vuex";
 import Tile from "./Tile.vue";
 
 export default {
@@ -40,7 +40,7 @@ export default {
     // const { matchId } = this.match;
     // if (!this.$route.params.id)
     //   this.$router.push({ name: "match", params: { id: matchId } });
-
+    console.log(this.match)
     console.log(this.match.board.tab[0]);
     console.log("board 도착");
   },
