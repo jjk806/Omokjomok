@@ -1,8 +1,9 @@
-from django.shortcuts import render, redirect 
+from django.shortcuts import render, redirect, get_object_or_404 
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from django.core.mail import EmailMessage
 from .models import *
+from .serializers import *
 
 import random
 import urllib 
@@ -23,6 +24,18 @@ def emailAuth(request):
         # EmailMessage(제목, 내용, 보내는 사람(settings 설정으로 안 적어도 됨), 받는 사람 목록)
         sendmail.send()
     return Response(number)
+
+@api_view(['GET'])
+def userPlay(request):
+    print('!user',requser.user)
+    user = get_object_or_404(CustomUser, email=request.user.email)
+    newplay = user.play + 1
+    serializer = CustomUserSerializer(user)
+    print('!before', serializer.data)
+    if serializer.is_valid(raise_exception=True):
+        serializer.save(play=newplay) 
+        print('!after', serializer.data)
+    return Response(serializer.data)
 
 # code 요청
 def kakao_login(request):
