@@ -25,7 +25,7 @@ class Game:
             self.legal_actions, self.illegal, self.end = self.state.referee()
             self.history.append(action)
             self.game_length += 1
-
+            print(self.end, self.game_length)
             # 패배 혹은 무승부
             if self.end >= 1:
                 count = self.game_count + 1

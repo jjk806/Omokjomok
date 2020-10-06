@@ -31,6 +31,11 @@ def test(request):
     game.state.black = black
     game.state.white = white
 
+    if game.state.referee()[2] != 0:
+        endmessage = 1
+        result = {'board': board, 'AIaction': -1, 'endmessage': endmessage}
+        return Response(result)
+
     if request.data['turn'] == '1':
         game.state.turn = [[1]]
     else:
@@ -49,32 +54,21 @@ def test(request):
     else:
         board[c][r] = 1
 
-    endmessage = ''
-    if request.data['level'] == '0':
-        game.next(mcts_low(pb, pw, vb, vw, game.state))
-        if game.end >= 1:
-            if game.end == 1:
-                if game.state.check_turn():
-                    endmessage = 'white win'
-                else:
-                    endmessage = 'black win'
-    elif request.data['level'] == '1':
-        game.next(mcts_middle(pb, pw, vb, vw, game.state))
-        if game.end >= 1:
-            if game.end == 1:
-                if game.state.check_turn():
-                    endmessage = 'white win'
-                else:
-                    endmessage = 'black win'
-    else:
-        game.next(mcts_high(pb, pw, vb, vw, game.state))
-        if game.end >= 1:
-            if game.end == 1:
-                if game.state.check_turn():
-                    endmessage = 'white win'
-                else:
-                    endmessage = 'black win'
+    for i in range(15):
+        for j in range(15):
+            if board[i][j] == 1:
+                black[i][j] = 1
+            elif board[i][j] == 2:
+                white[i][j] = 1
+    game.state.black = black
+    game.state.white = white
 
+    if game.state.referee()[2] != 0:
+        endmessage = 2
+        result = {'board': board, 'AIaction': AIaction, 'endmessage': endmessage}
+        return Response(result)
+
+    endmessage = -1
     result = {'board': board, 'AIaction': AIaction, 'endmessage': endmessage}
     return Response(result)
 
