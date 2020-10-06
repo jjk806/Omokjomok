@@ -10,4 +10,6 @@ urlpatterns = [
     path('', include('django.contrib.auth.urls')),
     path('userplay/', views.userPlay),
     path('userwin/', views.userWin),
+    path('userinfo/', views.userInfo),
+    path('userrank/', views.userRank),
 ]
