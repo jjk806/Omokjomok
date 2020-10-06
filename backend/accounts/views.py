@@ -27,18 +27,25 @@ def emailAuth(request):
         sendmail.send()
     return Response(number)
 
-@api_view(['GET'])
+@api_view(['POST'])
 @permission_classes([IsAuthenticated])
 def userPlay(request):
     user_id = request.data['pk']
     user = get_object_or_404(CustomUser, id=user_id)
-    newplay = user.play + 1
-    serializer = CustomUserSerializer(user)
-    print('!before', serializer.data)
-    if serializer.is_valid(raise_exception=True):
-        serializer.save(play=newplay) 
-        print('!after', serializer.data)
-    return Response(serializer.data)
+    user.play += 1
+    user.rate = user.win / user.play * 100
+    user.save()
+    return Response()
+
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def userWin(request):
+    user_id = request.data['pk']
+    user = get_object_or_404(CustomUser, id=user_id)
+    user.win += 1
+    user.rate = user.win / user.play * 100
+    user.save()
+    return Response()
 
 # code 요청
 def kakao_login(request):
