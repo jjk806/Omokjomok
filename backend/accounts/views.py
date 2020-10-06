@@ -47,6 +47,24 @@ def userWin(request):
     user.save()
     return Response()
 
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def userInfo(request):
+    user_id = request.data['pk']
+    user = get_object_or_404(CustomUser, id=user_id)
+    serializer = CustomUserSerializer(user)
+    return Response(serializer.data)
+
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def userRank(request):
+    user = CustomUser.objects.order_by('-rate')
+    rank = []
+    for i in range(5):
+        ind = user[i].email.find('@')
+        rank.append(user[i].email[:ind])
+    return Response(rank)
+
 # code 요청
 def kakao_login(request):
     app_rest_api_key = '1959deb17d11d37e28fecfb81284c8c4'

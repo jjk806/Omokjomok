@@ -9,4 +9,5 @@ urlpatterns = [
     path('gamestart/', views.gamestart),
     path('myosu/', views.showgame),
     path('room/', views.makeroom),
+    path('myosuwin/', views.myosuWin),
 ]

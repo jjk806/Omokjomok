@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404 
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
@@ -74,9 +74,12 @@ def test(request):
 
 @api_view(['GET'])
 def Tricklist(request):
-    tricks = TrickSolving.objects.filter(user=request.user)
+    pk = request.data["pk"]
+    tricks = TrickSolving.objects.filter(user=pk)
     serializer = TrickSolvingSerializer(instance=tricks)
     return Response(serializer.data)
+
+
 
 @api_view(['POST'])
 def gamestart(request):
@@ -108,3 +111,12 @@ def makeroom(request):
     r_level = request.data['level']
 
     rows = room.object.create(uid = r_uid, att_turn = r_att_turn, level = r_level)
+
+@api_view(['POST'])
+def myosuWin(request):
+    # pk = request.data["pk"]
+    # stage = request.data["stage"]
+    # trickSolve = TrickSolving.get_object_or_404(TrickSolving, user=pk)
+    # if stage == game1:
+    # trickSolve."game1"
+    return Response()
