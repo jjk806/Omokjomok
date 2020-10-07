@@ -11,4 +11,5 @@ urlpatterns = [
     path('room/', views.makeroom),
     path('myosuwin/', views.myosuWin),
     path('maketrick/', views.makeTrick),
+    path('tricksolving/', views.tricksolving),
 ]

@@ -15,6 +15,9 @@ pw = load_model('./model/policy_black.h5', compile=False)
 vb = load_model('./model/value_black_t.h5', compile=False)
 vw = load_model('./model/value_black_t.h5', compile=False)
 
+@api_view(['POST'])
+def tricksolving(request):
+    pass
 
 @api_view(['POST'])
 def test(request):
@@ -30,6 +33,15 @@ def test(request):
                 white[i][j] = 1
     game.state.black = black
     game.state.white = white
+
+    if game.state.referee()[2] != 0: # 사람이 이겼을 경우
+        if request.data['turn'] == '1':
+            endmessage = 1
+        else:
+            endmessage = 2
+        print(endmessage, '사람 승')
+        result = {'board': board, 'AIaction': -1, 'endmessage': endmessage}
+        return Response(result)
 
     if request.data['turn'] == '1':
         game.state.turn = [[1]]
@@ -49,32 +61,25 @@ def test(request):
     else:
         board[c][r] = 1
 
-    endmessage = ''
-    if request.data['level'] == '0':
-        game.next(mcts_low(pb, pw, vb, vw, game.state))
-        if game.end >= 1:
-            if game.end == 1:
-                if game.state.check_turn():
-                    endmessage = 'white win'
-                else:
-                    endmessage = 'black win'
-    elif request.data['level'] == '1':
-        game.next(mcts_middle(pb, pw, vb, vw, game.state))
-        if game.end >= 1:
-            if game.end == 1:
-                if game.state.check_turn():
-                    endmessage = 'white win'
-                else:
-                    endmessage = 'black win'
-    else:
-        game.next(mcts_high(pb, pw, vb, vw, game.state))
-        if game.end >= 1:
-            if game.end == 1:
-                if game.state.check_turn():
-                    endmessage = 'white win'
-                else:
-                    endmessage = 'black win'
+    for i in range(15):
+        for j in range(15):
+            if board[i][j] == 1:
+                black[i][j] = 1
+            elif board[i][j] == 2:
+                white[i][j] = 1
+    game.state.black = black
+    game.state.white = white
 
+    if game.state.referee()[2] != 0: # AI가 이겼을 경우
+        if request.data['turn'] == '1':
+            endmessage = 2
+        else:
+            endmessage = 1
+        print('AI 승')
+        result = {'board': board, 'AIaction': AIaction, 'endmessage': endmessage}
+        return Response(result)
+
+    endmessage = -1
     result = {'board': board, 'AIaction': AIaction, 'endmessage': endmessage}
     return Response(result)
 
