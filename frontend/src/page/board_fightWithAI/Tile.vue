@@ -77,13 +77,18 @@ export default {
   methods: {
     mouseOver() {
       this.hovering = true;
+      if(this.match.amIWin == true || this.match.amIWin == false){
+        this.hovering = false;
+      }
     },
     mouseOut() {
       this.hovering = false;
     },
     sendMove({ posX, posY }) {
       console.log("sendMove 시작!");
-      this.makeMove({ posX, posY });
+      if(this.match.amIWin == null){
+        this.makeMove({ posX, posY });
+      }
       console.log("sendMove 끝!");
     },
     ...mapActions(["makeMove"]),

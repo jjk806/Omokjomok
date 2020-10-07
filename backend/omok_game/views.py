@@ -31,8 +31,12 @@ def test(request):
     game.state.black = black
     game.state.white = white
 
-    if game.state.referee()[2] != 0:
-        endmessage = 1
+    if game.state.referee()[2] != 0: # 사람이 이겼을 경우
+        if request.data['turn'] == '1':
+            endmessage = 1
+        else:
+            endmessage = 2
+        print(endmessage, '사람 승')
         result = {'board': board, 'AIaction': -1, 'endmessage': endmessage}
         return Response(result)
 
@@ -63,8 +67,12 @@ def test(request):
     game.state.black = black
     game.state.white = white
 
-    if game.state.referee()[2] != 0:
-        endmessage = 2
+    if game.state.referee()[2] != 0: # AI가 이겼을 경우
+        if request.data['turn'] == '1':
+            endmessage = 2
+        else:
+            endmessage = 1
+        print('AI 승')
         result = {'board': board, 'AIaction': AIaction, 'endmessage': endmessage}
         return Response(result)
 
