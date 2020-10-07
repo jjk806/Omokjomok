@@ -20,6 +20,7 @@ const initialState = {
     suggestionTimer: 0,
     level: -1,
     turn: -1,
+    gameEnd: false,
     suggestorOn: undefined,
     suggestion: {
       x: -1,
@@ -80,7 +81,6 @@ export default new Vuex.Store({
     },
     clearMatch(state) {
       Object.assign(state, cloneDeep(initialState));
-      state.message = { Message: "You have navigated back to Gomoku_v2 home!" };
     },
     setmoveIsPending(state, { moveIsPending, posX, posY }) {
       state.match.pendingPosition = moveIsPending ? { x: posX, y: posY } : null;
@@ -245,6 +245,32 @@ export default new Vuex.Store({
           console.log(data);
           //this.state.match.board.tab = data.cloneDeep;
           commit("setmoveIsPending", { moveIsPending: false, posX, posY });
+          alert(data.endmessage);
+          if(data.endmessage == 1 || data.endmessage == 2){
+            // if(data.endmessage == 1){
+            //   setTimeout(function() {
+            //     alert('흑 승리')
+            //     // this.state.match.gameEnd = true;
+            //     // this.$router.push("Mainpage");
+            //   }, 500);
+            // }else{
+            //   setTimeout(function() {
+            //     alert('백 승리')
+            //     // this.state.match.gameEnd = true;
+            //   }, 500);
+            // }
+            if(data.endmessage == 1){
+              alert('흑 승리')
+              this.state.match.gameEnd = true;
+              alert(this.state.match.gameEnd)
+            }else{
+              alert('백 승리')
+              this.state.match.gameEnd = true;
+              alert(this.state.match.gameEnd)
+            }
+            
+
+          }
         });
     },
     initSetBoard({ state, commit }) {
@@ -285,6 +311,9 @@ export default new Vuex.Store({
           //this.state.match.board.tab = data.cloneDeep;
         });
     },
+    gameIsEnd({whoWin}){
+      resultModal = true;
+    }
   },
   computed: {
     ...mapState(["state"]),

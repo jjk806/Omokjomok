@@ -68,12 +68,9 @@
 </template>
 
 <script>
-<<<<<<< frontend/src/components/common/CreateRoom.vue
-import { mapActions } from "vuex";
-=======
 import { mapState, mapActions } from "vuex";
+import http from "@/util/http-common";
 
->>>>>>> frontend/src/components/common/CreateRoom.vue
 export default {
   data() {
     return {
@@ -90,7 +87,22 @@ export default {
       this.match.turn = this.selectOrder;
       this.match.level = this.selectLevel;
       alert(this.selectOrder + " " + this.selectLevel + " " + this.match.turn + " " + this.match.level)
-      this.$router.push({ name: "fightWithAI_bigBoard"})
+
+      if(this.match.turn != null && this.match.level != null){
+        alert("도착했어")
+        this.$router.push({ name: "fightWithAI_bigBoard"})
+      }else{
+        alert("공격순서와 난이도를 설정해주세요.");
+      }
+       ////////////////////////////////////////////////////////////////
+      // alert("1도착")
+      // http
+      //   .get("rest_auth/user/")
+      //   .then(({ data }) => {
+      //     console.log("asd");
+      // });
+      // alert("2도착")
+     /////////////////////////////////////////////////////
     },
     resetModal() {},
     handleOk() {},
