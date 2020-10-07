@@ -149,6 +149,12 @@ export default {
     // local methods here
     undo() {},
     restartGame() {
+      // pk 값을 이용해서 횟수를 늘리기 위한 요청
+      const config = {
+        headers: {
+          Authorization: `Token ${this.$cookies.get('auth-token')}`
+        }
+      }
       // pk 값 가져오는 요청
       http.get("rest_auth/user/", config)
       .then(res => {

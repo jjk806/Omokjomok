@@ -184,7 +184,7 @@ export default {
 
 img {
   /* width: 460px; */
-  height: 210px !important;
+  height: 270px !important;
 }
 
 </style>

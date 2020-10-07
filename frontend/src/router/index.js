@@ -33,7 +33,7 @@ const requireAuth = () => (to, from, next) => {
   if (store.state.isloggedin) {
     return next();
   }
-  next('/user/login');
+  next('/');
 }
 
 
@@ -42,7 +42,7 @@ export default new Router({
   routes: [
     // 로그인/가입
     {
-      path: "/user/login",
+      path: "/",
       name: "Login",
       component: Login,
     },
@@ -60,7 +60,7 @@ export default new Router({
 
     // 포스트
     {
-      path: "/",
+      path: "/home",
       name: "Mainpage",
       component: Mainpage,
       beforeEnter: requireAuth()
