@@ -2,7 +2,7 @@ from math import sqrt
 import numpy as np
 from random import randint
 
-MCTS_COUNT = 2
+MCTS_COUNT = 10
 PRUNING_COUNT = 5
 
 

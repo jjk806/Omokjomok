@@ -70,25 +70,54 @@ def test(request):
     game.state.black = black
     game.state.white = white
 
+    legal, illegal, end = game.state.referee()
+    
     if game.state.referee()[2] != 0: # AI가 이겼을 경우
         if request.data['turn'] == '1':
             endmessage = 2
         else:
             endmessage = 1
         print('AI 승')
-        result = {'board': board, 'AIaction': AIaction, 'endmessage': endmessage}
+        result = {'board': board, 'AIaction': AIaction, 'endmessage': endmessage, 'illegal': illegal}
         return Response(result)
 
     endmessage = -1
-    result = {'board': board, 'AIaction': AIaction, 'endmessage': endmessage}
+    for k in range(len(illegal)):
+        x, y = illegal[k][0] // 15, illegal[k][0] % 15
+        board[x][y] = 3
+
+    result = {'board': board, 'AIaction': AIaction, 'endmessage': endmessage, 'illegal': illegal}
+
     return Response(result)
 
-@api_view(['GET'])
+@api_view(['POST'])
+def makeTrick(request):
+    m_uid = request.data['pk']
+    rows = TrickSolving(user=m_uid)
+    rows.save()
+    return Response()
+
+@api_view(['POST'])
 def Tricklist(request):
-    pk = request.data["pk"]
-    tricks = TrickSolving.objects.filter(user=pk)
-    serializer = TrickSolvingSerializer(instance=tricks)
-    return Response(serializer.data)
+    user_id = request.data["pk"]
+    tricks = get_object_or_404(TrickSolving, user=user_id)
+    clear = [0]*15
+    clear[0] = tricks.game1_1
+    clear[1] = tricks.game1_2
+    clear[2] = tricks.game1_3
+    clear[3] = tricks.game1_4
+    clear[4] = tricks.game1_5
+    clear[5] = tricks.game2_1
+    clear[6] = tricks.game2_2
+    clear[7] = tricks.game2_3
+    clear[8] = tricks.game2_4
+    clear[9] = tricks.game2_5
+    clear[10] = tricks.game3_1
+    clear[11] = tricks.game3_2
+    clear[12] = tricks.game3_3
+    clear[13] = tricks.game3_4
+    clear[14] = tricks.game3_5
+    return Response(clear)
 
 
 
@@ -125,9 +154,39 @@ def makeroom(request):
 
 @api_view(['POST'])
 def myosuWin(request):
-    # pk = request.data["pk"]
-    # stage = request.data["stage"]
-    # trickSolve = TrickSolving.get_object_or_404(TrickSolving, user=pk)
-    # if stage == game1:
-    # trickSolve."game1"
+    pk = request.data["pk"]
+    stage = request.data["stage"]
+    trickSolve = get_object_or_404(TrickSolving, user=pk)
+    if stage == 11:
+        trickSolve.game1_1 = 1
+    elif stage == 12:
+        trickSolve.game1_2 = 1
+    elif stage == 13:
+        trickSolve.game1_3 = 1
+    elif stage == 14:
+        trickSolve.game1_4 = 1
+    elif stage == 15:
+        trickSolve.game1_5 = 1
+    elif stage == 21:
+        trickSolve.game2_1 = 1
+    elif stage == 22:
+        trickSolve.game2_2 = 1
+    elif stage == 23:
+        trickSolve.game2_3 = 1
+    elif stage == 24:
+        trickSolve.game2_4 = 1
+    elif stage == 25:
+        trickSolve.game2_5 = 1
+    elif stage == 31:
+        trickSolve.game3_1 = 1
+    elif stage == 32:
+        trickSolve.game3_2 = 1
+    elif stage == 33:
+        trickSolve.game3_3 = 1
+    elif stage == 34:
+        trickSolve.game3_4 = 1
+    elif stage == 35:
+        trickSolve.game3_5 = 1
+    trickSolve.save()
     return Response()
+
