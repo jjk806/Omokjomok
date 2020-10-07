@@ -181,8 +181,8 @@ export default {
       http
         .post("rest_auth/login/", this.loginInfo)
           .then(res => {
-            console.log(res)
             this.setCookie(res.data.key)
+            this.$store.state.isloggedin = true
             this.$router.push('/')
           })
           .catch(err => {
@@ -200,6 +200,7 @@ export default {
         .post("rest_auth/logout/")
           .then((res) => {
             this.$cookies.remove('auth-token')
+            this.$store.state.isloggedin = false
             this.$router.push('/')
           })
           .catch(err => console.log(err))
@@ -240,7 +241,6 @@ export default {
               this.signupInfo.email = null
               this.signupInfo.password1 = null
               this.signupInfo.password2 = null
-              this.mailsubmit = false
               this.mailsubmit = null
               this.mailauthentication = null
             })
@@ -253,10 +253,22 @@ export default {
       http
         .post("accounts/emailAuth/", { email: this.signupInfo.email})
           .then(res => {
-            this.mailauthentication = res.data
+            if (res.data == 0) {
+              alert('존재하는 이메일입니다.')
+              this.signupInfo.email = null
+              this.mailsubmit = null
+            } else {
+              this.mailauthentication = res.data
+            }
+
           })
     }
-	},
+  },
+  created() {
+    this.$cookies.remove('auth-token')
+    this.$router.push('/')
+    this.$store.state.isloggedin = false
+  }
 };
 </script>
 

@@ -4,6 +4,8 @@ import { cloneDeep } from "lodash";
 import http from "@/util/http-common";
 import { mapState } from "vuex";
 
+import createPersistedState from "vuex-persistedstate"
+
 Vue.use(Vuex);
 
 const initialState = {
@@ -80,7 +82,9 @@ export default new Vuex.Store({
       state.match.board.tab = cloneDeep(data);
     },
     clearMatch(state) {
+      const tempisloggedin = state.isloggedin
       Object.assign(state, cloneDeep(initialState));
+      state.isloggedin = tempisloggedin
     },
     setmoveIsPending(state, { moveIsPending, posX, posY }) {
       state.match.pendingPosition = moveIsPending ? { x: posX, y: posY } : null;
@@ -318,4 +322,5 @@ export default new Vuex.Store({
   computed: {
     ...mapState(["state"]),
   },
+  plugins: [createPersistedState()],
 });

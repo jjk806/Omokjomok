@@ -47,6 +47,8 @@ import MyInfo from "../../components/common/MyInfo.vue";
 import CreateRoom from "../../components/common/CreateRoom.vue";
 // import axios from "axios";
 
+import http from "../../util/http-common"
+
 export default {
   name: "Mainpage",
   components: {
@@ -57,10 +59,26 @@ export default {
   },
   watch: {},
   methods: {
+    user() {
+      const config = {
+        headers: {
+          Authorization: `Token ${this.$cookies.get('auth-token')}`
+        }
+      }
+      http
+        .get("rest_auth/user/", config)
+          .then(res => {
+            console.log(res)
+          })
+    }
+
   },
   data: () => {
     return {};
   },
+  created() {
+    console.log(this.$store.state.isloggedin)
+  }
 };
 </script>
 
