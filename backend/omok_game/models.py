@@ -5,11 +5,21 @@ from django.conf import settings
 
 class TrickSolving(models.Model):
     user = models.IntegerField()
-    game1 = models.IntegerField(default=0)
-    game2 = models.IntegerField(default=0)
-    game3 = models.IntegerField(default=0)
-    game4 = models.IntegerField(default=0)
-    game5 = models.IntegerField(default=0)
+    game1_1 = models.IntegerField(default=0)
+    game1_2 = models.IntegerField(default=0)
+    game1_3 = models.IntegerField(default=0)
+    game1_4 = models.IntegerField(default=0)
+    game1_5 = models.IntegerField(default=0)
+    game2_1 = models.IntegerField(default=0)
+    game2_2 = models.IntegerField(default=0)
+    game2_3 = models.IntegerField(default=0)
+    game2_4 = models.IntegerField(default=0)
+    game2_5 = models.IntegerField(default=0)
+    game3_1 = models.IntegerField(default=0)
+    game3_2 = models.IntegerField(default=0)
+    game3_3 = models.IntegerField(default=0)
+    game3_4 = models.IntegerField(default=0)
+    game3_5 = models.IntegerField(default=0)
 
 
 class omokgame(models.Model):
