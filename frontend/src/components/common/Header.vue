@@ -95,7 +95,7 @@ export default {
           .then((res) => {
             this.$cookies.remove('auth-token')
             this.$store.state.isloggedin = false
-            this.$router.push('/')
+            this.$router.push('/Login')
           })
           .catch(err => console.log(err))
     },
