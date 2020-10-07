@@ -87,9 +87,9 @@
           <b-row><p></p></b-row>
           <b-row>
             <b-col v-if="this.match.nowTurn == 1">당신 차례</b-col>
+            <b-col v-if="this.match.nowTurn == 1"></b-col>
+            <b-col v-if="this.match.nowTurn == 2"></b-col>
             <b-col v-if="this.match.nowTurn == 2">AI 차례</b-col>
-            <b-col cols = "">검은돌 차례</b-col>
-            <b-col cols = "">백돌 차례</b-col>
           </b-row>
           <b-row><p></p></b-row>
 
@@ -117,12 +117,6 @@
             <b-col cols = "">
               <button
                 class="btn"
-                @click="undo"
-              >무르기</button>
-            </b-col>
-            <b-col cols = "">
-              <button
-                class="btn"
                 @click="restartGame"
               >재시작</button>
             </b-col>
@@ -146,6 +140,7 @@ export default {
     return {
       posX : 0,
       poxY : 0,
+      myturn : True,
     };
   },
   methods: {
@@ -185,15 +180,23 @@ export default {
     }
   },
   updated(){
+    alert("update 도착")
+
+    if(this.match.nowTurn == 1){
+      this.match.nowWeCanMove = true;
+      alert("이제 움직일 수 있다 " + this.match.nowWeCanMove)
+    }
+
+    alert("내가 졌니" + this.match.amIWin)
     if(this.match.amIWin == true){
-      alert("update 도착")
       alert(this.match.board.stackIndex)
+      alert("경기 끝 내가 이겼어")
       this.$refs['win-modal'].show()
       // this.$router.push("/")
     }
     else if(this.match.amIWin == false){
-      alert("update 도착")
       alert(this.match.board.stackIndex)
+      alert("경기 끝 내가 졌어")
       this.$refs['lose-modal'].show()
       // this.$router.push("/")
     }

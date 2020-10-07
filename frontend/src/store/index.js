@@ -25,6 +25,7 @@ const initialState = {
     whatColorWin: 0,
     amIWin: null,
     nowTurn: 1,
+    nowWeCanMove: true,
     suggestorOn: undefined,
     suggestion: {
       x: -1,
@@ -216,7 +217,10 @@ export default new Vuex.Store({
   },
   actions: {
     makeMove({ state, commit }, { posX, posY }) {
+      alert("이제 AI 턴이다" +  this.state.match.nowTurn)
+      alert("이제 움직일 수 없다 " + this.state.match.nowWeCanMove)
       this.state.match.nowTurn = 2;
+      this.state.match.nowWeCanMove = false;
       commit("setmoveIsPending", { moveIsPending: true, posX, posY });
       // console.log(this.state.match.board.tab);
       // console.log(posX, posY);
@@ -230,7 +234,6 @@ export default new Vuex.Store({
         posY,
         posX,
       ];
-      console.log("여기야");
       console.log(
         this.state.match.board.stackMoves[this.state.match.board.stackIndex]
       );
@@ -238,7 +241,6 @@ export default new Vuex.Store({
       this.state.match.board.stackIndex++;
       //여기서 부터 커스텀
       http
-        // .post("omok_game/testgame/", { board: this.state.match.board.tab, level:  012하중상, turn: 흑1 백2 })
         .post("omok_game/testgame/", { board: this.state.match.board.tab, level: this.state.match.level, turn: this.state.match.turn})
         .then(({ data }) => {
           if (data != null) {
@@ -253,11 +255,13 @@ export default new Vuex.Store({
           //this.state.match.board.tab = data.cloneDeep;
           commit("setmoveIsPending", { moveIsPending: false, posX, posY });
           if(data.endmessage == 1 || data.endmessage == 2){
-            alert("결과로 보내와진 데이터" + data.endmessage)
+            alert("결과로 보내온 데이터" + data.endmessage)
             
             if(data.endmessage == this.state.match.currentPlayerId){
+              alert("색이 같네 내가 이겼어")
               this.state.match.amIWin = true;
             }else{
+              alert("색이 다르 내가 졌어")
               this.state.match.amIWin = false;
             }
 
@@ -270,12 +274,11 @@ export default new Vuex.Store({
               this.state.match.whatColorWin = 2;
               alert(this.state.match.whatColorWin)
             }
-            
-
           }
+          alert("AI가 둔 데이터 받아왔어")
+          alert("이제 나의 턴이야")
+          this.state.match.nowTurn = 1;
         });
-
-        this.state.match.nowTurn = 1;
     },
     initSetBoard({ state, commit }) {
       commit('setInitBoard')

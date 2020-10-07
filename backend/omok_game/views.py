@@ -17,6 +17,43 @@ vw = load_model('./model/value_black_t.h5', compile=False)
 
 
 @api_view(['POST'])
+def tricksolving(request):
+    game = Game()
+    board = request.data['board']
+    black = [[0] * 15 for _ in range(15)]
+    white = [[0] * 15 for _ in range(15)]
+    for i in range(15):
+        for j in range(15):
+            if board[i][j] == 1:
+                black[i][j] = 1
+            elif board[i][j] == 2:
+                white[i][j] = 1
+    game.state.black = black
+    game.state.white = white
+
+    if game.state.referee()[2] != 0: # 사람이 이겼을 경우
+        endmessage = 1
+        print(endmessage, '사람 승')
+        result = {'board': board, 'AIaction': -1, 'endmessage': endmessage}
+        return Response(result)
+
+    AIaction = mcts_low(pb, pw, vb, vw, game.state)
+
+    c, r = AIaction//15, AIaction%15
+    board[c][r] = 2
+
+    if game.state.referee()[2] != 0: # AI가 이겼을 경우
+        endmessage = 2
+        print('AI 승')
+        result = {'board': board, 'AIaction': AIaction, 'endmessage': endmessage}
+        return Response(result)
+        
+    endmessage = -1
+    result = {'board': board, 'AIaction': AIaction, 'endmessage': endmessage}
+    return Response(result)
+
+
+@api_view(['POST'])
 def test(request):
     game = Game()
     board = request.data['board']
