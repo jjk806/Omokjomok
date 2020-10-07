@@ -263,7 +263,6 @@ export default {
 <style>
 #loginCon {
 	max-width: 600px;
-	position: absolute;
 	top: 25%;
 	left: 34.5%;
 }

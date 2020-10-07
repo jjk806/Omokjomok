@@ -89,21 +89,20 @@ export default {
       alert(this.selectOrder + " " + this.selectLevel + " " + this.match.turn + " " + this.match.level)
 
       if(this.match.turn != null && this.match.level != null){
+        alert("도착했어")
         this.$router.push({ name: "fightWithAI_bigBoard"})
       }else{
         alert("공격순서와 난이도를 설정해주세요.");
       }
-    //   ////////////////////////////////////////////////////////////////
-    //   http
-    //     // .post("omok_game/testgame/", { board: this.state.match.board.tab, level:  012하중상, turn: 흑1 백2 })
-    //     .get("accounts/userplay/")
-    //     .then(({ data }) => {
-    //       if (data != null) {
-    //         alert("대전횟수 +1 요청 완료했어요!")
-    //       }
-    //     });
-    // /////////////////////////////////////////////////////
-      this.$router.push({ name: "fightWithAI_bigBoard"})
+       ////////////////////////////////////////////////////////////////
+      // alert("1도착")
+      // http
+      //   .get("rest_auth/user/")
+      //   .then(({ data }) => {
+      //     console.log("asd");
+      // });
+      // alert("2도착")
+     /////////////////////////////////////////////////////
     },
     resetModal() {},
     handleOk() {},
