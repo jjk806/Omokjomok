@@ -70,17 +70,27 @@ def test(request):
     game.state.black = black
     game.state.white = white
 
+    legal, illegal, end = game.state.referee()
+
     if game.state.referee()[2] != 0: # AI가 이겼을 경우
         if request.data['turn'] == '1':
             endmessage = 2
         else:
             endmessage = 1
         print('AI 승')
-        result = {'board': board, 'AIaction': AIaction, 'endmessage': endmessage}
+        result = {'board': board, 'AIaction': AIaction, 'endmessage': endmessage, 'illegal': illegal}
         return Response(result)
 
     endmessage = -1
-    result = {'board': board, 'AIaction': AIaction, 'endmessage': endmessage}
+
+    for k in range(len(illegal)):
+        print(illegal[k][0])
+        x, y = illegal[k][0] // 15, illegal[k][0] % 15
+        # x, y = illegal[k] // 15, illegal[k] % 15
+        print(x, y)
+        board[x][y] = 3
+
+    result = {'board': board, 'AIaction': AIaction, 'endmessage': endmessage, 'illegal': illegal}
     return Response(result)
 
 @api_view(['GET'])
