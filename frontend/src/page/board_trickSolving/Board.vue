@@ -41,8 +41,6 @@ export default {
     // if (!this.$route.params.id)
     //   this.$router.push({ name: "match", params: { id: matchId } });
 
-    console.log(this.match.board.tab[0]);
-    console.log("board 도착");
   },
   methods: {},
   computed: {

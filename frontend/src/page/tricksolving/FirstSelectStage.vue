@@ -29,6 +29,17 @@
 </template>
 
 <script>
+import http from "../../util/http-common"
+
+export default {
+  data: () => {
+    return {
+      pk: null,
+      userInfo : {},
+      userrank : [],
+    };
+  },
+};
 </script>
 <style scoped>
     #title{

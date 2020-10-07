@@ -14,6 +14,7 @@ const initialState = {
   httpEndpoint: process.env.VUE_APP_SERVER_HTTP || "http://localhost:4242",
   isloggedin: false,
   match: {
+    myosu: -1,
     titleName: null,
     matchPending: false, // bool
     pendingPosition: null, // { x: int, y: int }
@@ -139,6 +140,7 @@ export default new Vuex.Store({
       state.match.turn = '1'
       state.match.nowTurn = 1
       state.match.titleName = "운월 1단계"
+      state.match.myosu = 11
     },
     wunSetBoard2(state) {
       const tab1 = [
@@ -160,10 +162,11 @@ export default new Vuex.Store({
       ]
       state.match.board.tab = tab1
       state.match.currentPlayerId = 1
-      state.match.level = '1'
+      state.match.level = '0'
       state.match.turn = '1'
       state.match.nowTurn = 1
       state.match.titleName = "운월 2단계"
+      state.match.myosu = 12
     },
     wunSetBoard3(state) {
       const tab1 = [
@@ -185,10 +188,11 @@ export default new Vuex.Store({
       ]
       state.match.board.tab = tab1
       state.match.currentPlayerId = 1
-      state.match.level = '1'
+      state.match.level = '0'
       state.match.turn = '1'
       state.match.nowTurn = 1
       state.match.titleName = "운월 3단계"
+      state.match.myosu = 13
     },
     wunSetBoard4(state) {
       const tab1 = [
@@ -210,10 +214,11 @@ export default new Vuex.Store({
       ]
       state.match.board.tab = tab1
       state.match.currentPlayerId = 1
-      state.match.level = '1'
+      state.match.level = '0'
       state.match.turn = '1'
       state.match.nowTurn = 1
       state.match.titleName = "운월 4단계"
+      state.match.myosu = 14
     },
     wunSetBoard5(state) {
       const tab1 = [
@@ -235,10 +240,11 @@ export default new Vuex.Store({
       ]
       state.match.board.tab = tab1
       state.match.currentPlayerId = 1
-      state.match.level = '1'
+      state.match.level = '0'
       state.match.turn = '1'
       state.match.nowTurn = 2
       state.match.titleName = "운월 5단계"
+      state.match.myosu = 15
     },
     poSetBoard1(state) {
       const name = ""
@@ -265,6 +271,7 @@ export default new Vuex.Store({
       state.match.turn = '1'
       state.match.nowTurn = 1
       state.match.titleName = "포월 1단계"
+      state.match.myosu = 21
     },
     poSetBoard2(state) {
       const tab1 = [
@@ -286,10 +293,11 @@ export default new Vuex.Store({
       ]
       state.match.board.tab = tab1
       state.match.currentPlayerId = 1
-      state.match.level = '1'
+      state.match.level = '0'
       state.match.turn = '1'
       state.match.nowTurn = 1
       state.match.titleName = "포월 2단계"
+      state.match.myosu = 22
     },
     poSetBoard3(state) {
       const tab1 = [
@@ -311,10 +319,11 @@ export default new Vuex.Store({
       ]
       state.match.board.tab = tab1
       state.match.currentPlayerId = 1
-      state.match.level = '1'
+      state.match.level = '0'
       state.match.turn = '1'
       state.match.nowTurn = 1
       state.match.titleName = "포월 3단계"
+      state.match.myosu = 23
     },
     poSetBoard4(state) {
       const tab1 = [
@@ -336,10 +345,11 @@ export default new Vuex.Store({
       ]
       state.match.board.tab = tab1
       state.match.currentPlayerId = 1
-      state.match.level = '1'
+      state.match.level = '0'
       state.match.turn = '1'
       state.match.nowTurn = 1
       state.match.titleName = "포월 4단계"
+      state.match.myosu = 24
     },
     poSetBoard5(state) {
       const tab1 = [
@@ -361,10 +371,11 @@ export default new Vuex.Store({
       ]
       state.match.board.tab = tab1
       state.match.currentPlayerId = 1
-      state.match.level = '1'
+      state.match.level = '0'
       state.match.turn = '1'
       state.match.nowTurn = 2
       state.match.titleName = "포월 5단계"
+      state.match.myosu = 25
     },
     whaSetBoard1(state) {
       const name = ""
@@ -391,6 +402,7 @@ export default new Vuex.Store({
       state.match.turn = '1'
       state.match.nowTurn = 1
       state.match.titleName = "화월 1단계"
+      state.match.myosu = 31
     },
     whaSetBoard2(state) {
       const tab1 = [
@@ -412,10 +424,11 @@ export default new Vuex.Store({
       ]
       state.match.board.tab = tab1
       state.match.currentPlayerId = 1
-      state.match.level = '1'
+      state.match.level = '0'
       state.match.turn = '1'
       state.match.nowTurn = 1
       state.match.titleName = "화월 2단계"
+      state.match.myosu = 32
     },
     whaSetBoard3(state) {
       const tab1 = [
@@ -437,10 +450,11 @@ export default new Vuex.Store({
       ]
       state.match.board.tab = tab1
       state.match.currentPlayerId = 1
-      state.match.level = '1'
+      state.match.level = '0'
       state.match.turn = '1'
       state.match.nowTurn = 1
       state.match.titleName = "화월 3단계"
+      state.match.myosu = 33
     },
     whaSetBoard4(state) {
       const tab1 = [
@@ -462,10 +476,11 @@ export default new Vuex.Store({
       ]
       state.match.board.tab = tab1
       state.match.currentPlayerId = 1
-      state.match.level = '1'
+      state.match.level = '0'
       state.match.turn = '1'
       state.match.nowTurn = 1
       state.match.titleName = "화월 4단계"
+      state.match.myosu = 34
     },
     whaSetBoard5(state) {
       const tab1 = [
@@ -487,10 +502,11 @@ export default new Vuex.Store({
       ]
       state.match.board.tab = tab1
       state.match.currentPlayerId = 1
-      state.match.level = '1'
+      state.match.level = '0'
       state.match.turn = '1'
       state.match.nowTurn = 2
       state.match.titleName = "화월 5단계"
+      state.match.myosu = 35
     },
     justSendOne(){
     },
@@ -516,13 +532,10 @@ export default new Vuex.Store({
       
       this.state.match.board.stackIndex++;
       //여기서 부터 커스텀
-      alert("백통신 직전 " + this.state.match.board.tab + " " + this.state.match.level + " " + this.state.match.turn)
-      alert("백통신 직전2 " + this.state.match.nowTurn + " " + this.state.match.currentPlayerId)
       http
         .post("omok_game/testgame/", { board: this.state.match.board.tab, level: this.state.match.level, turn: this.state.match.turn})
         .then(({ data }) => {
           if (data != null) {
-            alert("데이터 갖고 왔어요")
             // this.match.board.tab = data;
             commit("makeMove", data.board);
           } else {
@@ -541,10 +554,8 @@ export default new Vuex.Store({
 
             if(data.endmessage == 1){
               this.state.match.whatColorWin = 1;
-              alert(this.state.match.whatColorWin)
             }else{
               this.state.match.whatColorWin = 2;
-              alert(this.state.match.whatColorWin)
             }
           }
           this.state.match.nowTurn = 1;
@@ -610,7 +621,6 @@ export default new Vuex.Store({
           if (data != null) {
             // this.match.board.tab = data;
             commit("makeMove", data.board);
-            alert(Math.floor(data.AIaction/15)  + " " + data.AIaction%15);
 
           } else {
             alert(" <추후 수정>실패했습니다.");

@@ -203,14 +203,8 @@ export default {
 
     if(this.match.nowTurn == 1){
       this.match.nowWeCanMove = true;
-      // alert("이제 움직일 수 있다 " + this.match.nowWeCanMove)
     }
-
-    // alert("내가 졌니" + this.match.amIWin)
     if(this.match.amIWin == true){
-      alert(this.match.board.stackIndex)
-      // alert("경기 끝 내가 이겼어")
-
       // 이기는 횟수 요청
       // pk 값 가져오는 요청
       http.get("rest_auth/user/", config)
@@ -232,11 +226,9 @@ export default {
       })
       // this.$router.push("/")
     }
+    // 경기 짐
     else if(this.match.amIWin == false){
-      alert(this.match.board.stackIndex)
-      // alert("경기 끝 내가 졌어")
       this.$refs['lose-modal'].show()
-      // this.$router.push("/")
     }
   },
 };

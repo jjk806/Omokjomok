@@ -37,8 +37,6 @@ export default {
   name: "Board",
   components: { Tile },
   mounted() {
-    console.log(this.match.board.tab[0]);
-    console.log("board 도착");
   },
   methods: {},
   computed: {
