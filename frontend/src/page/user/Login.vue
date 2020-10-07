@@ -191,7 +191,6 @@ export default {
     loginInfo: {
       deep: true,
       handler() {                
-          console.log('watch')
           this.validCheck(this.loginInfo) 
       }
     }
@@ -205,7 +204,6 @@ export default {
       http
         .post("rest_auth/login/", this.loginInfo)
           .then(res => {
-            console.log(';aaaaaaaaaaaaaa')
             this.setCookie(res.data.key)
             this.$store.state.isloggedin = true
             this.$router.push({ name: "Mainpage"})
@@ -256,7 +254,6 @@ export default {
 			alert('aaa')
     },
     handlesubmit() {
-      console.log(this.signupInfo)
     },
     signup() {
       if (this.emailconfirmation == this.mailauthentication) {

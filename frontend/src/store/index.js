@@ -557,7 +557,6 @@ export default new Vuex.Store({
           } else {
             alert(" <추후 수정>실패했습니다.");
           }
-          console.log(data);
           //this.state.match.board.tab = data.cloneDeep;
           commit("setmoveIsPending", { moveIsPending: false, posX, posY });
           if(data.endmessage == 1 || data.endmessage == 2){
@@ -633,7 +632,6 @@ export default new Vuex.Store({
         // .post("omok_game/testgame/", { board: this.state.match.board.tab, level:  012하중상, turn: 흑1 백2 })
         .post("omok_game/testgame/", { board: this.state.match.board.tab, level: this.state.match.level, turn: this.state.match.turn})
         .then(({ data }) => {
-          console.log('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa', data)
           if (data != null) {
             // this.match.board.tab = data;
             commit("makeMove", data.board);
@@ -641,7 +639,6 @@ export default new Vuex.Store({
           } else {
             alert(" <추후 수정>실패했습니다.");
           }
-          console.log('bbbbbbbbbbbbbbb', data);
           //this.state.match.board.tab = data.cloneDeep;
         });
     },
