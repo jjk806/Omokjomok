@@ -4,12 +4,12 @@ from django.conf import settings
 # Create your models here.
 
 class TrickSolving(models.Model):
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    game1 = models.BooleanField(default=False)
-    game2 = models.BooleanField(default=False)
-    game3 = models.BooleanField(default=False)
-    game4 = models.BooleanField(default=False)
-    game5 = models.BooleanField(default=False)
+    user = models.IntegerField()
+    game1 = models.IntegerField(default=0)
+    game2 = models.IntegerField(default=0)
+    game3 = models.IntegerField(default=0)
+    game4 = models.IntegerField(default=0)
+    game5 = models.IntegerField(default=0)
 
 
 class omokgame(models.Model):

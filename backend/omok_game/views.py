@@ -78,11 +78,18 @@ def test(request):
     result = {'board': board, 'AIaction': AIaction, 'endmessage': endmessage}
     return Response(result)
 
-@api_view(['GET'])
+@api_view(['POST'])
+def makeTrick(request):
+    m_uid = request.data['pk']
+    rows = TrickSolving(user=m_uid)
+    rows.save()
+    return Response()
+
+@api_view(['POST'])
 def Tricklist(request):
-    pk = request.data["pk"]
-    tricks = TrickSolving.objects.filter(user=pk)
-    serializer = TrickSolvingSerializer(instance=tricks)
+    user_id = request.data["pk"]
+    tricks = get_object_or_404(TrickSolving, user=user_id)
+    serializer = TrickSolvingSerializer(tricks)
     return Response(serializer.data)
 
 
@@ -120,9 +127,19 @@ def makeroom(request):
 
 @api_view(['POST'])
 def myosuWin(request):
-    # pk = request.data["pk"]
-    # stage = request.data["stage"]
-    # trickSolve = TrickSolving.get_object_or_404(TrickSolving, user=pk)
-    # if stage == game1:
-    # trickSolve."game1"
+    pk = request.data["pk"]
+    stage = request.data["stage"]
+    trickSolve = get_object_or_404(TrickSolving, user=pk)
+    if stage == 1:
+        trickSolve.game1 = 1
+    elif stage == 2:
+        trickSolve.game2 = 1
+    elif stage == 3:
+        trickSolve.game3 = 1
+    elif stage == 4:
+        trickSolve.game4 = 1
+    elif stage == 5:
+        trickSolve.game5 = 1
+    trickSolve.save()
     return Response()
+
