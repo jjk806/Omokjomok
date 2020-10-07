@@ -1,7 +1,7 @@
 <template>
 <b-container class ="p-20"> 
 
-  <b-modal ref="my-modal" hide-footer hide-header>
+  <b-modal ref="win-modal" hide-footer hide-header id= "win_modal">
     <!-- <div class="d-flex justify-content-around"> -->
     <div>
       <b-row class="justify-content-md-center">
@@ -9,22 +9,57 @@
       </b-row>
       <b-row class="justify-content-md-center">
         <b-col id = "difficult">
-          AI 난이도 상
+            <p v-if="this.match.level == 0">AI 난이도 하</p>
+            <p v-if="this.match.level == 1">AI 난이도 중</p>
+            <p v-if="this.match.level == 2">AI 난이도 상</p>
         </b-col>
       </b-row>
       <b-row class="justify-content-md-center">
         <b-col>
-          홍길동 흑돌
+            <p v-if="this.match.currentPlayerId == 1">흑돌</p>
+            <p v-if="this.match.currentPlayerId == 2">백돌</p>
         </b-col>
       </b-row>
       <b-row class="justify-content-md-center">
         <b-col>
-          32수
+          <p>{{this.match.board.stackIndex}} 수</p>
         </b-col>
       </b-row>
       <b-row class="justify-content-md-center">
         <b-col>
           승리
+        </b-col>
+      </b-row>
+    </div>
+  </b-modal>
+
+  <b-modal ref="lose-modal" hide-footer hide-header id= "lose_modal">
+    <!-- <div class="d-flex justify-content-around"> -->
+    <div>
+      <b-row class="justify-content-md-center">
+        <img id="victory_icon" src="@/assets/img/gameEnd/lose.png" />
+      </b-row>
+      <b-row class="justify-content-md-center">
+        <b-col id = "difficult">
+            <p v-if="this.match.level == 0">AI 난이도 하</p>
+            <p v-if="this.match.level == 1">AI 난이도 중</p>
+            <p v-if="this.match.level == 2">AI 난이도 상</p>
+        </b-col>
+      </b-row>
+      <b-row class="justify-content-md-center">
+        <b-col>
+            <p v-if="this.match.currentPlayerId == 1">흑돌</p>
+            <p v-if="this.match.currentPlayerId == 2">백돌</p>
+        </b-col>
+      </b-row>
+      <b-row class="justify-content-md-center">
+        <b-col>
+          <p>{{this.match.board.stackIndex}} 수</p>
+        </b-col>
+      </b-row>
+      <b-row class="justify-content-md-center">
+        <b-col>
+          패배
         </b-col>
       </b-row>
     </div>
@@ -51,6 +86,8 @@
           <b-row><p></p></b-row>
           <b-row><p></p></b-row>
           <b-row>
+            <b-col v-if="this.match.nowTurn == 1">당신 차례</b-col>
+            <b-col v-if="this.match.nowTurn == 2">AI 차례</b-col>
             <b-col cols = "">검은돌 차례</b-col>
             <b-col cols = "">백돌 차례</b-col>
           </b-row>
@@ -107,7 +144,8 @@ export default {
   components: { Board },
   data: function () {
     return {
-      showModal : false,
+      posX : 0,
+      poxY : 0,
     };
   },
   methods: {
@@ -147,11 +185,17 @@ export default {
     }
   },
   updated(){
-    if(this.match.gameEnd){
+    if(this.match.amIWin == true){
       alert("update 도착")
-      this.showModal = true;
-      alert(this.showModal)
-      this.$refs['my-modal'].show()
+      alert(this.match.board.stackIndex)
+      this.$refs['win-modal'].show()
+      // this.$router.push("/")
+    }
+    else if(this.match.amIWin == false){
+      alert("update 도착")
+      alert(this.match.board.stackIndex)
+      this.$refs['lose-modal'].show()
+      // this.$router.push("/")
     }
   },
 };
@@ -160,9 +204,13 @@ export default {
 #forColor{
   background-color: #F2F2F2;
 }
-.col{
+#win_modal .col{
   text-align: center;
-  font-size: 60px;
+  font-size: 40px;
+}
+#lose_modal .col{
+  text-align: center;
+  font-size: 40px;
 }
 #difficult{
   font-size: 80px !important;

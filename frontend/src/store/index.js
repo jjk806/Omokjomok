@@ -22,7 +22,9 @@ const initialState = {
     suggestionTimer: 0,
     level: -1,
     turn: -1,
-    gameEnd: false,
+    whatColorWin: 0,
+    amIWin: null,
+    nowTurn: 1,
     suggestorOn: undefined,
     suggestion: {
       x: -1,
@@ -214,6 +216,7 @@ export default new Vuex.Store({
   },
   actions: {
     makeMove({ state, commit }, { posX, posY }) {
+      this.state.match.nowTurn = 2;
       commit("setmoveIsPending", { moveIsPending: true, posX, posY });
       // console.log(this.state.match.board.tab);
       // console.log(posX, posY);
@@ -249,33 +252,30 @@ export default new Vuex.Store({
           console.log(data);
           //this.state.match.board.tab = data.cloneDeep;
           commit("setmoveIsPending", { moveIsPending: false, posX, posY });
-          alert(data.endmessage);
           if(data.endmessage == 1 || data.endmessage == 2){
-            // if(data.endmessage == 1){
-            //   setTimeout(function() {
-            //     alert('흑 승리')
-            //     // this.state.match.gameEnd = true;
-            //     // this.$router.push("Mainpage");
-            //   }, 500);
-            // }else{
-            //   setTimeout(function() {
-            //     alert('백 승리')
-            //     // this.state.match.gameEnd = true;
-            //   }, 500);
-            // }
+            alert("결과로 보내와진 데이터" + data.endmessage)
+            
+            if(data.endmessage == this.state.match.currentPlayerId){
+              this.state.match.amIWin = true;
+            }else{
+              this.state.match.amIWin = false;
+            }
+
             if(data.endmessage == 1){
               alert('흑 승리')
-              this.state.match.gameEnd = true;
-              alert(this.state.match.gameEnd)
+              this.state.match.whatColorWin = 1;
+              alert(this.state.match.whatColorWin)
             }else{
               alert('백 승리')
-              this.state.match.gameEnd = true;
-              alert(this.state.match.gameEnd)
+              this.state.match.whatColorWin = 2;
+              alert(this.state.match.whatColorWin)
             }
             
 
           }
         });
+
+        this.state.match.nowTurn = 1;
     },
     initSetBoard({ state, commit }) {
       commit('setInitBoard')
