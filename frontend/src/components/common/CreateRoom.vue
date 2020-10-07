@@ -78,7 +78,6 @@ export default {
     ...mapActions(["clearMatch"]),
 
     createRoom() {
-      console.log('bbbbbbb')
       // pk 값을 이용해서 횟수를 늘리기 위한 요청
       const config = {
         headers: {
@@ -89,7 +88,6 @@ export default {
       http.get("rest_auth/user/", config)
       .then(res => {
         var pk = res.data.pk
-        console.log('aaaaaaaaaa')
         // userInfo를 가져오는 요청
         http.post("accounts/userplay/", { "pk": pk }, config)
         .then(() => {
