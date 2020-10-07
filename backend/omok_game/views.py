@@ -135,16 +135,36 @@ def myosuWin(request):
     pk = request.data["pk"]
     stage = request.data["stage"]
     trickSolve = get_object_or_404(TrickSolving, user=pk)
-    if stage == 1:
-        trickSolve.game1 = 1
-    elif stage == 2:
-        trickSolve.game2 = 1
-    elif stage == 3:
-        trickSolve.game3 = 1
-    elif stage == 4:
-        trickSolve.game4 = 1
-    elif stage == 5:
-        trickSolve.game5 = 1
+    if stage == 11:
+        trickSolve.game1_1 = 1
+    elif stage == 12:
+        trickSolve.game1_2 = 1
+    elif stage == 13:
+        trickSolve.game1_3 = 1
+    elif stage == 14:
+        trickSolve.game1_4 = 1
+    elif stage == 15:
+        trickSolve.game1_5 = 1
+    elif stage == 21:
+        trickSolve.game2_1 = 1
+    elif stage == 22:
+        trickSolve.game2_2 = 1
+    elif stage == 23:
+        trickSolve.game2_3 = 1
+    elif stage == 24:
+        trickSolve.game2_4 = 1
+    elif stage == 25:
+        trickSolve.game2_5 = 1
+    elif stage == 31:
+        trickSolve.game3_1 = 1
+    elif stage == 32:
+        trickSolve.game3_2 = 1
+    elif stage == 33:
+        trickSolve.game3_3 = 1
+    elif stage == 34:
+        trickSolve.game3_4 = 1
+    elif stage == 35:
+        trickSolve.game3_5 = 1
     trickSolve.save()
     return Response()
 
