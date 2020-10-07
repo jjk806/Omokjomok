@@ -85,6 +85,8 @@ export default {
       this.hovering = false;
     },
     sendMove({ posX, posY }) {
+      this.match.nowTurn = 2;
+      alert("현재 턴" + this.match.nowTurn)
       console.log("sendMove 시작!");
       if(this.match.amIWin == null){
         this.makeMove({ posX, posY });
