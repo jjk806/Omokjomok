@@ -1,7 +1,7 @@
 <template>
   <b-container fluid>
     <b-row class="mt-2">
-      <b-col offset=2 cols=4>
+      <b-col offset=1 cols=4>
         <b-button variant="dark" block v-b-modal.modal-create-room>
           AI 대전
           <img src="../../assets/ai.jpg" alt="" class="my-2" style="height: auto; width: 100%;">
@@ -17,26 +17,7 @@
           </b-button>
       </b-col>
       <b-col cols=2>
-        <!-- <MyInfo /> -->
-      </b-col>
-    </b-row>
-    <b-row class="mt-5">
-      <b-col offset=2 cols=4>
-        <b-button block>AI 대전 설명
-          <AiCarousel  class="my-2"/>
-        </b-button>
-      </b-col>
-      <b-col cols=4>
-        <b-button block>묘수 풀이 설명
-          <AiCarousel  class="my-2"/>
-        </b-button>
-      </b-col>
-
-    </b-row>
-    
-    <br><br>
-    <b-row>
-      <b-col offset="2" cols=3>
+        <br><br>
         <b-row>
           <b-col class="text-left">
             <h4>{{ userInfo.email }} 정보</h4>
@@ -60,8 +41,20 @@
           <b-col class="text-left" style="border-style: solid; border-width: 1px;"><a href="">보러가기</a></b-col>
         </b-row>
       </b-col>
-      <b-col offset="1" cols=2>
-        <!-- <Rating /> -->
+    </b-row>
+    <b-row class="mt-5">
+      <b-col offset=1 cols=4>
+        <b-button block>AI 대전 설명
+          <AiCarousel  class="my-2"/>
+        </b-button>
+      </b-col>
+      <b-col cols=4>
+        <b-button block>묘수 풀이 설명
+          <MyosuCarousel class="my-2"/>
+        </b-button>
+      </b-col>
+      <b-col cols=2>
+        <br><br><br><br><br><br><br><br>
         <b-row>
           <b-col class="text-left">
             <h4>실시간 순위</h4>
@@ -94,6 +87,7 @@
         </b-row>
       </b-col>
     </b-row>
+    
   <!--  -->
   <CreateRoom />
 
@@ -103,6 +97,7 @@
 
 <script>
 import AiCarousel from "../../components/common/AiCarousel.vue";
+import MyosuCarousel from "../../components/common/MyosuCarousel.vue";
 import Rating from "../../components/common/Rating.vue";
 import MyInfo from "../../components/common/MyInfo.vue";
 import CreateRoom from "../../components/common/CreateRoom.vue";
@@ -114,6 +109,7 @@ export default {
   name: "Mainpage",
   components: {
     AiCarousel,
+    MyosuCarousel,
     Rating,
     MyInfo,
     CreateRoom,
