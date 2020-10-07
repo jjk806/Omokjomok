@@ -8,7 +8,7 @@
         </b-button>
       </b-col>
       <b-col cols=4>
-        <b-button class="text-light" variant="dark" block router :to="{ name: 'TrickSolve' }">
+        <b-button class="text-light" variant="dark" block router :to="{ name: 'FirstSelectStage' }">
           묘수 풀이
           <div>
             <img class="my-2" src="../../assets/myosu.png" alt="" style="height: auto; width: 100%;">

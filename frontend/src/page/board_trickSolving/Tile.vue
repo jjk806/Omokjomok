@@ -11,7 +11,12 @@
     @mouseleave="mouseOut"
   >
     <div v-if="posY === 0" class="text-gray-600 -mt-12">{{ posX }}</div>
-    <div class="h-4 w-3 p-3 rounded-full" :class="[stoneColor, stoneOpacity]" />
+    <div class="h-4 w-3 p-3 rounded-full" :class="[stoneColor, stoneOpacity]" v-if="stoneColor === 'bg-black'" />
+    <div class="h-4 w-3 p-3 rounded-full" :class="[stoneColor, stoneOpacity]" v-if="stoneColor === 'bg-white-whip'" />
+    <div class="h-4 w-3 p-3 rounded black_last" :class="[stoneColor, stoneOpacity]" v-if="stoneColor === 'bg-secondary'" />
+    <div class="h-4 w-3 p-3 rounded white_last" :class="[stoneColor, stoneOpacity]" v-if="stoneColor === 'alert-primary'" />
+    <div class="h-4 w-3 p-3 rounded illegal"  v-if="stoneColor === 'bg-red'" />
+
   </div>
 </template>
 
@@ -51,6 +56,12 @@ export default {
         ? "bg-black"
         : value === 2 || (value === 0 && (hovering || isSuggestion) && id === 2)
         ? "bg-white-whip"
+        : value === 3 || (value === 0 && (hovering || isSuggestion) && id === 3)
+        ? "bg-red"
+        : value === 11 || (value === 0 && (hovering || isSuggestion) && id === 11)
+        ? "bg-secondary"
+        : value === 22 || (value === 0 && (hovering || isSuggestion) && id === 22)
+        ? "alert-primary"
         : "";
     },
     stoneOpacity() {
@@ -97,3 +108,25 @@ export default {
   },
 };
 </script>
+
+
+<style>
+.illegal {
+  background-image: url('../../assets/illegal2.png');
+  height: 16px !important;
+  width: 16px !important;
+}
+
+.black_last {
+  background-image: url('../../assets/black_last.png');
+  height: 16px !important;
+  width: 16px !important;
+}
+
+.white_last {
+  background-image: url('../../assets/white_last.png');
+  height: 16px !important;
+  width: 16px !important;
+}
+
+</style>
