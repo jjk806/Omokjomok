@@ -217,8 +217,8 @@ export default new Vuex.Store({
   },
   actions: {
     makeMove({ state, commit }, { posX, posY }) {
-      alert("이제 AI 턴이다" +  this.state.match.nowTurn)
-      alert("이제 움직일 수 없다 " + this.state.match.nowWeCanMove)
+      // alert("이제 AI 턴이다" +  this.state.match.nowTurn)
+      // alert("이제 움직일 수 없다 " + this.state.match.nowWeCanMove)
       this.state.match.nowTurn = 2;
       this.state.match.nowWeCanMove = false;
       commit("setmoveIsPending", { moveIsPending: true, posX, posY });
@@ -234,10 +234,7 @@ export default new Vuex.Store({
         posY,
         posX,
       ];
-      console.log(
-        this.state.match.board.stackMoves[this.state.match.board.stackIndex]
-      );
-      console.log(this.state.match.board.stackMoves);
+      
       this.state.match.board.stackIndex++;
       //여기서 부터 커스텀
       http
@@ -246,8 +243,6 @@ export default new Vuex.Store({
           if (data != null) {
             // this.match.board.tab = data;
             commit("makeMove", data.board);
-            alert(Math.floor(data.AIaction/15)  + " " + data.AIaction%15);
-
           } else {
             alert(" <추후 수정>실패했습니다.");
           }
@@ -266,11 +261,9 @@ export default new Vuex.Store({
             }
 
             if(data.endmessage == 1){
-              alert('흑 승리')
               this.state.match.whatColorWin = 1;
               alert(this.state.match.whatColorWin)
             }else{
-              alert('백 승리')
               this.state.match.whatColorWin = 2;
               alert(this.state.match.whatColorWin)
             }
@@ -306,6 +299,7 @@ export default new Vuex.Store({
         // .post("omok_game/testgame/", { board: this.state.match.board.tab, level:  012하중상, turn: 흑1 백2 })
         .post("omok_game/testgame/", { board: this.state.match.board.tab, level: this.state.match.level, turn: this.state.match.turn})
         .then(({ data }) => {
+          console.log('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa', data)
           if (data != null) {
             // this.match.board.tab = data;
             commit("makeMove", data.board);
@@ -314,7 +308,7 @@ export default new Vuex.Store({
           } else {
             alert(" <추후 수정>실패했습니다.");
           }
-          console.log(data);
+          console.log('bbbbbbbbbbbbbbb', data);
           //this.state.match.board.tab = data.cloneDeep;
         });
     },

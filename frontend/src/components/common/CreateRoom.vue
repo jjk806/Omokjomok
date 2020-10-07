@@ -80,10 +80,8 @@ export default {
       this.clearMatch();
       this.match.turn = this.selectOrder;
       this.match.level = this.selectLevel;
-      alert(this.selectOrder + " " + this.selectLevel + " " + this.match.turn + " " + this.match.level)
 
       if(this.match.turn != null && this.match.level != null){
-        alert("도착했어")
         this.$router.push({ name: "fightWithAI_bigBoard"})
       }else{
         alert("공격순서와 난이도를 설정해주세요.");
