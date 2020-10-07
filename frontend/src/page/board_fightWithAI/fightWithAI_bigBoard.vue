@@ -141,7 +141,6 @@ export default {
     return {
       posX : 0,
       poxY : 0,
-      myturn : True,
     };
   },
   methods: {

@@ -1,6 +1,6 @@
 <template>
   <div
-    class="p-10 text-center m-auto"
+    class="p-10 text-center m-auto "
     v-if="match && match.board && match.board.tab && match.board.tab.length"
   >
     <div
@@ -21,8 +21,8 @@
         :anyMoveIsPending="!!match.pendingPosition"
         :isPendingPosition="
           !!match.pendingPosition &&
-          posY === match.pendingPosition.y &&
-          posX === match.pendingPosition.x
+            posY === match.pendingPosition.y &&
+            posX === match.pendingPosition.x
         "
       />
     </div>
@@ -30,7 +30,7 @@
 </template>
 
 <script>
-import { mapState, mapActions, mapMutations } from "vuex";
+import { mapState } from "vuex";
 import Tile from "./Tile.vue";
 
 export default {
@@ -40,7 +40,7 @@ export default {
     // const { matchId } = this.match;
     // if (!this.$route.params.id)
     //   this.$router.push({ name: "match", params: { id: matchId } });
-    console.log(this.match)
+
     console.log(this.match.board.tab[0]);
     console.log("board 도착");
   },
