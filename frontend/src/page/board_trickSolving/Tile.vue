@@ -16,7 +16,7 @@
 </template>
 
 <script>
-import { mapState, mapMutations, mapActions } from "vuex";
+import { mapState, mapActions } from "vuex";
 
 export default {
   name: "Tile",
@@ -77,13 +77,20 @@ export default {
   methods: {
     mouseOver() {
       this.hovering = true;
+      if(this.match.amIWin == true || this.match.amIWin == false){
+        this.hovering = false;
+      }
     },
     mouseOut() {
       this.hovering = false;
     },
     sendMove({ posX, posY }) {
+      this.match.nowTurn = 2;
+      alert("현재 턴" + this.match.nowTurn)
       console.log("sendMove 시작!");
-      this.makeMove({ posX, posY });
+      if(this.match.amIWin == null){
+        this.makeMove({ posX, posY });
+      }
       console.log("sendMove 끝!");
     },
     ...mapActions(["makeMove"]),
