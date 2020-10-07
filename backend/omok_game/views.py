@@ -94,8 +94,23 @@ def makeTrick(request):
 def Tricklist(request):
     user_id = request.data["pk"]
     tricks = get_object_or_404(TrickSolving, user=user_id)
-    serializer = TrickSolvingSerializer(tricks)
-    return Response(serializer.data)
+    clear = [0]*15
+    clear[0] = tricks.game1_1
+    clear[1] = tricks.game1_2
+    clear[2] = tricks.game1_3
+    clear[3] = tricks.game1_4
+    clear[4] = tricks.game1_5
+    clear[5] = tricks.game2_1
+    clear[6] = tricks.game2_2
+    clear[7] = tricks.game2_3
+    clear[8] = tricks.game2_4
+    clear[9] = tricks.game2_5
+    clear[10] = tricks.game3_1
+    clear[11] = tricks.game3_2
+    clear[12] = tricks.game3_3
+    clear[13] = tricks.game3_4
+    clear[14] = tricks.game3_5
+    return Response(clear)
 
 
 
