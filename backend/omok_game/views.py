@@ -3,6 +3,7 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
 from .models import *
+from accounts.models import CustomUser
 from .serializers import * 
 from tensorflow.keras.models import load_model
 from mcts import mcts_action as mcts_high
@@ -157,6 +158,7 @@ def myosuWin(request):
     pk = request.data["pk"]
     stage = request.data["stage"]
     trickSolve = get_object_or_404(TrickSolving, user=pk)
+    user = get_object_or_404(CustomUser, id=pk)
     if stage == 11:
         trickSolve.game1_1 = 1
     elif stage == 12:
@@ -188,5 +190,10 @@ def myosuWin(request):
     elif stage == 35:
         trickSolve.game3_5 = 1
     trickSolve.save()
+    score = trickSolve.game1_1 + trickSolve.game1_2 + trickSolve.game1_3 + trickSolve.game1_4 + trickSolve.game1_5
+    score += trickSolve.game2_1 + trickSolve.game2_2 + trickSolve.game2_3 + trickSolve.game2_4 + trickSolve.game2_5
+    score += trickSolve.game3_1 + trickSolve.game3_2 + trickSolve.game3_3 + trickSolve.game3_4 + trickSolve.game3_5
+    user.score = score
+    user.save()
     return Response()
 
