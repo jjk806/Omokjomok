@@ -37,10 +37,6 @@ export default {
   name: "Board",
   components: { Tile },
   mounted() {
-    // const { matchId } = this.match;
-    // if (!this.$route.params.id)
-    //   this.$router.push({ name: "match", params: { id: matchId } });
-
     console.log(this.match.board.tab[0]);
     console.log("board 도착");
   },

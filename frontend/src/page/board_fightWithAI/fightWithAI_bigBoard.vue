@@ -77,8 +77,8 @@
       <div class="h-full">
         <b-container > 
           <b-row>
-            <b-col cols = "">p1</b-col>
-            <b-col cols = "">p2</b-col>
+            <b-col cols = "">플레이어</b-col>
+            <b-col cols = "">AI</b-col>
           </b-row>
           <b-row><p></p></b-row>
           <b-row><p></p></b-row>
@@ -140,7 +140,6 @@ export default {
     return {
       posX : 0,
       poxY : 0,
-      myturn : True,
     };
   },
   methods: {

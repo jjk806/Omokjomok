@@ -19,8 +19,12 @@ import bigBoard from "../page/omokBoard/bigBoard.vue";
 import fightWithAI_bigBoard from "../page/board_fightWithAI/fightWithAI_bigBoard.vue";
 import trickSolving_bigBoard from "../page/board_trickSolving/trickSolving_bigBoard.vue";
 
+
 // 묘수 풀이 페이지
-import TrickSolve from "../page/tricksolving/tricksolve.vue"
+import TrickSolveWun from "../page/tricksolving/tricksolvewun.vue"
+import TrickSolvePo from "../page/tricksolving/tricksolvepo.vue"
+import TrickSolveWha from "../page/tricksolving/tricksolvewha.vue"
+import FirstSelectStage from "../page/tricksolving/FirstSelectStage.vue";
 
 Vue.use(Router);
 
@@ -103,11 +107,32 @@ export default new Router({
       component: trickSolving_bigBoard,
       beforeEnter: requireAuth()
     },    
-    // 묘수 풀이
+    // 묘수 풀이 종류 선택창
     {
-      path: "/tricksolve",
-      name: "TrickSolve",
-      component: TrickSolve,
+      path: "/FirstSelectStage",
+      name: "FirstSelectStage",
+      component: FirstSelectStage,
+      beforeEnter: requireAuth()
+    },
+    // 묘수 풀이 운월
+    {
+      path: "/tricksolvewun",
+      name: "TrickSolveWun",
+      component: TrickSolveWun,
+      beforeEnter: requireAuth()
+    },
+    // 묘수 풀이 포월
+    {
+      path: "/tricksolvepo",
+      name: "TrickSolvePo",
+      component: TrickSolvePo,
+      beforeEnter: requireAuth()
+    },
+    // 묘수 풀이 화월
+    {
+      path: "/tricksolvewha",
+      name: "TrickSolveWha",
+      component: TrickSolveWha,
       beforeEnter: requireAuth()
     },
 
