@@ -27,13 +27,6 @@
             </b-form-radio-group>
           </b-form-group>
 
-          
-          <!-- <b-form-group>
-            <b-form-radio-group
-              id="radio-group-2"
-              v-model="selectLevel"
-            ></b-form-radio-group>
-          </b-form-group> -->
           <b-form-group>
             <b-form-radio-group id="level" v-model="selectLevel">
               <b-row>
@@ -76,6 +69,7 @@ export default {
     return {
       selectOrder: null,
       selectLevel: null,
+
     }
   },
   methods: {
@@ -86,23 +80,34 @@ export default {
       this.clearMatch();
       this.match.turn = this.selectOrder;
       this.match.level = this.selectLevel;
-      alert(this.selectOrder + " " + this.selectLevel + " " + this.match.turn + " " + this.match.level)
 
       if(this.match.turn != null && this.match.level != null){
-        alert("도착했어")
         this.$router.push({ name: "fightWithAI_bigBoard"})
       }else{
         alert("공격순서와 난이도를 설정해주세요.");
       }
-       ////////////////////////////////////////////////////////////////
-      // alert("1도착")
-      // http
-      //   .get("rest_auth/user/")
-      //   .then(({ data }) => {
-      //     console.log("asd");
-      // });
-      // alert("2도착")
-     /////////////////////////////////////////////////////
+      
+      // pk 값을 이용해서 횟수를 늘리기 위한 요청
+      const config = {
+        headers: {
+          Authorization: `Token ${this.$cookies.get('auth-token')}`
+        }
+      }
+      // pk 값 가져오는 요청
+      http.get("rest_auth/user/", config)
+      .then(res => {
+        var pk = res.data.pk
+
+        // userInfo를 가져오는 요청
+        http.post("accounts/userplay/", { "pk": pk }, config)
+        .catch(err => {
+          console.log(err)
+        })
+        
+      })
+      .catch(err => {
+        console.log(err)
+      })
     },
     resetModal() {},
     handleOk() {},

@@ -146,6 +146,21 @@ export default {
     // local methods here
     undo() {},
     restartGame() {
+      // pk 값 가져오는 요청
+      http.get("rest_auth/user/", config)
+      .then(res => {
+        var pk = res.data.pk
+
+        // userInfo를 가져오는 요청
+        http.post("accounts/userplay/", { "pk": pk }, config)
+        .catch(err => {
+          console.log(err)
+        })
+        
+      })
+      .catch(err => {
+        console.log(err)
+      })
       const tempTurn = this.match.turn;
       const tempLevel = this.match.level;
       this.clearMatch();
@@ -179,23 +194,41 @@ export default {
     }
   },
   updated(){
-    alert("update 도착")
 
     if(this.match.nowTurn == 1){
       this.match.nowWeCanMove = true;
-      alert("이제 움직일 수 있다 " + this.match.nowWeCanMove)
+      // alert("이제 움직일 수 있다 " + this.match.nowWeCanMove)
     }
 
-    alert("내가 졌니" + this.match.amIWin)
+    // alert("내가 졌니" + this.match.amIWin)
     if(this.match.amIWin == true){
       alert(this.match.board.stackIndex)
-      alert("경기 끝 내가 이겼어")
-      this.$refs['win-modal'].show()
+      // alert("경기 끝 내가 이겼어")
+
+      // 이기는 횟수 요청
+      // pk 값 가져오는 요청
+      http.get("rest_auth/user/", config)
+      .then(res => {
+        var pk = res.data.pk
+
+        // userInfo를 가져오는 요청
+        http.post("accounts/userwin/", { "pk": pk }, config)
+        .then(() =>{
+          this.$refs['win-modal'].show()
+        })
+        .catch(err => {
+          console.log(err)
+        })
+        
+      })
+      .catch(err => {
+        console.log(err)
+      })
       // this.$router.push("/")
     }
     else if(this.match.amIWin == false){
       alert(this.match.board.stackIndex)
-      alert("경기 끝 내가 졌어")
+      // alert("경기 끝 내가 졌어")
       this.$refs['lose-modal'].show()
       // this.$router.push("/")
     }

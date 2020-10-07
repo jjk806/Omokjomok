@@ -21,6 +21,12 @@
               placeholder="이메일을 입력해주세요"
             ></b-form-input>
           </b-input-group>
+          <label              
+              v-if="!vaildLogin.email"
+              class="text-danger align-middle m-0"
+              style="text-align:right"
+              for="input-large"
+            >이메일이 올바르지 않습니다.</label>
         </b-form>
       </b-col>
     </b-row>
@@ -44,13 +50,20 @@
               placeholder="비밀번호를 입력해주세요"
             ></b-form-input>
           </b-input-group>
+          <label              
+              v-if="!vaildLogin.password"
+              class="text-danger align-middle m-0"
+              style="text-align:right"
+              for="input-large"
+            >패스워드는 8자리 이상입니다.</label>
+        </b-form>
         </b-form>
 			</b-col>
 		</b-row>
 		<!-- 로그인 버튼 -->
 		<b-row class="mt-5">
 			<b-col>
-				<b-button block size="lg" @click="login()">로그인</b-button>
+				<b-button block size="lg" @click="login()" :disabled="!loginPossible">로그인</b-button>
 			</b-col>
 		</b-row>
 
@@ -138,9 +151,6 @@
 			</template>
     </b-modal>
 
-    
-
-    <button @click="logout()">logout</button>
 		<!-- 비밀번호 찾기 -->
 		<!-- <b-row class="my-3">
 			<b-col class="text-right">
@@ -169,9 +179,23 @@ export default {
       isLoggedIn: false,
       mailsubmit: false,
       mailauthentication: null,
-      emailconfirmation: null
+      emailconfirmation: null,
+      vaildLogin: {
+        email: false,
+        password: false,
+      },
+      loginPossible: false,
 		}
 	},
+  watch: {
+    loginInfo: {
+      deep: true,
+      handler() {                
+          console.log('watch')
+          this.validCheck(this.loginInfo) 
+      }
+    }
+  },
 	methods: {
     setCookie(key) {
       this.$cookies.set('auth-token', key)
@@ -262,7 +286,24 @@ export default {
             }
 
           })
-    }
+    },
+    validCheck(model) {
+      if (model.email.indexOf("@") != -1 && model.email.lastIndexOf(".") != -1) {
+          this.vaildLogin.email = true
+      } else {
+          this.vaildLogin.email = false
+      }
+      if (model.password.length > 7) {
+          this.vaildLogin.password = true
+      } else {
+          this.vaildLogin.password = false
+      }
+      if (this.vaildLogin.email && this.vaildLogin.password) {
+          this.loginPossible = true
+      } else {
+          this.loginPossible = false
+      }
+    },
   },
   created() {
     this.$cookies.remove('auth-token')

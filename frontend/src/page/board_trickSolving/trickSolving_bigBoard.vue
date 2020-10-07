@@ -147,6 +147,22 @@ export default {
     // local methods here
     undo() {},
     restartGame() {
+      // pk 값 가져오는 요청
+      http.get("rest_auth/user/", config)
+      .then(res => {
+        var pk = res.data.pk
+
+        // userInfo를 가져오는 요청
+        http.post("accounts/userplay/", { "pk": pk }, config)
+        .catch(err => {
+          console.log(err)
+        })
+        
+      })
+      .catch(err => {
+        console.log(err)
+      })
+      
       const tempTurn = this.match.turn;
       const tempLevel = this.match.level;
       this.clearMatch();
