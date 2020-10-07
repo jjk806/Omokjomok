@@ -11,7 +11,10 @@
     @mouseleave="mouseOut"
   >
     <div v-if="posY === 0" class="text-gray-600 -mt-12">{{ posX }}</div>
-    <div class="h-4 w-3 p-3 rounded-full" :class="[stoneColor, stoneOpacity]" />
+    <div class="h-4 w-3 p-3 rounded-full" :class="[stoneColor, stoneOpacity]" v-if="stoneColor !== 'bg-red'" />
+    <div class="h-4 w-3 p-3 rounded illegal"  v-if="stoneColor === 'bg-red'" />
+
+    <!--  -->
   </div>
 </template>
 
@@ -45,12 +48,15 @@ export default {
         match: { currentPlayerId: id },
       } = this;
 
+
       return !hovering && value === 0 && !isSuggestion
         ? ""
         : value === 1 || (value === 0 && (hovering || isSuggestion) && id === 1)
         ? "bg-black"
         : value === 2 || (value === 0 && (hovering || isSuggestion) && id === 2)
         ? "bg-white-whip"
+        : value === 3 || (value === 0 && (hovering || isSuggestion) && id === 3)
+        ? "bg-red"
         : "";
     },
     stoneOpacity() {
@@ -61,10 +67,7 @@ export default {
         anyMoveIsPending,
         isPendingPosition,
       } = this;
-      return value === 0 &&
-        !isPendingPosition &&
-        ((anyMoveIsPending && !isPendingPosition) ||
-          (!hovering && !isSuggestion))
+      return value === 0 && !isPendingPosition && ((anyMoveIsPending && !isPendingPosition) || (!hovering && !isSuggestion))
         ? "opacity-0"
         : isPendingPosition ||
           value > 0 ||
@@ -86,7 +89,7 @@ export default {
     },
     sendMove({ posX, posY }) {
       this.match.nowTurn = 2;
-      alert("현재 턴" + this.match.nowTurn)
+      // alert("현재 턴" + this.match.nowTurn)
       console.log("sendMove 시작!");
       if(this.match.amIWin == null){
         this.makeMove({ posX, posY });
@@ -97,3 +100,12 @@ export default {
   },
 };
 </script>
+
+<style>
+.illegal {
+  background-image: url('../../assets/illegal2.png');
+  height: 16px !important;
+  width: 16px !important;
+}
+
+</style>

@@ -4,37 +4,20 @@
       <b-col offset=2 cols=4>
         <b-button variant="dark" block v-b-modal.modal-create-room>
           AI 대전
-          <img src="../../assets/ai.jpg" alt="" class="my-2">
+          <img src="../../assets/ai.jpg" alt="" class="my-2" style="height: auto; width: 100%;">
         </b-button>
       </b-col>
       <b-col cols=4>
         <b-button variant="dark" block router :to="{ name: 'TrickSolve' }">
           묘수 풀이
-          <img src="../../assets/myosu.png" alt="" class="my-2">
+          <div>
+            <img class="my-2" src="../../assets/myosu.png" alt="" style="height: auto; width: 100%;">
+
+          </div>
           </b-button>
       </b-col>
       <b-col cols=2>
-        
         <!-- <MyInfo /> -->
-        <b-container class="my-5">
-          <b-row>
-            <b-col class="text-left">
-              <h4>SSAFY1 정보</h4>
-            </b-col>
-          </b-row>
-          <b-row>
-            <b-col class="text-left">승률</b-col>
-            <b-col class="text-left">{{ userInfo.rate}} %</b-col>
-          </b-row>
-          <b-row>
-            <b-col class="text-left">묘수풀이</b-col>
-            <b-col class="text-left">{{ userInfo.score}} 점</b-col>
-          </b-row>
-          <b-row>
-            <b-col class="text-left">기보</b-col>
-            <b-col class="text-left"><a href="">보러가기</a></b-col>
-          </b-row>
-        </b-container>
       </b-col>
     </b-row>
     <b-row class="mt-5">
@@ -43,11 +26,11 @@
           <AiCarousel  class="my-2"/>
         </b-button>
       </b-col>
-      <b-col cols=4>
+      <!-- <b-col cols=4>
         <b-button block>묘수 풀이 설명
           <AiCarousel  class="my-2"/>
         </b-button>
-      </b-col>
+      </b-col> -->
       <b-col cols=2>
         <!-- <Rating /> -->
         <b-row>
@@ -80,7 +63,28 @@
           <b-col cols="9" class="text-left">{{ userrank[4] }}</b-col>
         </b-row>
       </b-col>
+
+      <b-col cols=2>
+        <b-row>
+          <b-col class="text-left">
+            <h4>{{ userInfo.email }} 정보</h4>
+          </b-col>
+        </b-row>
+        <b-row>
+          <b-col class="text-left">승률</b-col>
+          <b-col class="text-left">{{ userInfo.rate}} %</b-col>
+        </b-row>
+        <b-row>
+          <b-col class="text-left">묘수풀이</b-col>
+          <b-col class="text-left">{{ userInfo.score}} 점</b-col>
+        </b-row>
+        <b-row>
+          <b-col class="text-left">기보</b-col>
+          <b-col class="text-left"><a href="">보러가기</a></b-col>
+        </b-row>
+      </b-col>
     </b-row>
+    
   <!--  -->
   <CreateRoom />
 
@@ -121,7 +125,8 @@ export default {
         .catch(err => {
           console.log(err)
         })
-    }
+    },
+    
 
   },
   data: () => {
@@ -167,14 +172,13 @@ export default {
 };
 </script>
 
-
 <style scoped>
 .wrapB {
   width: 1200px;
 }
 
 img {
-  width: 460px;
+  /* width: 460px; */
   height: 210px !important;
 }
 

@@ -8,18 +8,9 @@
               <b-icon scale="2" icon="justify"></b-icon>
               <span class="sr-only"></span>
             </template>
-            <b-dropdown-item router :to="{ name: 'bigBoard' }"
-              >테스트용 오목판 view</b-dropdown-item
-            >
-            <b-dropdown-item router :to="{ name: 'trickSolving_bigBoard' }"
-              >묘수풀이용 오목판 view</b-dropdown-item
-            >
-            <b-dropdown-item router :to="{ name: 'fightWithAI_bigBoard' }"
-              >AI와 대결용 오목판 view</b-dropdown-item
-            >
             <b-dropdown-divider></b-dropdown-divider>
-            <b-dropdown-item router :to="{ name: 'Login' }"
-              >로그인</b-dropdown-item
+            <b-dropdown-item @click="logout()" router :to="{ name: 'Login' }"
+              >로그아웃</b-dropdown-item
             >
           </b-dropdown>
         </b-button-group>
@@ -93,6 +84,21 @@ export default {
   watch: {},
   created() {},
   methods: {
+    logout() {
+      const config = {
+        headers: {
+          Authorization: `Token ${this.$cookies.get('auth-token')}`
+        }
+      }
+      http
+        .post("rest_auth/logout/")
+          .then((res) => {
+            this.$cookies.remove('auth-token')
+            this.$store.state.isloggedin = false
+            this.$router.push('/')
+          })
+          .catch(err => console.log(err))
+    },
     clickTip() {
       // alert('꿀팁!')
       this.boxTwo = ''
