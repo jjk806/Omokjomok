@@ -133,6 +133,7 @@
 <script>
 import { mapState, mapActions } from "vuex";
 import Board from "./Board.vue";
+import http from "../../util/http-common"
 
 export default {
   name: "Match",
@@ -148,6 +149,12 @@ export default {
     undo() {},
     restartGame() {
       // pk 값 가져오는 요청
+
+      const config = {
+        headers: {
+          Authorization: `Token ${this.$cookies.get('auth-token')}`
+        }
+      }
       http.get("rest_auth/user/", config)
       .then(res => {
         var pk = res.data.pk
@@ -165,19 +172,26 @@ export default {
       
       const tempTurn = this.match.turn;
       const tempLevel = this.match.level;
+      const tab1 = this.match.board.tabBackup;
+      const titleName1 = this.match.titleName;
+      const nowTurn1 = this.match.nowTurn;
+      const currentPlayerId1 = this.match.currentPlayerId;
+
       this.clearMatch();
       this.match.level = tempLevel;
       this.match.turn = tempTurn;
-      if(this.match.turn == 1){
-        this.match.currentPlayerId = 1;
-      }
-      if(this.match.turn == 2){
-        this.justSendOne();
-        this.match.currentPlayerId = 2;
-      }
+      this.match.board.tab = tab1;
+      this.match.board.tabBackup = tab1;
+      this.match.titleName = titleName1;
+      this.match.nowTurn = nowTurn1;
+      this.match.currentPlayerId = currentPlayerId1;
+
+
+
+
       // this.$router.push("/fightWithAI_bigBoard");
       // this.$router.push(this.$router.currentRoute);
-      this.$router.push("/fightWithAI_bigBoard").catch(()=>{});
+      this.$router.push("/trickSolving_bigBoard").catch(()=>{});
       // router.push("/", () => {});
     },
     ...mapActions(["newMatch", "undoMove", "clearMatch", "justSendOne"]),
