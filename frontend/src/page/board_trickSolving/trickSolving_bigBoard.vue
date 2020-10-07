@@ -134,6 +134,8 @@
 import { mapState, mapActions } from "vuex";
 import Board from "./Board.vue";
 
+import http from "../../util/http-common"
+
 export default {
   name: "Match",
   components: { Board },
@@ -196,23 +198,35 @@ export default {
     }
   },
   updated(){
-    alert("update 도착")
 
     if(this.match.nowTurn == 1){
       this.match.nowWeCanMove = true;
-      alert("이제 움직일 수 있다 " + this.match.nowWeCanMove)
     }
 
-    alert("내가 졌니" + this.match.amIWin)
     if(this.match.amIWin == true){
-      alert(this.match.board.stackIndex)
-      alert("경기 끝 내가 이겼어")
       this.$refs['win-modal'].show()
+      // pk 값 가져오는 요청
+      const config = {
+        headers: {
+          Authorization: `Token ${this.$cookies.get('auth-token')}`
+        }
+      }
+      http.get("rest_auth/user/", config)
+      .then(res => {
+        var pk = res.data.pk
+        // userInfo를 가져오는 요청
+        http.post("omok_game/myosuwin/", { "pk": pk, "stage": this.match.myosu})
+        .catch(err => {
+          console.log(err)
+        })
+        
+      })
+      .catch(err => {
+        console.log(err)
+      })
       // this.$router.push("/")
     }
     else if(this.match.amIWin == false){
-      alert(this.match.board.stackIndex)
-      alert("경기 끝 내가 졌어")
       this.$refs['lose-modal'].show()
       // this.$router.push("/")
     }

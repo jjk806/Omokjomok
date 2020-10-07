@@ -6,19 +6,19 @@
         </div>
         <div class= "row h-full self-center">
             <div class= "col-md-4">
-                <b-button variant="primary" block router :to="{ name: 'TrickSolveWun' }">
+                <b-button class="text-light" variant="primary" block router :to="{ name: 'TrickSolveWun' }">
                     운월
                     <img src="../../assets/img/solvingTrick/wunWall.png" alt="" class="my-2">
                 </b-button>
             </div>
             <div class= "col-md-4">
-                <b-button variant="secondary" block router :to="{ name: 'TrickSolvePo' }">
+                <b-button class="text-light" variant="secondary" block router :to="{ name: 'TrickSolvePo' }">
                     포월
                     <img src="../../assets/img/solvingTrick/poWall.png" alt="" class="my-2">
                 </b-button>
             </div>
             <div class= "col-md-4">
-                <b-button variant="danger" block router :to="{ name: 'TrickSolveWha' }">
+                <b-button class="text-light" variant="danger" block router :to="{ name: 'TrickSolveWha' }">
                     화월
                     <img src="../../assets/img/solvingTrick/hwaWall.png" alt="" class="my-2">
                 </b-button>
@@ -29,6 +29,17 @@
 </template>
 
 <script>
+import http from "../../util/http-common"
+
+export default {
+  data: () => {
+    return {
+      pk: null,
+      userInfo : {},
+      userrank : [],
+    };
+  },
+};
 </script>
 <style scoped>
     #title{

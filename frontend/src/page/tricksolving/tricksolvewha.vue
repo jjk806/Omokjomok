@@ -3,11 +3,20 @@
     <h1>무적수 화월</h1>
     <div class="d-flex align-items-center justify-content-center" id="trick" style="height:75vh; text-align:center;">
       <div>
-        <b-button @click='whaWallSetBoard1' variant="white" router :to="{ name: 'trickSolving_bigBoard' }" class="btn ml-3 mb-5" type="submit"><img class="btn-img" src="../../assets/one_black.png" width="100"></b-button>
-        <b-button @click='whaWallSetBoard2' variant="white" router :to="{ name: 'trickSolving_bigBoard' }" class="btn ml-3 mb-5" type="submit"><img class="btn-img" src="../../assets/two_black.png" width="100"></b-button>
-        <b-button @click='whaWallSetBoard3' variant="white" router :to="{ name: 'trickSolving_bigBoard' }" class="btn ml-3 mb-5" type="submit"><img class="btn-img" src="../../assets/three.png" width="100"></b-button>
-        <b-button @click='whaWallSetBoard4' variant="white" router :to="{ name: 'trickSolving_bigBoard' }" class="btn ml-3 mb-5" type="submit"><img class="btn-img" src="../../assets/four.png" width="100"></b-button>
-        <b-button @click='whaWallSetBoard5' variant="white" router :to="{ name: 'trickSolving_bigBoard' }" class="btn ml-3 mb-5" type="submit"><img class="btn-img" src="../../assets/five.png" width="100"></b-button>
+        <b-button v-if="tricklist[10]" @click='whaWallSetBoard1' variant="white" router :to="{ name: 'trickSolving_bigBoard' }" class="btn ml-3 mb-5" type="submit"><img class="btn-img" src="../../assets/one_black.png" width="100"></b-button>
+        <b-button v-else @click='whaWallSetBoard1' variant="white" router :to="{ name: 'trickSolving_bigBoard' }" class="btn ml-3 mb-5" type="submit"><img class="btn-img" src="../../assets/one.png" width="100"></b-button>
+
+        <b-button v-if="tricklist[11]" @click='whaWallSetBoard2' variant="white" router :to="{ name: 'trickSolving_bigBoard' }" class="btn ml-3 mb-5" type="submit"><img class="btn-img" src="../../assets/two_black.png" width="100"></b-button>
+        <b-button v-else @click='whaWallSetBoard2' variant="white" router :to="{ name: 'trickSolving_bigBoard' }" class="btn ml-3 mb-5" type="submit"><img class="btn-img" src="../../assets/two.png" width="100"></b-button>
+
+        <b-button v-if="tricklist[12]" @click='whaWallSetBoard3' variant="white" router :to="{ name: 'trickSolving_bigBoard' }" class="btn ml-3 mb-5" type="submit"><img class="btn-img" src="../../assets/three.png" width="100"></b-button>
+        <b-button v-else @click='whaWallSetBoard3' variant="white" router :to="{ name: 'trickSolving_bigBoard' }" class="btn ml-3 mb-5" type="submit"><img class="btn-img" src="../../assets/three.png" width="100"></b-button>
+
+        <b-button v-if="tricklist[13]" @click='whaWallSetBoard4' variant="white" router :to="{ name: 'trickSolving_bigBoard' }" class="btn ml-3 mb-5" type="submit"><img class="btn-img" src="../../assets/four_black.png" width="100"></b-button>
+        <b-button v-else @click='whaWallSetBoard4' variant="white" router :to="{ name: 'trickSolving_bigBoard' }" class="btn ml-3 mb-5" type="submit"><img class="btn-img" src="../../assets/four.png" width="100"></b-button>
+
+        <b-button v-if="tricklist[14]" @click='whaWallSetBoard5' variant="white" router :to="{ name: 'trickSolving_bigBoard' }" class="btn ml-3 mb-5" type="submit"><img class="btn-img" src="../../assets/five_black.png" width="100"></b-button>
+        <b-button v-else @click='whaWallSetBoard5' variant="white" router :to="{ name: 'trickSolving_bigBoard' }" class="btn ml-3 mb-5" type="submit"><img class="btn-img" src="../../assets/five.png" width="100"></b-button>
       </div>
     </div>
   </div>
@@ -16,16 +25,43 @@
 <script>
 import { mapActions } from "vuex";
 
+import http from "../../util/http-common"
 export default {
   name: "TrickSolve",
+  data: () => {
+    return {
+      tricklist: []
+    };
+  },
   methods: {
     check() {
       alert('추후 업데이트 예정')
     },
-    ...mapActions(['whaWallSetBoard1', 'whaWallSetBoard2', 'whaWallSetBoard3', 'whaWallSetBoard4', 'whaWallSetBoard5']),
+    ...mapActions(['whaWallSetBoard1', 'whaWallSetBoard2', 'whaWallSetBoard3', 'whaWallSetBoard4', 'whaWallSetBoard5', 'clearMatch']),
   },
   created() {
     this.clearMatch();
+    const config = {
+      headers: {
+        Authorization: `Token ${this.$cookies.get('auth-token')}`
+      }
+    }
+    // pk 값 가져오는 요청
+    http.get("rest_auth/user/", config)
+    .then(res => {
+      
+      // tricklist 가져오는 요청
+      http.post("omok_game/tricklist/", { "pk": res.data.pk })
+      .then(re => {
+        this.tricklist = re.data
+      })
+      .catch(err => {
+        console.log(err)
+      })
+    })
+    .catch(err => {
+      console.log(err)
+    })
   },
 }
 </script>

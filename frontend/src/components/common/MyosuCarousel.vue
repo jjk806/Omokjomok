@@ -19,20 +19,7 @@
             class="d-block img-fluid w-100"
             width="1024"
             height="480"
-            src="../../assets/AiCarousel/1.png"
-            alt="image slot"
-            style="height: 300px"
-          >
-        </template>
-      </b-carousel-slide>
-
-      <b-carousel-slide>
-        <template v-slot:img>
-          <img
-            class="d-block img-fluid w-100"
-            width="1024"
-            height="480"
-            src="../../assets/AiCarousel/2.png"
+            src="../../assets/myosu/1.png"
             alt="image slot"
           >
         </template>
@@ -44,7 +31,7 @@
             class="d-block img-fluid w-100"
             width="1024"
             height="480"
-            src="../../assets/AiCarousel/3.png"
+            src="../../assets/myosu/2.png"
             alt="image slot"
           >
         </template>
@@ -56,7 +43,7 @@
             class="d-block img-fluid w-100"
             width="1024"
             height="480"
-            src="../../assets/AiCarousel/4.png"
+            src="../../assets/myosu/3.png"
             alt="image slot"
           >
         </template>
@@ -68,7 +55,7 @@
             class="d-block img-fluid w-100"
             width="1024"
             height="480"
-            src="../../assets/AiCarousel/5.png"
+            src="../../assets/myosu/4.png"
             alt="image slot"
           >
         </template>
@@ -80,13 +67,24 @@
             class="d-block img-fluid w-100"
             width="1024"
             height="480"
-            src="../../assets/AiCarousel/6.png"
+            src="../../assets/myosu/5.png"
+            alt="image slot"
+          >
+        </template>
+      </b-carousel-slide>
+
+      <b-carousel-slide>
+        <template v-slot:img>
+          <img
+            class="d-block img-fluid w-100"
+            width="1024"
+            height="480"
+            src="../../assets/myosu/6.png"
             alt="image slot"
           >
         </template>
       </b-carousel-slide>
     </b-carousel>
-
   </div>
 </template>
 
