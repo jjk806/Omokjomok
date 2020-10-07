@@ -205,9 +205,10 @@ export default {
       http
         .post("rest_auth/login/", this.loginInfo)
           .then(res => {
+            console.log(';aaaaaaaaaaaaaa')
             this.setCookie(res.data.key)
             this.$store.state.isloggedin = true
-            this.$router.push('/')
+            this.$router.push({ name: "Mainpage"})
           })
           .catch(err => {
             console.error(err)
