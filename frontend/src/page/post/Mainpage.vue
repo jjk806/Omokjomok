@@ -8,7 +8,7 @@
         </b-button>
       </b-col>
       <b-col cols=4>
-        <b-button variant="dark" block router :to="{ name: 'TrickSolve' }">
+        <b-button class="text-light" variant="dark" block router :to="{ name: 'TrickSolve' }">
           묘수 풀이
           <div>
             <img class="my-2" src="../../assets/myosu.png" alt="" style="height: auto; width: 100%;">
@@ -26,65 +26,74 @@
           <AiCarousel  class="my-2"/>
         </b-button>
       </b-col>
-      <!-- <b-col cols=4>
+      <b-col cols=4>
         <b-button block>묘수 풀이 설명
           <AiCarousel  class="my-2"/>
         </b-button>
-      </b-col> -->
-      <b-col cols=2>
+      </b-col>
+
+    </b-row>
+    
+    <br><br>
+    <b-row>
+      <b-col offset="2" cols=3>
+        <b-row>
+          <b-col class="text-left">
+            <h4>{{ userInfo.email }} 정보</h4>
+          </b-col>
+        </b-row>
+        <br>
+        <b-row>
+          <b-col class="text-left" style="border-style: outset; border-width: 3px;">전적</b-col>
+          <b-col class="text-left" style="border-style: solid; border-width: 1px;">{{ userInfo.play}}전 {{ userInfo.win }}승 {{userInfo.play-userInfo.win }}패</b-col>
+        </b-row>
+        <b-row>
+          <b-col class="text-left" style="border-style: outset; border-width: 3px;">승률</b-col>
+          <b-col class="text-left" style="border-style: solid; border-width: 1px;">{{ userInfo.rate }} %</b-col>
+        </b-row>
+        <b-row>
+          <b-col class="text-left" style="border-style: outset; border-width: 3px;">묘수풀이</b-col>
+          <b-col class="text-left" style="border-style: solid; border-width: 1px;">{{ userInfo.score}} 점</b-col>
+        </b-row>
+        <b-row>
+          <b-col class="text-left" style="border-style: outset; border-width: 3px;">기보</b-col>
+          <b-col class="text-left" style="border-style: solid; border-width: 1px;"><a href="">보러가기</a></b-col>
+        </b-row>
+      </b-col>
+      <b-col offset="1" cols=2>
         <!-- <Rating /> -->
         <b-row>
           <b-col class="text-left">
             <h4>실시간 순위</h4>
           </b-col>
         </b-row>
-        <b-row class="my-2">
-          <b-col cols="3" class="text-left">No.</b-col>
-          <b-col cols="9" class="text-left">Name</b-col>
+        <br>
+        <b-row >
+          <b-col cols="3" class="text-left" style="border-style: outset; border-width: 3px;">No.</b-col>
+          <b-col cols="9" class="text-left" style="border-style: outset; border-width: 3px;">유저</b-col>
         </b-row>
         <b-row>
-          <b-col cols="3" class="text-left">1</b-col>
-          <b-col cols="9" class="text-left">{{ userrank[0] }}</b-col>
+          <b-col cols="3" class="text-left" style="border-style: solid; border-width: 1px;">1</b-col>
+          <b-col cols="9" class="text-left" style="border-style: solid; border-width: 1px;">{{ userrank[0] }}</b-col>
         </b-row>
         <b-row>
-          <b-col cols="3" class="text-left">2</b-col>
-          <b-col cols="9" class="text-left">{{ userrank[1] }}</b-col>
+          <b-col cols="3" class="text-left" style="border-style: solid; border-width: 1px;">2</b-col>
+          <b-col cols="9" class="text-left" style="border-style: solid; border-width: 1px;">{{ userrank[1] }}</b-col>
         </b-row>
         <b-row>
-          <b-col cols="3" class="text-left">3</b-col>
-          <b-col cols="9" class="text-left">{{ userrank[2] }}</b-col>
+          <b-col cols="3" class="text-left" style="border-style: solid; border-width: 1px;">3</b-col>
+          <b-col cols="9" class="text-left" style="border-style: solid; border-width: 1px;">{{ userrank[2] }}</b-col>
         </b-row>
         <b-row>
-          <b-col cols="3" class="text-left">4</b-col>
-          <b-col cols="9" class="text-left">{{ userrank[3] }}</b-col>
+          <b-col cols="3" class="text-left" style="border-style: solid; border-width: 1px;">4</b-col>
+          <b-col cols="9" class="text-left" style="border-style: solid; border-width: 1px;">{{ userrank[3] }}</b-col>
         </b-row>
         <b-row>
-          <b-col cols="3" class="text-left">5</b-col>
-          <b-col cols="9" class="text-left">{{ userrank[4] }}</b-col>
-        </b-row>
-      </b-col>
-
-      <b-col cols=2>
-        <b-row>
-          <b-col class="text-left">
-            <h4>{{ userInfo.email }} 정보</h4>
-          </b-col>
-        </b-row>
-        <b-row>
-          <b-col class="text-left">승률</b-col>
-          <b-col class="text-left">{{ userInfo.rate}} %</b-col>
-        </b-row>
-        <b-row>
-          <b-col class="text-left">묘수풀이</b-col>
-          <b-col class="text-left">{{ userInfo.score}} 점</b-col>
-        </b-row>
-        <b-row>
-          <b-col class="text-left">기보</b-col>
-          <b-col class="text-left"><a href="">보러가기</a></b-col>
+          <b-col cols="3" class="text-left" style="border-style: solid; border-width: 1px;">5</b-col>
+          <b-col cols="9" class="text-left" style="border-style: solid; border-width: 1px;">{{ userrank[4] }}</b-col>
         </b-row>
       </b-col>
     </b-row>
-    
   <!--  -->
   <CreateRoom />
 

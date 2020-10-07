@@ -1,6 +1,6 @@
 <template>
 <b-container class ="p-20"> 
-
+  <br><br><br><br><br><br><br>
   <b-modal ref="win-modal" hide-footer hide-header id= "win_modal">
     <!-- <div class="d-flex justify-content-around"> -->
     <div>
@@ -77,8 +77,8 @@
       <div class="h-full">
         <b-container > 
           <b-row>
-            <b-col cols = "">p1</b-col>
-            <b-col cols = "">p2</b-col>
+            <b-col cols = "">흑돌</b-col>
+            <b-col cols = "">백돌</b-col>
           </b-row>
           <b-row><p></p></b-row>
           <b-row><p></p></b-row>
@@ -132,6 +132,7 @@
 <script>
 import { mapState, mapActions } from "vuex";
 import Board from "./Board.vue";
+import http from "../../util/http-common"
 
 export default {
   name: "Match",
@@ -148,6 +149,11 @@ export default {
     undo() {},
     restartGame() {
       // pk 값 가져오는 요청
+      const config = {
+        headers: {
+          Authorization: `Token ${this.$cookies.get('auth-token')}`
+        }
+      }
       http.get("rest_auth/user/", config)
       .then(res => {
         var pk = res.data.pk

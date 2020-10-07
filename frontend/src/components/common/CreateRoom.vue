@@ -46,7 +46,7 @@
 
           <b-row class="mt-5">
             <b-col>
-              <b-button @click='createRoom()' :to="{ name: 'bigBoard' }" block variant="primary">생성하기</b-button>
+              <b-button @click='createRoom()' :to="{ name: 'bigBoard' }" block variant="primary" class="text-light">생성하기</b-button>
             </b-col>
           </b-row>
           <b-row class="mt-3">
@@ -62,7 +62,8 @@
 
 <script>
 import { mapState, mapActions } from "vuex";
-import http from "@/util/http-common";
+
+import http from "../../util/http-common"
 
 export default {
   data() {
@@ -77,16 +78,7 @@ export default {
     ...mapActions(["clearMatch"]),
 
     createRoom() {
-      this.clearMatch();
-      this.match.turn = this.selectOrder;
-      this.match.level = this.selectLevel;
-
-      if(this.match.turn != null && this.match.level != null){
-        this.$router.push({ name: "fightWithAI_bigBoard"})
-      }else{
-        alert("공격순서와 난이도를 설정해주세요.");
-      }
-      
+      console.log('bbbbbbb')
       // pk 값을 이용해서 횟수를 늘리기 위한 요청
       const config = {
         headers: {
@@ -97,9 +89,20 @@ export default {
       http.get("rest_auth/user/", config)
       .then(res => {
         var pk = res.data.pk
-
+        console.log('aaaaaaaaaa')
         // userInfo를 가져오는 요청
         http.post("accounts/userplay/", { "pk": pk }, config)
+        .then(() => {
+          this.clearMatch();
+          this.match.turn = this.selectOrder;
+          this.match.level = this.selectLevel;
+
+          if(this.match.turn != null && this.match.level != null){
+            this.$router.push({ name: "fightWithAI_bigBoard"})
+          }else{
+            alert("공격순서와 난이도를 설정해주세요.");
+          }
+        })
         .catch(err => {
           console.log(err)
         })
@@ -108,6 +111,7 @@ export default {
       .catch(err => {
         console.log(err)
       })
+      
     },
     resetModal() {},
     handleOk() {},

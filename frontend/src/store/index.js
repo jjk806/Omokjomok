@@ -250,13 +250,10 @@ export default new Vuex.Store({
           //this.state.match.board.tab = data.cloneDeep;
           commit("setmoveIsPending", { moveIsPending: false, posX, posY });
           if(data.endmessage == 1 || data.endmessage == 2){
-            alert("결과로 보내온 데이터" + data.endmessage)
             
             if(data.endmessage == this.state.match.currentPlayerId){
-              alert("색이 같네 내가 이겼어")
               this.state.match.amIWin = true;
             }else{
-              alert("색이 다르 내가 졌어")
               this.state.match.amIWin = false;
             }
 
@@ -268,8 +265,6 @@ export default new Vuex.Store({
               alert(this.state.match.whatColorWin)
             }
           }
-          alert("AI가 둔 데이터 받아왔어")
-          alert("이제 나의 턴이야")
           this.state.match.nowTurn = 1;
         });
     },
