@@ -20,6 +20,10 @@ export default {
       isHeader: true,
     };
   },
+  created () {
+    // 탭 타이틀 변경
+    document.title = "Omok Jmok"
+  }
 };
 </script>
 
