@@ -219,7 +219,8 @@ def mcts_action(pb, pw, vb, vw, state):
 
             if not state.check_turn(): # white일 때 6목이면 100프로 이기니까 끝남
                 if state.black[i][j] == 0 and state.white[i][j] == 0 and state.check_6(i, j):
-                    win_action.append(15 * i + j)
+                    if state.check_legal(i, j)[0]:
+                        win_action.append(15 * i + j)
 
             if not win_action and enemy[i][j] == 1:
                 for k in state.check_defend(i, j):
@@ -233,7 +234,8 @@ def mcts_action(pb, pw, vb, vw, state):
 
             if not win_action and not defend_action and state.black[i][j] == 0 and state.white[i][j] == 0:
                 if state.check_finish(i, j):
-                    attack_action.append(15 * i + j)
+                    if state.check_legal(i, j)[0]:
+                        attack_action.append(15 * i + j)
 
             if not win_action and not defend_action and not attack_action and enemy[i][j] == 1:
                 for k in state.check_defend2(i, j):
@@ -253,7 +255,8 @@ def mcts_action(pb, pw, vb, vw, state):
     #action = np.random.choice(state.referee()[0], p = scores)
     # 최선의 수 착수
     action = state.referee()[0][np.argmax(scores)]
-
+    print(state.check_turn())
+    print(action, state.referee())
     if defend2_action and action not in defend2_action:
         if state.count_4(action//15, action%15) == 0:
             return defend2_action[randint(0, len(defend2_action) - 1)]

@@ -37,9 +37,9 @@ class State:
 
     def check_turn(self):
         if self.turn[0][0] == 1:
-            return True
-        else:
             return False
+        else:
+            return True
 
 
     # return legal, illegal, result(0: not end, 1: lose, 2: draw)

@@ -14,7 +14,7 @@ import RecentGame from "../page/post/RecentGame.vue";
 import Rule from "../page/post/Rule.vue";
 
 //곧 지울 테스트용 오목판 view 보러가기
-import bigBoard from "../page/omokBoard/bigBoard.vue";
+// import bigBoard from "../page/omokBoard/bigBoard.vue";
 //기능별 오목판 view 들
 import fightWithAI_bigBoard from "../page/board_fightWithAI/fightWithAI_bigBoard.vue";
 import trickSolving_bigBoard from "../page/board_trickSolving/trickSolving_bigBoard.vue";
@@ -87,12 +87,12 @@ export default new Router({
       beforeEnter: requireAuth()
     },
     //곧 지울 테스트용 오목판 이동
-    {
-      path: "/omokBoard/bigBoard",
-      name: "bigBoard",
-      component: bigBoard,
-      beforeEnter: requireAuth()
-    },
+    // {
+    //   path: "/omokBoard/bigBoard",
+    //   name: "bigBoard",
+    //   component: bigBoard,
+    //   beforeEnter: requireAuth()
+    // },
     //AI 대결용 오목판 이동
     {
       path: "/fightWithAI_bigBoard",

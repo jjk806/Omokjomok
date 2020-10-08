@@ -46,7 +46,7 @@
 
           <b-row class="mt-5">
             <b-col>
-              <b-button @click='createRoom()' :to="{ name: 'bigBoard' }" block variant="primary" class="text-light">생성하기</b-button>
+              <b-button @click='createRoom()' block variant="primary" class="text-light">생성하기</b-button>
             </b-col>
           </b-row>
           <b-row class="mt-3">

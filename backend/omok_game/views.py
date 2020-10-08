@@ -28,6 +28,8 @@ def test(request):
     white = [[0] * 15 for _ in range(15)]
     for i in range(15):
         for j in range(15):
+            if board[i][j] == 3:
+                board[i][j] = 0
             if board[i][j] == 11:
                 board[i][j] = 1
             elif board[i][j] == 22:
@@ -88,15 +90,16 @@ def test(request):
         return Response(result)
 
     endmessage = -1
-    for k in range(len(illegal)):
-        x, y = illegal[k][0] // 15, illegal[k][0] % 15
-        board[x][y] = 3
+    if not game.state.check_turn():
+        for k in range(len(illegal)):
+            x, y = illegal[k][0] // 15, illegal[k][0] % 15
+            board[x][y] = 3
 
     if request.data['turn'] == '1':
         board[c][r] = 22
     else:
         board[c][r] = 11
-    
+    print('aaaaaa', illegal)
     result = {'board': board, 'AIaction': AIaction, 'endmessage': endmessage, 'illegal': illegal}
 
     return Response(result)
