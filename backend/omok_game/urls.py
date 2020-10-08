@@ -12,4 +12,9 @@ urlpatterns = [
     path('myosuwin/', views.myosuWin),
     path('maketrick/', views.makeTrick),
     path('tricksolving/', views.tricksolving),
+    path('readallmyrecode/', views.ReadAllMyRecode),
+    path('readonerecode/', views.ReadOneRecode),
+    path('createrecode/', views.CreateRecode),
+    path('recodegameedit/', views.RecodeGameEdit),
+    path('recodewinedit/', views.RecodeWinEdit),
 ]

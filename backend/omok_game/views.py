@@ -197,3 +197,42 @@ def myosuWin(request):
     user.save()
     return Response()
 
+@api_view(["Post"])
+def ReadAllMyRecode(request):
+    pk = request.data["pk"]
+    recode = Recode.objects.filter(user=pk)
+    serializer = RecodeSerializer(recode, many=True)
+    return Response(serializer.data)
+
+@api_view(["Post"])
+def ReadOneRecode(request):
+    pk = request.data["pk"]
+    recode = get_object_or_404(Recode, id=pk)
+    serializer = RecodeSerializer(recode)
+    return Response(serializer.data)
+
+@api_view(["Post"])
+def CreateRecode(request):
+    user_id = request.data['pk']
+    ai_level = request.data['level']
+    turn = request.data['turn']
+    recode = Recode(user=user_id, ailevel=ai_level, turn=turn)
+    recode.save()
+    return Response()
+
+@api_view(["Post"])
+def RecodeGameEdit(request):
+    pk = request.data["pk"]
+    game = request.data["game"]
+    recode = get_object_or_404(Recode, id=pk)
+    recode.game = recode.game + str(game) + " "
+    recode.save()
+    return Response()
+
+@api_view(["Post"])
+def RecodeWinEdit(request):
+    pk = request.data["pk"]
+    recode = get_object_or_404(Recode, id=pk)
+    recode.win = 1
+    recode.save()
+    return Response()
