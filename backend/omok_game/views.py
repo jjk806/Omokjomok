@@ -210,3 +210,12 @@ def ReadOneRecode(request):
     recode = get_object_or_404(Recode, id=pk)
     serializer = RecodeSerializer(recode)
     return Response(serializer.data)
+
+@api_view(["Post"])
+def CreateRecode(request):
+    user_id = request.data['pk']
+    ai_level = request.data['level']
+    turn = request.data['turn']
+    recode = Recode(user=user_id, ailevel=ai_level, turn=turn)
+    recode.save()
+    return Response()
