@@ -52,7 +52,6 @@ class room(models.Model):
         db_table = 'room'
 
 class Recode(models.Model):
-    title = models.CharField(max_length=200)
     created_at = models.DateTimeField(auto_now_add=True)
     win = models.IntegerField(default=0) # 승이면 1, 패면 0
     ailevel = models.IntegerField() # ai난이도 하면 1, 중이면 2, 상이면 3

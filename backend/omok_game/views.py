@@ -197,3 +197,9 @@ def myosuWin(request):
     user.save()
     return Response()
 
+@api_view(["Post"])
+def ReadAllMyRecode(request):
+    pk = request.data["pk"]
+    recode = Recode.objects.filter(user=pk)
+    serializer = RecodeSerializer(recode, many=True)
+    return Response(serializer.data)
