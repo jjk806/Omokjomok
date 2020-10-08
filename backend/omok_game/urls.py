@@ -15,4 +15,6 @@ urlpatterns = [
     path('readallmyrecode/', views.ReadAllMyRecode),
     path('readonerecode/', views.ReadOneRecode),
     path('createrecode/', views.CreateRecode),
+    path('recodegameedit/', views.RecodeGameEdit),
+    path('recodewinedit/', views.RecodeWinEdit),
 ]

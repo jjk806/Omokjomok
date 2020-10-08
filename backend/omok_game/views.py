@@ -219,3 +219,21 @@ def CreateRecode(request):
     recode = Recode(user=user_id, ailevel=ai_level, turn=turn)
     recode.save()
     return Response()
+
+@api_view(["Post"])
+def RecodeGameEdit(request):
+    pk = request.data["pk"]
+    game = request.data["game"]
+    recode = get_object_or_404(Recode, id=pk)
+    recode.game = recode.game + str(game) + " "
+    recode.save()
+    return Response()
+
+@api_view(["Post"])
+def RecodeWinEdit(request):
+    pk = request.data["pk"]
+    win = request.data["win"]
+    recode = get_object_or_404(Recode, id=pk)
+    recode.win = win
+    recode.save()
+    return Response()
