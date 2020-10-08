@@ -232,8 +232,7 @@ def RecodeGameEdit(request):
 @api_view(["Post"])
 def RecodeWinEdit(request):
     pk = request.data["pk"]
-    win = request.data["win"]
     recode = get_object_or_404(Recode, id=pk)
-    recode.win = win
+    recode.win = 1
     recode.save()
     return Response()
