@@ -181,11 +181,11 @@ export default {
             for(var i = 0; i < this.Recodelist.length; i++) {
               var created_at = String(this.Recodelist[i].created_at)
               this.Recodelist[i].created_at = created_at.substr(0,10) + " " + created_at.substr(11,8)
-              if (this.Recodelist[i].ailevel == 1) {
+              if (this.Recodelist[i].ailevel == 0) {
                 this.Recodelist[i].ailevel = "하"
-              } else if (this.Recodelist[i].ailevel == 2) {
+              } else if (this.Recodelist[i].ailevel == 1) {
                 this.Recodelist[i].ailevel = "중"
-              } else if (this.Recodelist[i].ailevel == 3) {
+              } else if (this.Recodelist[i].ailevel == 2) {
                 this.Recodelist[i].ailevel = "상"
               }
               if (this.Recodelist[i].turn == 1) {

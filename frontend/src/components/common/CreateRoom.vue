@@ -104,6 +104,14 @@ export default {
         .catch(err => {
           console.log(err)
         })
+        // Recode를 만드는 요청
+        http.post("omok_game/createrecode/", { "pk": pk, "level": this.selectLevel, "turn": this.selectOrder })
+        .then(re => {
+          console.log(re.data)
+        })
+        .catch(err => {
+          console.log(err)
+        })
         
       })
       .catch(err => {
