@@ -1,0 +1,127 @@
+<template>
+  <div
+    class="flex-none flex flex-wrap justify-center items-center resize-none m-0 p-0 h-8 w-8 border-solid border-dark border rounded-sm content-center"
+    :class="[
+      { 'cursor-pointer': !anyMoveIsPending && value === 0 },
+      { 'opacity-75 cursor-default': anyMoveIsPending },
+      isSuggestion && !anyMoveIsPending ? 'bg-warning-70' : 'bg-orange-400',
+    ]"
+    @click="() => !anyMoveIsPending && value === 0 && sendMove({ posX, posY })"
+    @mouseover="mouseOver"
+    @mouseleave="mouseOut"
+  >
+    <div v-if="posY === 0" class="text-gray-600 -mt-12">{{ posX }}</div>
+    <div class="h-4 w-3 p-3 rounded-full" :class="[stoneColor, stoneOpacity]" v-if="stoneColor === 'bg-black'" />
+    <div class="h-4 w-3 p-3 rounded-full" :class="[stoneColor, stoneOpacity]" v-if="stoneColor === 'bg-white-whip'" />
+    <div class="h-4 w-3 p-3 rounded black_last" :class="[stoneColor, stoneOpacity]" v-if="stoneColor === 'bg-secondary'" />
+    <div class="h-4 w-3 p-3 rounded white_last" :class="[stoneColor, stoneOpacity]" v-if="stoneColor === 'alert-primary'" />
+    <div class="h-4 w-3 p-3 rounded illegal"  v-if="stoneColor === 'bg-red'" />
+
+    <!--  -->
+  </div>
+</template>
+
+<script>
+import { mapState, mapActions } from "vuex";
+
+export default {
+  name: "Tile",
+  props: {
+    value: Number,
+    posX: Number,
+    posY: Number,
+    isSuggestion: Boolean,
+    anyMoveIsPending: {
+      type: Boolean,
+      default: false,
+    },
+    isPendingPosition: Boolean,
+  },
+  data() {
+    return {
+      hovering: false,
+    };
+  },
+  computed: {
+    stoneColor() {
+      const {
+        value,
+        hovering,
+        isSuggestion,
+        match: { currentPlayerId: id },
+      } = this;
+
+
+      return !hovering && value === 0 && !isSuggestion
+        ? ""
+        : value === 1 || (value === 0 && (hovering || isSuggestion) && id === 1)
+        ? "bg-black"
+        : value === 2 || (value === 0 && (hovering || isSuggestion) && id === 2)
+        ? "bg-white-whip"
+        : value === 3 || (value === 0 && (hovering || isSuggestion) && id === 3)
+        ? "bg-red"
+        : value === 11 || (value === 0 && (hovering || isSuggestion) && id === 11)
+        ? "bg-secondary"
+        : value === 22 || (value === 0 && (hovering || isSuggestion) && id === 22)
+        ? "alert-primary"
+        : "";
+    },
+    stoneOpacity() {
+      const {
+        value,
+        hovering,
+        isSuggestion,
+        anyMoveIsPending,
+        isPendingPosition,
+      } = this;
+      return value === 0 && !isPendingPosition && ((anyMoveIsPending && !isPendingPosition) || (!hovering && !isSuggestion))
+        ? "opacity-0"
+        : isPendingPosition ||
+          value > 0 ||
+          (!anyMoveIsPending && hovering && isSuggestion)
+        ? "opacity-100"
+        : "opacity-50";
+    },
+    ...mapState(["match"]),
+  },
+  methods: {
+    mouseOver() {
+      this.hovering = true;
+      if(this.match.amIWin == true || this.match.amIWin == false){
+        this.hovering = false;
+      }
+    },
+    mouseOut() {
+      this.hovering = false;
+    },
+    sendMove({ posX, posY }) {
+      this.match.nowTurn = 2;
+      if(this.match.amIWin == null){
+        this.makeMove({ posX, posY });
+      }
+    },
+    ...mapActions(["makeMove"]),
+  },
+};
+</script>
+
+<style>
+.illegal {
+  background-image: url('../../assets/illegal2.png');
+  height: 16px !important;
+  width: 16px !important;
+}
+
+.black_last {
+  background-image: url('../../assets/black_last.png');
+  height: 16px !important;
+  width: 16px !important;
+}
+
+.white_last {
+  background-image: url('../../assets/white_last.png');
+  height: 16px !important;
+  width: 16px !important;
+}
+
+</style>
