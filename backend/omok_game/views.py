@@ -203,3 +203,10 @@ def ReadAllMyRecode(request):
     recode = Recode.objects.filter(user=pk)
     serializer = RecodeSerializer(recode, many=True)
     return Response(serializer.data)
+
+@api_view(["Post"])
+def ReadOneRecode(request):
+    pk = request.data["pk"]
+    recode = get_object_or_404(Recode, id=pk)
+    serializer = RecodeSerializer(recode)
+    return Response(serializer.data)
