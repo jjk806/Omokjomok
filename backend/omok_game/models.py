@@ -54,7 +54,7 @@ class room(models.Model):
 class Recode(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     win = models.IntegerField(default=0) # 승이면 1, 패면 0
-    ailevel = models.IntegerField() # ai난이도 하면 1, 중이면 2, 상이면 3
+    ailevel = models.IntegerField() # ai난이도 하면 0, 중이면 1, 상이면 2
     turn = models.IntegerField() # 선공이면 1, 후공이면 2
     game = models.CharField(max_length=1000) # 숫자를 str로 저장 ex) [15,15]는 '255_'로 저장
     user = models.IntegerField()

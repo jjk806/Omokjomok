@@ -218,7 +218,7 @@ def CreateRecode(request):
     turn = request.data['turn']
     recode = Recode(user=user_id, ailevel=ai_level, turn=turn)
     recode.save()
-    return Response()
+    return Response(recode.pk)
 
 @api_view(["Post"])
 def RecodeGameEdit(request):
