@@ -200,7 +200,7 @@ def myosuWin(request):
 @api_view(["Post"])
 def ReadAllMyRecode(request):
     pk = request.data["pk"]
-    recode = Recode.objects.filter(user=pk)
+    recode = Recode.objects.filter(user=pk).order_by('-created_at')
     serializer = RecodeSerializer(recode, many=True)
     return Response(serializer.data)
 
